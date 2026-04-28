@@ -1,0 +1,29 @@
+[flake8]
+exclude =
+    .git,
+    .gitignore,
+    *.pot,
+    *.py[co],
+    __pycache__,
+    venv,
+    .venv,
+    .env,
+    .env*,
+    .dockerignore,
+    pyproject.toml,
+    uv.lock,
+    __init__.py,
+    settings.py,
+    zzrequirements/,
+    help*.txt,
+    z_changes.txt,
+    __user/apps.py,
+
+
+ignore =
+    E501,
+    W503,
+    E401,
+    E291,
+    E293,
+    E203,

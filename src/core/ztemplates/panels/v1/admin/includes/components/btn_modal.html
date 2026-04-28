@@ -1,0 +1,4 @@
+<button type="button" class="btn pb-1 {% if btn_style %}{{ btn_style }}{% else %}btn-outline-danger{% endif %}"
+        data-bs-toggle="modal" data-bs-target="#{{ target }}">
+    <span class="{% if style_text %}{{ style_text }}{% else %}d-none d-md-inline-block{% endif %}">{{ text }}</span>
+</button>

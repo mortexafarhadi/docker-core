@@ -1,0 +1,10 @@
+@font-face {
+    font-family: font-digikala;
+    /*src: url('./fonts/digikala/iranyekanwebbold.e298fdc6.e298fdc6.woff');*/
+    /*src: url('./fonts/digikala/cube.8f7add79.8f7add79.woff');*/
+    src: url('./fonts/digikala/iranyekanwebregular.b95439c1.b95439c1.woff');
+}
+
+*, a, p.h1, span, h2, h3, h4, h5, h6, .ff-digikala {
+    font-family: font-digikala;
+}

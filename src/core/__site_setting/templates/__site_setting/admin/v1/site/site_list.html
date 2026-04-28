@@ -1,0 +1,111 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Footer_References %}
+    <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_list_page.js' %}"></script>{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-site:list' as the_list_url %}
+    {% url 'admin-v1-setting-site:add' as the_create_url %}
+    {% url 'admin-v1-setting-site:delete' as the_delete_url %}
+    <main class="adminuiux-content has-sidebar">
+        <div class="container-fluid mt-4">
+            <div class="row gx-3 align-items-center">
+                <div class="col-12 col-sm">
+                    <nav aria-label="breadcrumb" class="mb-2">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item bi"><a
+                                    href="{{ the_template_url }}">{{ dic_language.setting }}</a></li>
+                            <li class="breadcrumb-item active bi" aria-current="page">{{ dic_language.site }}</li>
+                        </ol>
+                    </nav>
+                    <h4>{{ dic_language.site }}</h4>
+                </div>
+                <div class="col-auto py-1"><a href="{{ the_create_url }}" class="btn btn-theme">
+                    <i data-feather="plus" class="me-0 me-md-1"></i>
+                    <span class="d-none d-md-inline-block pt-1 pe-2">{{ dic_language.add_ }} Site</span></a></div>
+                <div class="col-auto py-1 ms-auto ms-sm-0" onclick="clear_datetimes()">
+                    <button class="btn btn-link btn-square btn-icon" data-bs-toggle="collapse"
+                            data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+                        <i data-feather="filter"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="collapse" id="filter">
+                <div class="card adminuiux-card mt-4">
+                    <div class="card-body pb-0">
+                        <form method="GET">
+                            <div class="row">
+                                {% include 'panels/v1/admin/includes/components/search_filter_in_list_page.html' %}
+                                {% include 'panels/v1/admin/includes/components/status_delete_datetime_filter_and_submit_in_list_page.html' with list_url=the_list_url active_name='main' %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card adminuiux-card mt-4 mb-0">
+                <div class="card-body">
+                    <table id="dataTable" class="table w-100 nowrap">
+                        <thead>
+                        <tr>
+                            <th class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} align-content-center">{{ dic_language.order }}</th>
+                            <th class="align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.site }} {{ dic_language.name_ }}</th>
+                            <th class="align-content-center" data-breakpoints="xs sm md">Info</th>
+                            <th class="text-center align-content-center" data-breakpoints="xs sm">Thumbnail Quality</th>
+                            <th class="text-center align-content-center" data-breakpoints="xs sm">Thumbnail Size</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.footer }} Description
+                            </th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.status }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.date_and_time }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.action }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for site in object_list %}
+                            <tr>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %}">{{ site.sort_order }}</td>
+                                <td>
+                                    <div class="row align-items-center flex-nowrap">
+                                        <div class="col-auto">
+                                            {% if site.logo_favicon %}
+                                                <figure class="avatar avatar-40 mb-0 coverimg rounded-circle">
+                                                    <img src="{{ site.get_logo_favicon_tmb_url }}" alt=""></figure>
+                                            {% else %}
+                                                <div class="avatar avatar-40 mb-0 rounded-circle bg-purple text-white"><span
+                                                        class="h6">{{ site.site_name|slice:2 }}</span></div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col ps-0"><p class="mb-0 fw-medium">{{ site.site_name }}</p>
+                                            <p class="text-secondary small">{{ site.link }}</p></div>
+                                    </div>
+                                </td>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %}">
+                                    <p class="mb-0">{{ site.email }}</p>
+                                    <p class="text-secondary small">{{ site.phone }} - {{ site.fax }}</p>
+                                </td>
+                                <td class="text-center">{{ site.thumbnail_quality }}</td>
+                                <td class="text-center">{{ site.thumbnail_size }}</td>
+                                <td class="text-center">{{ site.footer_description|truncatewords:10 }}</td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if site.is_main %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ site.get_is_main }}</span>
+                                </td>
+                                <td class="text-center"><p class="mb-0">{{ site.datetime_update|date:"Y/m/d" }}</p>
+                                    <p class="text-secondary small">{{ site.datetime_update|timesince }}</p>
+                                </td>
+                                <td class="text-center">
+                                    {% include 'panels/v1/admin/includes/components/option_record_in_list_page.html' with detail_url=site.get_admin_detail_v1_url update_url=site.get_admin_update_v1_url pk=site.pk is_deleted=site.is_deleted %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'panels/v1/admin/includes/components/paginator.html' %}
+                </div>
+            </div>
+        </div>
+        {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url=the_delete_url %}
+    </main>
+{% endblock %}

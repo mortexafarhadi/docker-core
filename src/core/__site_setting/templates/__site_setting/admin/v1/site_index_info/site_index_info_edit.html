@@ -1,0 +1,701 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block CSS_CUSTOM %}
+    {{ form.media }}
+{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-site:list' as the_list_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi">
+                                    <a href="{{ the_template_url }}">{{ dic_language.setting }}</a>
+                                </li>
+                                <li class="breadcrumb-item bi"><a href="{{ the_list_url }}">{{ dic_language.site }}</a>
+                                </li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.pk }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with is_back=True btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body pb-0">
+                                    <h4 class="mt-3 mb-4">Edit
+                                        <span class="text-orange">{{ dic_language.site }} Index Info</span></h4>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                {{ form.register_title }}
+                                                <label>register_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                {{ form.register_btn_title }}
+                                                <label>register_btn_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                {{ form.register_btn_url }}
+                                                <label>register_btn_url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                {{ form.about_award_title }}
+                                                <label>about_award_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.about_award_poster %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_about_award_poster_tmb_url }}"
+                                                         alt="logo_preload">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.about_award_poster %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">about_award_poster</h5>
+                                                    {{ form.about_award_poster }}
+                                                </div>
+                                                {% if object.about_award_poster %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_about_award_poster }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            <div class="form-floating mb-3">
+                                                {{ form.about_award_btn_text }}
+                                                <label>about_award_btn_text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 mt-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.about_award_description }}
+                                                <label>about_award_description</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 mt-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.about_award_btn_url }}
+                                                <label>about_award_btn_url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">about_award_item_1_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.about_award_item_1_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_1_title }}
+                                                <label>about_award_item_1_title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_1_icon_name }}
+                                                <label>about_award_item_1_icon_name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_1_value }}
+                                                <label>about_award_item_1_value</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">about_award_item_2_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.about_award_item_2_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_2_title }}
+                                                <label>about_award_item_2_title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_2_icon_name }}
+                                                <label>about_award_item_2_icon_name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_2_value }}
+                                                <label>about_award_item_2_value</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">about_award_item_3_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.about_award_item_3_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_3_title }}
+                                                <label>about_award_item_3_title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_3_icon_name }}
+                                                <label>about_award_item_3_icon_name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_3_value }}
+                                                <label>about_award_item_3_value</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">about_award_item_4_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.about_award_item_4_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_4_title }}
+                                                <label>about_award_item_4_title</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_4_icon_name }}
+                                                <label>about_award_item_4_icon_name</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.about_award_item_4_value }}
+                                                <label>about_award_item_4_value</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">collection_asset_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.collection_asset_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.collection_asset_title_small }}
+                                                <label>collection_asset_title_small</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.collection_asset_title }}
+                                                <label>collection_asset_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">options_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.options_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.options_title }}
+                                                <label>options_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_1_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_1_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_1_title }}
+                                                <label>option_1_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_1_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_1_image_tmb_url }}"
+                                                         alt="option_1_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_1_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_1_image</h5>
+                                                    {{ form.option_1_image }}
+                                                </div>
+                                                {% if object.option_1_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_1_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_1_description }}
+                                                <label>option_1_description</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_2_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_2_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_2_title }}
+                                                <label>option_2_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_2_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_2_image_tmb_url }}"
+                                                         alt="option_2_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_2_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_2_image</h5>
+                                                    {{ form.option_2_image }}
+                                                </div>
+                                                {% if object.option_2_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_2_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_2_description }}
+                                                <label>option_2_description</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_3_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_3_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_3_title }}
+                                                <label>option_3_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_3_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_3_image_tmb_url }}"
+                                                         alt="option_3_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_3_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_3_image</h5>
+                                                    {{ form.option_3_image }}
+                                                </div>
+                                                {% if object.option_3_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_3_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_3_description }}
+                                                <label>option_3_description</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_4_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_4_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_4_title }}
+                                                <label>option_4_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_4_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_4_image_tmb_url }}"
+                                                         alt="option_4_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_4_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_4_image</h5>
+                                                    {{ form.option_4_image }}
+                                                </div>
+                                                {% if object.option_4_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_4_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_4_description }}
+                                                <label>option_4_description</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_5_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_5_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_5_title }}
+                                                <label>option_5_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_5_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_5_image_tmb_url }}"
+                                                         alt="option_5_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_5_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_5_image</h5>
+                                                    {{ form.option_5_image }}
+                                                </div>
+                                                {% if object.option_5_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_5_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_5_description }}
+                                                <label>option_5_description</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">option_6_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.option_6_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_6_title }}
+                                                <label>option_6_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.option_6_image %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_option_6_image_tmb_url }}"
+                                                         alt="option_6_image">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.option_6_image %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">option_6_image</h5>
+                                                    {{ form.option_6_image }}
+                                                </div>
+                                                {% if object.option_6_image %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_option_6_image }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.option_6_description }}
+                                                <label>option_6_description</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">subscribe_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.subscribe_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.subscribe_title_1 }}
+                                                <label>subscribe_title_1</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.subscribe_title_2 }}
+                                                <label>subscribe_title_2</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.subscribe_btn_title }}
+                                                <label>subscribe_btn_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">news_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.news_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.news_title_1 }}
+                                                <label>news_title_1</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.news_title_2 }}
+                                                <label>news_title_2</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.news_btn_title }}
+                                                <label>news_btn_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_title_small }}
+                                                <label>follow_us_title_small</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_title }}
+                                                <label>follow_us_title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_facebook_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_facebook_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_facebook_link }}
+                                                <label>follow_us_facebook_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_twitter_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_twitter_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_twitter_link }}
+                                                <label>follow_us_twitter_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_twitter_x_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_twitter_x_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_twitter_x_link }}
+                                                <label>follow_us_twitter_x_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_google_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_google_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_google_link }}
+                                                <label>follow_us_google_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_rss_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_rss_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_rss_link }}
+                                                <label>follow_us_rss_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_linkedin_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_linkedin_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_linkedin_link }}
+                                                <label>follow_us_linkedin_link</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-8 my-auto">follow_us_youtube_active</h5>
+                                                <div class="col-4 form-check-md form-switch d-flex justify-content-end">
+                                                    {{ form.follow_us_youtube_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.follow_us_youtube_link }}
+                                                <label>follow_us_youtube_link</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <button type="submit"
+                                                    class="btn btn-lg px-5 btn-success">{{ dic_language.save }}</button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a class="btn btn-link"
+                                               href="{{ request.META.HTTP_REFERER|default:'#' }}">{{ dic_language.cancel }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="modal fade" id="DeleteModal" tabindex="-1"
+     aria-labelledby="DeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title h5 text-danger" id="DeleteModalLabel">{{ dic_language.warning }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">{{ dic_language.delete_modal_description }}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary"
+                        data-bs-dismiss="modal">{{ dic_language.close }}</button>
+                <form method="POST" action={{ target_url }}>
+                    {% csrf_token %}
+                    <input type="hidden" name="next_page" value="{{ request.resolver_match.url_name }}">
+                    {% if pk_field %}
+                        <input id="modal_delete_pk" type="hidden" name="{{ pk_field }}" value="{{ pk_value }}">
+                    {% else %}
+                        <input id="modal_delete_pk" type="hidden" name="pk" value="{{ object.pk }}">
+                    {% endif %}
+                    <button type="submit" class="btn btn-danger">{{ dic_language.delete }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

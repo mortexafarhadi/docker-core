@@ -1,0 +1,21 @@
+<div class="modal fade" id="UnDeleteModal" tabindex="-1"
+     aria-labelledby="UnDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title h5 text-danger" id="UnDeleteModalLabel">{{ dic_language.warning }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">{{ dic_language.undelete_modal_description }}</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ dic_language.close }}</button>
+                <form method="POST" action="{% url target_url %}{% if target_url_params %}{{ target_url_params }}{% endif %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next_page" value="{{ request.resolver_match.url_name }}">
+                    <input id="modal_rollback_delete_slug" type="hidden" name="slug"  {% if slug %} value="{{ slug }}" {% else %} value="{{ object.slug }}" {% endif %}>
+                    <button type="submit" class="btn btn-danger">Rollback {{ dic_language.delete }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

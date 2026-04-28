@@ -1,0 +1,359 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-site:list' as the_list_url %}
+    {% url 'admin-v1-setting-site:delete' as the_delete_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi">
+                                    <a href="{{ the_template_url }}">{{ dic_language.setting }}</a>
+                                </li>
+                                <li class="breadcrumb-item bi">
+                                    <a href="{{ the_list_url }}">{{ dic_language.site }}</a>
+                                </li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.pk }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with link=the_list_url btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <div class="card-body">
+                                <h3 class="mt-3 mb-4">{{ dic_language.detail }} <span
+                                        class="text-orange">{{ dic_language.site }}</span></h3>
+                                <div class="row mb-2">
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Site Type</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.get_site_type_display }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Section Head Title</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.section_head_title }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Section Head Description</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.section_head_description }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Section Head Keywords</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.section_head_keywords }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Section Head Author</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.section_head_author }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Section Head HTML Language</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.section_head_html_language }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-2">
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.site }} {{ dic_language.name_ }}</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.site_name }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.link }}</h4>
+                                            <h5 class="my-auto text-end text-primary link">{{ object.link }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Email</h4>
+                                            <h4 class="my-auto text-end text-primary link">{{ object.email }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Phone</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.phone }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Fax</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.fax }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.sort_order }}</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.sort_order }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Verify Code Digits</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.verify_code_digits }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Thumbnail Quality</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.thumbnail_quality }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Thumbnail Size</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.thumbnail_size }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.description }}</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.get_description_display }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Address</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.get_address }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Description</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.get_footer_description }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 1</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.footer_link_1_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 1 Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.footer_link_1_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-5 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 1 Url</h4>
+                                            <h5 class="my-auto text-end text-primary link">{{ object.footer_link_1_url }}</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 2</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.footer_link_2_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 2 Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.footer_link_2_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-5 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 2 Url</h4>
+                                            <h5 class="my-auto text-end text-primary link">{{ object.footer_link_2_url }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 3</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.footer_link_3_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 3 Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.footer_link_3_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-5 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.footer }} Link 3 Url</h4>
+                                            <h5 class="my-auto text-end text-primary link">{{ object.footer_link_3_url }}</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Main Text 1</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_main_text_1 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Main Text 2</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_main_text_2 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Main Link Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_main_link_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Main Link Url</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_main_link_url }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Auth Text 1</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_auth_text_1 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Auth Text 2</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_auth_text_2 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Auth Link Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_auth_link_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Auth Link Url</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_auth_link_url }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Panels Text 1</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_panels_text_1 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Panels Text 2</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.get_copyright_panels_text_2 }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Panels Link Text</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_panels_link_text }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Copyright Panels Link Url</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.copyright_panels_link_url }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Logo Header</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.logo_header %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_logo_header_tmb_url }}" alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h5 class="my-auto text-end text-primary link">Not Set</h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Logo Footer</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.logo_footer %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_logo_footer_tmb_url }}" alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h5 class="my-auto text-end text-primary link">Not Set</h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Logo Preload</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.logo_preload %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_logo_preload_tmb_url }}" alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h5 class="my-auto text-end text-primary link">Not Set</h5>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">Main</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_main %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h4 class="my-auto">{{ dic_language.deleted }}</h4>
+                                            <div class="col-8 form-check-md form-switch theme-red d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_deleted %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include 'panels/v1/admin/includes/components/footer_in_detail_page.html' with update_url=object.get_admin_update_v1_url %}
+                        </div>
+                        {% include 'panels/v1/admin/includes/components/log_history_in_detail_page.html' with model="Site" %}
+                    </div>
+                </div>
+            </div>
+            {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url=the_delete_url %}
+        </main>
+    </div>
+{% endblock %}

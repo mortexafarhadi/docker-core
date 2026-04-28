@@ -1,0 +1,7 @@
+<div class="col-12 col-md-6 col-lg-4 mb-3">
+    <div class="form-floating">
+        <input name="q" class="form-control" placeholder="{{ dic_language.search_placeholder }}"
+               {% if request.params.q %}value="{{ request.params.q }}" {% endif %}>
+        <label>{{ dic_language.search_placeholder }}</label>
+    </div>
+</div>

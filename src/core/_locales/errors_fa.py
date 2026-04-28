@@ -1,0 +1,8 @@
+password_confirm_password_not_correct = "رمز عبور با تکرار رمز عبور مطابقت ندارد"
+enter_the_information_correctly = "اطلاعات را به درستی وارد کنید"
+the_email_or_password_is_incorrect = "ایمیل یا رمز عبور معتبر نیست"
+the_password_is_incorrect = "رمز عبور معتبر نیست"
+your_account_is_not_active = "جساب کاربری شما فعال نیست"
+this_email_has_already_been_registered = "این ایمیل قبلا ثبت نام شده است"
+user_not_found = "کاربری یافت نشد"
+activation_code_is_not_correct = "کد فعالسازی نامعتبر است"

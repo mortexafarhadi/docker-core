@@ -1,0 +1,40 @@
+<div id="id_{{ item_name }}" class="d-none" key="choice">
+    {% for item in options %}
+        <div><label for="id_{{ item_name }}_{{ forloop.counter0 }}">
+            <input type="checkbox" name="{{ item_name }}" value="{{ item.0 }}"
+                   id="id_{{ item_name }}_{{ forloop.counter0 }}" {% if item.1 in selected %}checked{% endif %}>
+            {{ item.1 }}</label>
+        </div>
+    {% endfor %}
+</div>
+<div>
+    <p class="position-absolute z-1 ms-3 mt-2 text-secondary fs-14">{{ item_display }}</p>
+    <div class="searchable-dropdown">
+        <div class="searchable-dropdown-toggle" onclick="toggleDropdown('{{ item_name }}')">
+            {% if selected %}
+                <span class="searchable-selected-options {{ item_name }} pt-1 mb-_0_5rem fs-5 overflow-hidden"
+                      key="choice">
+                {% for item in selected %}
+                    <span onclick="removeOption('{{ item }}', '{{ item_name }}')">{{ item }}</span>
+                {% endfor %}
+            </span>
+            {% else %}
+                <span class="searchable-selected-options {{ item_name }} pt-1 mb-_0_5rem fs-5 overflow-hidden"
+                      key="choice">Select {{ item_display }}</span>
+            {% endif %}
+            <span>&#9662;</span>
+        </div>
+        <div class="searchable-dropdown-menu {{ item_name }}">
+            <input type="text" class="searchable-search {{ item_name }}" onkeyup="filterOptions('{{ item_name }}')"
+                   placeholder="Search...">
+            <ul class="searchable-options-list {{ item_name }}">
+                {% if not required %}
+                    <li class="pt-3" onclick="selectOption('','-----','{{ item_name }}')">-----</li>{% endif %}
+                {% for item in options %}
+                    <li class="{% if item.1 in selected %}bg-primary-subtle{% endif %} pt-3"
+                        onclick="selectManyOption('{{ item.0 }}','{{ item.1 }}','{{ item_name }}')">{{ item.1 }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

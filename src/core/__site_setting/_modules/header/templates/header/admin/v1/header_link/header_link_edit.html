@@ -1,0 +1,104 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% block CSS_CUSTOM %}
+    {{ form.media }}
+{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-header-link-list' as the_list_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_template_url }}">{{ dic_language.setting }}</a></li>
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_list_url }}">{{ dic_language.header }}
+                                    {{ dic_language.link }}</a></li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.pk }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with is_back=True btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="card-body pb-0">
+                                    <h4 class="mt-3 mb-4">{% if object %}{{ dic_language.edit_ }}{% else %}
+                                        {{ dic_language.add_ }}{% endif %} <span
+                                            class="text-orange">{{ dic_language.header }} {{ dic_language.link }}</span>
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.title }}
+                                                <label>{{ dic_language.title }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {% include 'base/searchable_dropdown/select_foreignKey_with_pk.html' with item_name="group" item_display="Group" options=groups selected=object.group required=True %}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.link }}
+                                                <label>{{ dic_language.link }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">{{ dic_language.open_in_newtab }}</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.open_in_newtab }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-control mb-3">
+                                                <label>{{ dic_language.description }}</label>
+                                                {{ form.description }}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 ">
+                                            <div class="form-floating mb-3">
+                                                {{ form.sort_order }}
+                                                <label>{{ dic_language.sort_order }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">{{ dic_language.status }}</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.is_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% include 'panels/v1/admin/includes/components/footer_in_edit_page.html' with detail_url=object.get_admin_detail_v1_url %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+<hr>
+<div class="d-flex justify-content-between">
+    <div class="my-auto">
+        <div class="dt-info ms-3">
+            {{ dic_language.showing }} {{ page_obj.start_index }}
+            {{ dic_language.to }} {{ page_obj.end_index }}
+            {{ dic_language.of }} {{ paginator.count }}
+            {{ dic_language.entries }}
+        </div>
+    </div>
+    <div class="my-auto">
+        {% if is_paginated %}
+            <nav>
+                <ul class="pagination justify-content-end my-auto">
+                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <button class="page-link ps-0_6rem py-t38-b25rem"
+                                {% if page_obj.has_previous %} onclick="set_page(1)" {% endif %}>
+                            {{ dic_language.first }}
+                        </button>
+                    </li>
+                    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+                        <button class="page-link ps-0_6rem py-t38-b25rem"
+                                {% if page_obj.has_previous %}
+                                onclick="set_page({{ page_obj.previous_page_number }})" {% endif %}>
+                            &lt;&lt;
+                        </button>
+                    </li>
+                    {% for page in page_range %}
+                        <li class="page-item {% if page == page_obj.number %}active{% endif %}">
+                            <button class="page-link ps-0_6rem py-t38-b25rem" onclick="set_page({{ page }})">
+                                {{ page }}
+                            </button>
+                        </li>
+                    {% endfor %}
+                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                        <button class="page-link ps-0_6rem py-t38-b25rem"
+                                {% if page_obj.has_next %}onclick="set_page({{ page_obj.next_page_number }})"{% endif %}>
+                            &gt;&gt;
+                        </button>
+                    </li>
+                    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                        <button class="page-link ps-0_6rem py-t38-b25rem"
+                                {% if page_obj.has_next %}onclick="set_page({{ paginator.num_pages }})"{% endif %}>
+                            {{ dic_language.end }}
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+</div>

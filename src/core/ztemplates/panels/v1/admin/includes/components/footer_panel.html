@@ -1,0 +1,34 @@
+<footer class="adminuiux-footer has-adminuiux-sidebar mt-auto">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md col-lg py-2"><span class="small">{{ current_setting.copyright_panels_text_1 }} <a
+                    href="{{ current_setting.copyright_panels_link_url }}"
+                    target="_blank">{{ current_setting.copyright_panels_link_text }}</a> {{ current_setting.copyright_panels_text_2 }}</span>
+            </div>
+            <div class="col-12 col-md-auto col-lg-auto align-self-center">
+                <ul class="nav small">
+                    {% if current_setting.footer_link_1_active %}
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ current_setting.footer_link_1_url }}">{{ current_setting.footer_link_1_text }}</a>
+                        </li>
+                        <li class="nav-item">|</li>
+                    {% endif %}
+                    {% if current_setting.footer_link_2_active %}
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ current_setting.footer_link_2_url }}">{{ current_setting.footer_link_2_text }}</a>
+                        </li>
+                    {% endif %}
+                    {% if current_setting.footer_link_3_active %}
+                        <li class="nav-item">|</li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               href="{{ current_setting.footer_link_3_url }}">{{ current_setting.footer_link_3_text }}</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,22 @@
+1-
+First, insert the tag
+{% load i18n %}
+into the desired templates
+Then change the desired texts to
+{% translate 'Home' %}
+
+2-
+Then go to the module where the template is located and create a folder called locale
+And enter the following command
+python manage.py makemessages -l fa
+
+3-
+In the created folder, a file with the extension
+.po
+will be created based on your chosen language
+Open them and translate your texts
+
+4-
+Finally, compile your translation files with the following command
+python manage.py compilemessages
+(this will create files with the extension .mo)

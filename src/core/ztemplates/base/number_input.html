@@ -1,0 +1,6 @@
+<input type="text" class="{{ style|default:'form-control' }}"
+       {% if has_id or id_ %}id="{{ id_ }}"{% endif %}
+       {% if has_name or name_ %}name="{{ name_ }}"{% endif %}
+       onkeypress="return isNumberKey(event)"
+       onkeyup="return setCommaThreeDigit(this)"
+>

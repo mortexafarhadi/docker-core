@@ -1,0 +1,8 @@
+@font-face {
+    font-family: font-lalezar;
+    src: url('./fonts/Lalezar-Regular.ttf');
+}
+
+*, a, p.h1, span, h2, h3, h4, h5, h6, .ff-lalezar {
+    font-family: font-lalezar;
+}

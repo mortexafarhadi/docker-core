@@ -1,0 +1,32 @@
+## list git remote
+git remote -v
+
+## remove previous upstream
+git remote remove upstream
+
+## rename origin name
+git remote rename origin upstream
+
+## set upstream
+git branch --set-upstream-to=origin/main main
+
+## disable push upstream
+git remote set-url --push upstream DISABLE
+
+## add remote origin
+git remote add origin git@github.com:mortexafarhadi/core.git
+
+## add submodule to main git
+git submodule add https://github.com/mortexafarhadi/core.git projects/core
+
+## clone and pull submodules
+git submodule update --init --recursive
+
+## for fetch core (main)
+git fetch upstream
+git checkout main
+
+git merge upstream/main   ## for clean history   -> git rebase upstream/main
+
+## for fix conflict
+git push origin main

@@ -1,0 +1,80 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Context %}
+    {% url 'admin-v1-user-template' as the_user_template_url %}
+    {% url 'admin-v1-admin-list' as the_admin_list_url %}
+    {% url 'admin-v1-user-detail' user_code as the_user_detail_url %}
+    {% url 'admin-v1-user-wallet-card:list' user_code as the_list_url %}
+    {% url 'admin-v1-user-wallet-card:add' user_code as the_create_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_admin_list_url }}">{{ dic_language.users }}</a></li>
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_user_detail_url }}">{{ user_code }}</a></li>
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_list_url }}">{{ dic_language.wallet }} {{ dic_language.cards }}</a></li>
+                                <li class="breadcrumb-item active bi" aria-current="page">
+                                    {% if object %}{{ object.slug }}{% else %}{{ dic_language.add_ }}{% endif %}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                <a href="{{ request.META.HTTP_REFERER|default:'#' }}" class="btn btn-accent pe-4">
+                                    <i data-feather="arrow-left" class="me-0 me-md-1"></i>
+                                    <span class="d-none d-md-inline-block pt-1 pe-1">{{ dic_language.back }}</span>
+                                </a>
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.slug }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body pb-0">
+                                    <h3 class="mt-3 mb-4">{% if object %}{{ dic_language.edit_ }}{% else %}
+                                        {{ dic_language.add_ }}{% endif %} <span
+                                            class="text-orange">{{ dic_language.wallet }} {{ dic_language.card }}</span></h3>
+                                    <div class="row">
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-floating mb-3">
+                                                {{ form.bank_name }}
+                                                <label>{{ dic_language.bank_name }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-floating mb-3">
+                                                {{ form.card_number }}
+                                                <label>{{ dic_language.card_number }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-floating mb-3">
+                                                {{ form.shaba_number }}
+                                                <label>{{ dic_language.shaba_number }}</label>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                {% include 'panels/v1/admin/includes/components/footer_in_edit_page.html' with detail_url='admin-v1-category:detail' %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

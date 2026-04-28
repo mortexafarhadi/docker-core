@@ -1,0 +1,17 @@
+{
+    "eth": {
+        "chain_id": 1,
+        "rpc_url": "https://rpc.ankr.com/eth/647a387a9b774e59d26d1c3157590bbd498fc491f9c588a049811422cdf6a26b",
+        "contract": "0x6b03E1eA6CaA9Bf9085a0bb732039f249BFb6a4a"
+    },
+    "pol": {
+        "chain_id": 137,
+        "rpc_url": "https://rpc.ankr.com/polygon/647a387a9b774e59d26d1c3157590bbd498fc491f9c588a049811422cdf6a26b",
+        "contract": "0x6b03E1eA6CaA9Bf9085a0bb732039f249BFb6a4a"
+    },
+    "avax": {
+        "chain_id": 43114,
+        "rpc_url": "https://rpc.ankr.com/avalanche/647a387a9b774e59d26d1c3157590bbd498fc491f9c588a049811422cdf6a26b",
+        "contract": "0x6b03E1eA6CaA9Bf9085a0bb732039f249BFb6a4a"
+    }
+}

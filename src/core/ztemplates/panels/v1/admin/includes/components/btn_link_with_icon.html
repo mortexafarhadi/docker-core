@@ -1,0 +1,8 @@
+<a {% if is_back %}href="{{ request.META.HTTP_REFERER|default:'#' }}"{% else %}href="{{ link }}"{% endif %}
+   class="btn {% if btn_color %}{{ btn_color }}{% else %}btn-theme{% endif %}">
+    <i data-feather="{{ icon_name }}"
+       class="{% if style_icon %}{{ style_icon }}{% else %}me-0 me-md-1{% endif %}"></i>
+    <span class="{% if style_text %}{{ style_text }}{% else %}d-none d-md-inline-block pt-1 pe-2{% endif %}">
+        {{ text }}
+    </span>
+</a>

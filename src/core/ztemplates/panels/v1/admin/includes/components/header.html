@@ -1,0 +1,113 @@
+{% load poll_extras %}
+{% load static %}
+
+<header class="adminuiux-header">
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <button class="btn btn-link btn-square sidebar-toggler" id="checker_hide_sidebar" type="button"
+                    onclick="initSidebar()">
+                <i class="sidebar-svg" data-feather="menu" onclick="set_hide_sidebar()"></i></button>
+            <a class="navbar-brand" href="{% url 'auth-v1:dashboard' %}">
+                <img data-bs-img="light" src="{% static 'panels/v1/admin/assets/img/logo-light.svg' %}" alt=""> <img
+                    data-bs-img="dark" src="{% static 'panels/v1/admin/assets/img/logo.svg' %}" alt="">
+                <div class=""><span class="h4">{{ current_setting.site_name }}</span>
+                    <p class="company-tagline">{{ current_setting.slogan }}</p></div>
+            </a>
+            <div class="ms-auto">
+                <a class="btn btn-link btn-square btn-link-header" href="{% url 'main:index' %}">
+                    {{ dic_language.index }}
+                </a>
+                <button onclick="toggle_dark_mode()"
+                        class="btn btn-link btn-square btnsunmoon btn-link-header" id="btn-layout-modes-dark-page"><i
+                        class="sun mx-auto" data-feather="sun"></i> <i class="moon mx-auto" data-feather="moon"></i>
+                </button>
+                <div class="dropdown d-none d-sm-inline-block">
+                    <button class="btn btn-link btn-square btn-icon btn-link-header dropdown-toggle no-caret"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+                            class="bi bi-translate"></i></button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li onclick="set_language('en','ltr')" role="button">
+                            <a class="dropdown-item {% if request.user.get_language == 'en' %}active{% endif %}"
+                               data-value="en">{{ dic_language.language_en_option }}</a></li>
+                        <li onclick="set_language('fa','rtl')" role="button">
+                            <a class="dropdown-item {% if request.user.get_language == 'fa' %}active{% endif %}"
+                               data-value="fa">{{ dic_language.language_fa_option }}</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown d-inline-block"><a
+                        class="dropdown-toggle btn btn-link btn-square btn-link-header style-none no-caret px-0"
+                        id="userprofiledd" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                    <div class="row gx-0 d-inline-flex">
+                        <div class="col-auto align-self-center">
+                            <figure class="avatar avatar-28 rounded-circle coverimg align-middle">
+                                {% if request.user.avatar %}
+                                    <img src="{{ request.user.get_avatar_tmb_url }}" alt=""
+                                         id="userphotoonboarding2">
+                                {% else %}
+                                    <img src="{% static 'panels/v1/admin/assets/img/modern-ai-image/user-6.jpg' %}"
+                                         alt="" id="userphotoonboarding2">
+                                {% endif %}
+                            </figure>
+                        </div>
+                    </div>
+                </a>
+                    <div class="dropdown-menu dropdown-menu-end width-300 pt-0 px-0 sm-mi-45px"
+                         aria-labelledby="userprofiledd">
+                        <div class="bg-theme-1-space rounded py-3 mb-3 dropdown-dontclose">
+                            <div class="row gx-0">
+                                <div class="col-auto px-3">
+                                    <figure class="avatar avatar-50 rounded-circle coverimg align-middle">
+                                        {% if request.user.avatar %}
+                                            <img src="{{ request.user.get_avatar_tmb_url }}" alt="">
+                                        {% else %}
+                                            <img src="{% static 'panels/v1/admin/assets/img/modern-ai-image/user-6.jpg' %}"
+                                                 alt="">
+                                        {% endif %}
+                                    </figure>
+                                </div>
+                                <div class="col align-self-center"><p class="mb-1"><span>{{ request.user }}</span><small
+                                        class="opacity-50 ms-2">{{ request.user.get_full_name }}</small></p>
+                                    <p>
+                                        <i class="bi {% if request.user.is_superuser %}bi-person-gear{% elif request.user.is_staff %}bi-person-fill-check{% else %}bi-person{% endif %} me-2"></i> {{ request.user.get_role_display }}
+                                    </p></div>
+                            </div>
+                        </div>
+                        <div class="px-2">
+                            <div class="dropdown open-left dropdown-dontclose">
+                                <a class="dropdown-item" data-bs-toggle="dropdown" aria-expanded="false" role="button">
+                                    <div class="row">
+                                        <div class="col">
+                                            <i class="bi bi-translate avatar avatar-18 me-1"></i> {{ dic_language.language }}
+                                        </div>
+                                        <div class="col-auto">
+                                            <small class="vm">{{ request.user.get_language_str }}</small>
+                                            <i class="bi bi-translate"></i>
+                                        </div>
+                                        <div class="col-auto"><span class="arrow bi bi-chevron-right"></span></div>
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <div onclick="set_language('en','ltr')" role="button">
+                                        <a class="dropdown-item {% if request.user.get_language == 'en' %}active{% endif %}"
+                                           data-value="en">{{ dic_language.language_en_option }}</a></div>
+                                    <div onclick="set_language('fa','rtl')" role="button">
+                                        <a class="dropdown-item {% if request.user.get_language == 'fa' %}active{% endif %}"
+                                           data-value="fa">{{ dic_language.language_fa_option }}</a></div>
+                                </div>
+                            </div>
+                            <div><a class="dropdown-item theme-red" href="{% url 'auth-v1:logout' %}">
+                                <i data-feather="power" class="avatar avatar-18 me-1"></i>
+                                {{ dic_language.logout }}</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+        <form method="POST" action="{% url 'base:change-language' %}">
+            {% csrf_token %}
+            <input type="hidden" id="setting_language" name="language" value="{{ request.user.get_language }}">
+            <input type="hidden" id="setting_direction" name="direction" value="{{ request.user_setting.direction }}">
+            <input type="hidden" name="next_url" value="{{ request.path_info }}">
+        </form>
+</header>

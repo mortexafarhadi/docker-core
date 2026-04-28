@@ -1,0 +1,36 @@
+<div class="card-footer border-top border-2">
+    <div class="row align-items-center justify-content-between">
+        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+            <div class="form-floating align-items-center row">
+                <h5 class="col-5 my-auto">{{ dic_language.create }} {{ dic_language.datetime }}</h5>
+                <h4 class="col-7 my-auto text-end text-primary">{{ object.datetime_create|date:"Y/m/d" }}</h4>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+            <div class="form-floating align-items-center row">
+                <h5 class="col-5 my-auto">{{ dic_language.update }} {{ dic_language.datetime }}</h5>
+                <h4 class="col-7 my-auto text-end text-primary">{{ object.datetime_update|date:"Y/m/d" }}</h4>
+            </div>
+        </div>
+        {% if object.is_deleted %}
+            <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                <div class="form-floating align-items-center row">
+                    <h5 class="col-5 my-auto">{{ dic_language.delete }} {{ dic_language.datetime }}</h5>
+                    <h4 class="col-7 my-auto text-end text-danger">{{ object.datetime_delete|date:"Y/m/d" }}</h4>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if not object.is_deleted %}
+        <div class="row align-items-center mt-2">
+            <div class="col">
+                {% include 'panels/v1/admin/includes/components/btn_link.html' with link=update_url text=dic_language.edit_ %}
+            </div>
+            {% if dont_show_delete != True %}
+                <div class="col-auto">
+                    {% include 'panels/v1/admin/includes/components/btn_modal.html' with text=dic_language.delete target="DeleteModal" %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

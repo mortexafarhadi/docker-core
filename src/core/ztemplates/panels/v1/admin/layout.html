@@ -1,0 +1,13 @@
+{% extends 'panels/v1/base-layout.html' %}
+{% load static %}
+{% block Layout %}
+    {% include 'panels/v1/admin/includes/components/header.html' %}
+    <div class="adminuiux-wrap">
+        {% include 'panels/v1/admin/includes/components/left_sidebar.html' %}
+        {% block Context %}{% endblock Context %}
+    </div>
+    {% include 'panels/v1/admin/includes/components/footer_panel.html' %}
+{% endblock Layout %}
+{% block Footer_References_Base %}
+    <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_panel_base.js' %}"></script>
+{% endblock %}

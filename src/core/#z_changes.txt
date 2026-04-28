@@ -1,0 +1,28 @@
+# ##################### #
+# ###   CHANGES   ### #
+# ##################### #
+1- fix config password for setup admin and test user
+
+# ##################### #
+# ###   IMPORTANT   ### #
+# ##################### #
+1- change object list from 'objects' to 'object_list' in list templates
+
+
+
+
+#package
+django-debug-toolbar
+
+
+shop
+
+S06- S04
+S06- S06
+
+#payment gateway
+ali-zahedi/az-iranian-bank-gateways
+
+
+#remove url parameter in django
+https://stackoverflow.com/questions/16518733/how-can-i-remove-the-get-parameters-from-url-in-django

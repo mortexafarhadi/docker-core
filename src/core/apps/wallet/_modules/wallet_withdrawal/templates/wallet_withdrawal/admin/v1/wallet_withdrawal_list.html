@@ -1,0 +1,80 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Footer_References %}
+    <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_list_page.js' %}"></script>{% endblock %}
+{% block Context %}
+    <main class="adminuiux-content has-sidebar">
+        <div class="container-fluid mt-4">
+            <div class="row gx-3 align-items-center">
+                <div class="col-12 col-sm">
+                    <nav aria-label="breadcrumb" class="mb-2">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item bi">
+                                <a href="{% url 'admin-wallet-withdrawal-list' %}">Wallet Withdrawal</a></li>
+                        </ol>
+                    </nav>
+                    <h4>Wallet Withdrawal</h4>
+                </div>
+{#                <div class="col-auto py-1"><a href="{% url 'admin-wallet-withdrawal-add' %}" class="btn btn-theme">#}
+{#                    <i data-feather="plus" class="me-0 me-md-1"></i>#}
+{#                    <span class="d-none d-md-inline-block pt-1 pe-2">{{ dic_language.add_ }} Wallet Withdrawal</span></a>#}
+{#                </div>#}
+                <div class="col-auto py-1 ms-auto ms-sm-0" onclick="clear_datetimes()">
+                    <button class="btn btn-link btn-square btn-icon" data-bs-toggle="collapse"
+                            data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+                        <i data-feather="filter" class="d-flex pb-0 pt-1"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="collapse" id="filter">
+                <div class="card adminuiux-card mt-4">
+                    <div class="card-body pb-0">
+                        <form method="GET">
+                            <div class="row">
+                                {% include 'panels/v1/admin/includes/components/search_filter_in_list_page.html' %}
+                                {% include 'panels/v1/admin/includes/components/status_delete_datetime_filter_and_submit_in_list_page.html' with list_url='admin-wallet-withdrawal-list' %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card adminuiux-card mt-4 mb-0">
+                <div class="card-body">
+                    <table id="dataTable" class="table w-100 nowrap">
+                        <thead>
+                        <tr>
+                            <th class="text-start align-content-center col-1">{{ dic_language.order }}</th>
+                            <th class="text-start align-content-center">{{ dic_language.user }}</th>
+                            <th class="text-center align-content-center col-2">Amount</th>
+                            <th class="text-center align-content-center col-1" data-breakpoints="xs sm">{{ dic_language.status }}</th>
+                            <th class="text-center align-content-center col-3" data-breakpoints="xs sm">Card</th>
+                            <th class="text-center align-content-center col-1 all">{{ dic_language.date_and_time }}</th>
+                            <th class="text-center align-content-center col-1 all">{{ dic_language.action }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for withdrawal in object_list %}
+                            <tr>
+                                <td class="text-start">{{ withdrawal.slug }}</td>
+                                <td class="text-start text-wrap"><h6>{{ withdrawal.get_user.get_fullname }}</h6></td>
+                                <td class="text-center text-wrap"><h6>{{ withdrawal.amount }}</h6></td>
+                                <td class="text-center"><span class="badge badge-light rounded-pill pt-2 text-bg-{{ get_status_bg_color }}">{{ withdrawal.get_status_display }}</span></td>
+                                <td class="text-center text-wrap"><h6>{{ withdrawal.get_wallet_card }}</h6></td>
+                                <td class="text-center"><p class="mb-0">{{ withdrawal.datetime_create|date }}</p>
+                                    <p class="text-secondary small">{{ withdrawal.datetime_update|timesince }}</p>
+                                </td>
+                                <td class="text-center">
+                                    {% include 'panels/v1/admin/includes/components/option_record_in_list_page.html' with detail_url='admin-wallet-withdrawal-detail' has_edit='False' slug=withdrawal.slug has_delete="True" is_deleted=withdrawal.is_deleted %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'panels/v1/admin/includes/components/paginator.html' %}
+                </div>
+            </div>
+        </div>
+        {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url='admin-wallet-withdrawal-delete' %}
+    </main>
+{% endblock %}

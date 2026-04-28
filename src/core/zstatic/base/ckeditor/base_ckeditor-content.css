@@ -1,0 +1,55 @@
+
+/* 1. استایل‌های عمومی تصویر داخل محتوا (بسیار مهم) */
+.ck-editor-content figure {
+    /* حذف هرگونه استایل پیش‌فرض margin برای مدیریت بهتر توسط CSS ما */
+    margin: 0;
+    /* اطمینان از اینکه figure از عرض والد خود تجاوز نمی‌کند */
+    max-width: 100%;
+}
+
+/* برای تصاویر ریسایز شده، اطمینان از اعمال عرض درصدی */
+.ck-editor-content .image_resized {
+    /* figure ها به صورت پیش‌فرض inline هستند، باید آنها را block کنیم تا float کار کند */
+    display: block;
+}
+
+
+/* 2. مدیریت وضعیت وسط‌چین (Center) */
+/* تصاویر وسط‌چین هیچ کلاسی ندارند.
+   استایل‌های فعلی شما برای این وضعیت عالی کار می‌کنند: */
+.ck-editor-content img {
+    display: block;
+    max-width: 100%;
+    height: auto !important;
+    /* این خط باعث وسط‌چین شدن تصاویر بدون کلاس float می‌شود */
+    margin: 10px auto;
+}
+
+
+/* 3. مدیریت وضعیت راست‌چین (Right / Side) */
+/* در جهت LTR، کلاس 'side' برای راست‌چین استفاده می‌شود */
+.ck-editor-content .image-style-side {
+    float: right;
+    /* ایجاد فاصله با متن در سمت چپ تصویر */
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+}
+
+
+/* 4. مدیریت وضعیت چپ‌چین (Left) */
+.ck-editor-content .image-style-align-left {
+    float: left;
+    /* ایجاد فاصله با متن در سمت راست تصویر */
+    margin-right: 1.5em;
+    margin-bottom: 1em;
+}
+
+/* 5. پاکسازی float */
+/* برای جلوگیری از بهم ریختگی لایه‌بندی محتوای بعدی،
+   باید بعد از figure های float شده، Clearfix اعمال شود.
+   این روش (Clearfix بر روی figure) در اغلب موارد کارساز است. */
+.ck-editor-content figure:after {
+    content: "";
+    display: table;
+    clear: both;
+}

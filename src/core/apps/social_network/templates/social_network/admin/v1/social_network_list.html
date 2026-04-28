@@ -1,0 +1,90 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Footer_References %}
+    <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_list_page.js' %}"></script>{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-social-network:list' as the_list_url %}
+    {% url 'admin-v1-social-network:add' as the_create_url %}
+    {% url 'admin-v1-social-network:delete' as the_delete_url %}
+    <main class="adminuiux-content has-sidebar">
+        <div class="container-fluid mt-4">
+            <div class="row gx-3 align-items-center">
+                <div class="col-12 col-sm">
+                    <nav aria-label="breadcrumb" class="mb-2">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item bi">
+                                <a href="{{ the_list_url }}">{{ dic_language.social_network }}</a>
+                            </li>
+                        </ol>
+                    </nav>
+                    <h4>{{ dic_language.social_network }}</h4>
+                </div>
+                <div class="col-auto py-1">
+                    {% with text_value=dic_language.add_|add:" "|add:dic_language.social_network %}
+                        {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with link=the_create_url icon_name="plus" text=text_value %}
+                    {% endwith %}
+                </div>
+                <div class="col-auto py-1 ms-auto ms-sm-0" onclick="clear_datetimes()">
+                    <button class="btn btn-link btn-square btn-icon" data-bs-toggle="collapse"
+                            data-bs-target="#filter" aria-expanded="false" aria-controls="filter">
+                        <i data-feather="filter" class="d-flex pb-0 pt-1"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="collapse" id="filter">
+                <div class="card adminuiux-card mt-4">
+                    <div class="card-body pb-0">
+                        <form method="GET">
+                            <div class="row">
+                                {% include 'panels/v1/admin/includes/components/search_filter_in_list_page.html' %}
+                                {% include 'panels/v1/admin/includes/components/status_delete_datetime_filter_and_submit_in_list_page.html' with list_url=the_list_url %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card adminuiux-card mt-4 mb-0">
+                <div class="card-body">
+                    <table id="dataTable" class="table w-100 nowrap">
+                        <thead>
+                        <tr>
+                            <th class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} align-content-center">{{ dic_language.order }}</th>
+                            <th class="align-content-center col-5">{{ dic_language.title }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.status }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.deleted }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.date_and_time }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.action }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for social_network in object_list %}
+                            <tr>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %}">{{ social_network.sort_order }}</td>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} text-wrap">
+                                    <h6>{{ social_network.title }}</h6></td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if social_network.is_active %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ social_network.get_is_active_display }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if social_network.is_deleted %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ social_network.get_is_deleted_display }}</span>
+                                </td>
+                                <td class="text-center"><p class="mb-0">{{ social_network.datetime_update|date:"Y/m/d" }}</p>
+                                    <p class="text-secondary small">{{ social_network.datetime_update|timesince }}</p>
+                                </td>
+                                <td class="text-center">
+                                    {% include 'panels/v1/admin/includes/components/option_record_in_list_page.html' with detail_url=social_network.get_admin_detail_v1_url update_url=social_network.get_admin_update_v1_url pk=social_network.pk is_deleted=social_network.is_deleted %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'panels/v1/admin/includes/components/paginator.html' %}
+                </div>
+            </div>
+        </div>
+        {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url=the_delete_url %}
+    </main>
+{% endblock %}

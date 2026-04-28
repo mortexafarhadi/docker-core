@@ -1,0 +1,24 @@
+<div class="modal fade" id="RejectModal" tabindex="-1"
+     aria-labelledby="RejectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="modal-title h5 text-danger" id="RejectModalLabel">{{ dic_language.warning }}</p>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{ target_url }}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    {{ dic_language.delete_modal_description }}
+                    <textarea class="form-control mb-3" rows="3" name="rejection_reason"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">{{ dic_language.close }}</button>
+                    <input type="hidden" name="pk" value="{{ object.pk }}">
+                    <button type="submit" class="btn btn-danger">{{ dic_language.reject }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

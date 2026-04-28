@@ -1,0 +1,408 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block CSS_CUSTOM %}
+    {{ form.media }}
+{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-site:list' as the_list_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_template_url }}">{{ dic_language.setting }}</a></li>
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_list_url }}">{{ dic_language.site }}</a>
+                                </li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.pk }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with is_back=True btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-body pb-0">
+                                    <h4 class="mt-3 mb-4">{% if object %}{{ dic_language.edit_ }}{% else %}
+                                        {{ dic_language.add_ }}{% endif %}
+                                        <span class="text-orange">{{ dic_language.site }}</span></h4>
+                                    <div class="row mb-5">
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.site_type }}
+                                                <label>Site Type</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.section_head_title }}
+                                                <label>Section Head Title</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.section_head_html_language }}
+                                                <label>Section Head HTML Language</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 align-content-center">
+                                            <div class="">
+                                                <label>Section Head Description</label>
+                                                {{ form.section_head_description }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 align-content-center mt-3">
+                                            <div class="">
+                                                <label>Section Head Keywords</label>
+                                                {{ form.section_head_keywords }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 align-content-center mt-3">
+                                            <div class="">
+                                                <label>Section Head Author</label>
+                                                {{ form.section_head_author }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 mt-3">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div class="d-flex justify-content-between align-content-center">
+                                                    <div class="d-flex justify-content-between align-content-center">
+                                                        <h5 class="my-auto me-3">Section Head Favicon</h5>
+                                                        {{ form.section_head_favicon }}
+                                                    </div>
+                                                    {% if object.section_head_favicon %}
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="mx-3 mt-1">Clear</span>
+                                                            {{ form.clear_section_head_favicon }}
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+
+                                                {% if object.section_head_favicon %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_section_head_favicon_tmb_url }}"
+                                                             alt="logo_favicon">
+                                                    </figure>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row mt-3">
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.site_name }}
+                                                <label>{{ dic_language.site }} {{ dic_language.name_ }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.link }}
+                                                <label>{{ dic_language.link }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.email }}
+                                                <label>Email</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.phone }}
+                                                <label>Phone</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.fax }}
+                                                <label>Fax</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="form-floating mb-3">
+                                                {{ form.sort_order }}
+                                                <label>{{ dic_language.sort_order }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-2 mt-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.thumbnail_quality }}
+                                                <label>Thumbnail Quality</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-2 mt-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.thumbnail_size }}
+                                                <label>Thumbnail Size</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-2 mt-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.verify_code_digits }}
+                                                <label>verify_code_digits</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                            <div class="">
+                                                <label>{{ dic_language.description }}</label>
+                                                {{ form.description }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.address }}
+                                                <label>Address</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.footer_description }}
+                                                <label>{{ dic_language.footer }} Description</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">{{ dic_language.footer }} Link 1</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.footer_link_1_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_1_text }}
+                                                <label>{{ dic_language.footer }} Link 1 Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-5 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_1_url }}
+                                                <label>{{ dic_language.footer }} Link 1 Url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">{{ dic_language.footer }} Link 2</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.footer_link_2_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_2_text }}
+                                                <label>{{ dic_language.footer }} Link 2 Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-5 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_2_url }}
+                                                <label>{{ dic_language.footer }} Link 2 Url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">{{ dic_language.footer }} Link 3</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.footer_link_3_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_3_text }}
+                                                <label>{{ dic_language.footer }} Link 3 Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-5 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.footer_link_3_url }}
+                                                <label>{{ dic_language.footer }} Link 3 Url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_main_text_1 }}
+                                                <label>Copyright Main Text 1</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_main_text_2 }}
+                                                <label>Copyright Main Text 2</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_main_link_text }}
+                                                <label>Copyright Main Link Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_main_link_url }}
+                                                <label>Copyright Main Link Url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_auth_text_1 }}
+                                                <label>Copyright Auth Text 1</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_auth_text_2 }}
+                                                <label>Copyright Auth Text 2</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_auth_link_text }}
+                                                <label>Copyright Auth Link Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_auth_link_url }}
+                                                <label>Copyright Auth Link Url</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_panels_text_1 }}
+                                                <label>Copyright Panels Text 1</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                            <div class="form-floating">
+                                                {{ form.copyright_panels_text_2 }}
+                                                <label>Copyright Panels Text 2</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_panels_link_text }}
+                                                <label>Copyright Panels Link Text</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6 align-content-center">
+                                            <div class="form-floating mb-3">
+                                                {{ form.copyright_panels_link_url }}
+                                                <label>Copyright Panels Link Url</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.logo_header %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_logo_header_tmb_url }}" alt="logo_header">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.logo_header %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">Logo Header</h5>
+                                                    {{ form.logo_header }}
+                                                </div>
+                                                {% if object.logo_header %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_logo_header }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.logo_footer %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_logo_footer_tmb_url }}" alt="logo_footer">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.logo_footer %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">Logo Footer</h5>
+                                                    {{ form.logo_footer }}
+                                                </div>
+                                                {% if object.logo_footer %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_logo_footer }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-6">
+                                            {% if object.logo_preload %}
+                                                <figure class="avatar">
+                                                    <img src="{{ object.get_logo_preload_tmb_url }}" alt="logo_preload">
+                                                </figure>
+                                            {% endif %}
+                                            <div class="row">
+                                                <div class="{% if object.logo_preload %}col-10{% else %}col-12{% endif %} d-flex">
+                                                    <h5 class="my-auto col-2 me-3">Logo Preload</h5>
+                                                    {{ form.logo_preload }}
+                                                </div>
+                                                {% if object.logo_preload %}
+                                                    <div class="col-2 align-content-center">
+                                                        <span class="me-1">Clear</span>{{ form.clear_logo_preload }}
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                            <div class="form-floating align-items-center row mb-3">
+                                                <h5 class="col-4 my-auto">Main</h5>
+                                                <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                    {{ form.is_main }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% include 'panels/v1/admin/includes/components/footer_in_edit_page.html' with detail_url=object.get_admin_detail_v1_url %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

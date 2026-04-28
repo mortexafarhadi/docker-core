@@ -1,0 +1,16 @@
+{% load poll_extras %}
+{% load static %}
+<div class="pageloader">
+    <div class="container h-100">
+        <div class="row justify-content-center align-items-center text-center h-100">
+            <div class="col-12 mb-auto pt-4"></div>
+            <div class="col-auto"><img src="{% static 'panels/v1/admin/assets/img/logo.svg' %}" alt=""
+                                       class="height-60 mb-3">
+                <p class="h6 mb-0 ff-pydda">{{ current_setting.site_name }}</p>
+                <p class="h3 mb-4 ff-pydda">{{ dic_language.admin }}</p>
+                <div class="loader10 mb-2 mx-auto"></div>
+            </div>
+            <div class="col-12 mt-auto pb-4"><p class="text-secondary">{{ dic_language.please_wait }}</p></div>
+        </div>
+    </div>
+</div>

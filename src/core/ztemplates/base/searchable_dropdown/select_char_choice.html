@@ -1,0 +1,27 @@
+<select class="d-none" name="{{ item_name }}" {% if required %}required{% endif %} id="id_{{ item_name }}">
+    <option class="searchable-option-selected {{ item_name }}" value="{{ selected_pk }}"
+            selected>{{ selected_display }}</option>
+</select>
+<div>
+    <p class="position-absolute z-1 ms-3 mt-2 text-secondary fs-14">{{ item_display }}</p>
+    <div class="searchable-dropdown">
+        <div class="searchable-dropdown-toggle" onclick="toggleDropdown('{{ item_name }}')">
+            {% if selected_pk %}
+                <span class="searchable-selected {{ item_name }} pt-1 mb-_0_5rem fs-5 overflow-hidden">{{ selected_display }}</span>
+            {% else %}
+                <span class="searchable-selected {{ item_name }} pt-1 mb-_0_5rem fs-5 overflow-hidden">Select an {{ item_display }}</span>
+            {% endif %}
+            <span>&#9662;</span>
+        </div>
+        <div class="searchable-dropdown-menu {{ item_name }}">
+            <input type="text" class="searchable-search {{ item_name }}" onkeyup="filterOptions('{{ item_name }}')"
+                   placeholder="Search...">
+            <ul class="searchable-options-list {{ item_name }}">
+                {% for item in options %}
+                    <li class="{% if item.0 == selected_pk %}bg-primary-subtle{% endif %} pt-3"
+                        onclick="selectOption('{{ item.0 }}','{{ item.1 }}','{{ item_name }}')">{{ item.1 }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

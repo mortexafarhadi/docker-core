@@ -1,0 +1,29 @@
+{% load poll_extras %}
+{# ------- WALLET BALANCE START ------- #}
+<div class="card adminuiux-card mb-4 px-3 py-3">
+    <div class="card-body pb-0">
+        <h3 class="mb-4"><span class="text-orange">{{ dic_language.wallet }}</span>
+            {{ dic_language.info }}</h3>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12 my-1">
+                <div class="d-flex justify-content-between">
+                    <h4 class="my-auto">{{ dic_language.balance }}</h4>
+                    <h3 class="my-auto text-end text-primary text-wrap text-break">{{ wallet.balance|separate_number }}</h3>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12 my-1">
+                <div class="d-flex justify-content-between">
+                    <h4 class="my-auto">{{ dic_language.pending }}</h4>
+                    <h3 class="my-auto text-end text-primary">{{ wallet.pending|separate_number }}</h3>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12 my-1">
+                <div class="d-flex justify-content-between">
+                    <h4 class="my-auto">{{ dic_language.locked }}</h4>
+                    <h3 class="my-auto text-end text-primary">{{ wallet.locked|separate_number }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{# ------- WALLET BALANCE END ------- #}

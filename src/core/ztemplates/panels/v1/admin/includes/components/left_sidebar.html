@@ -1,0 +1,94 @@
+{% load poll_extras %}
+{% load static %}
+<div class="adminuiux-sidebar">
+    <div class="adminuiux-sidebar-inner">
+        <div class="px-3 not-iconic mt-3">
+            <div class="row">
+                <div class="col align-self-center"><h6 class="fw-medium ff-pydda">{{ dic_language.main }} {{ dic_language.menu }}</h6></div>
+                <div class="col-auto">
+                    <a class="btn btn-link btn-square" data-bs-toggle="collapse" data-bs-target="#usersidebarprofile" 
+                       aria-expanded="false" role="button" aria-controls="usersidebarprofile">
+                        <i data-feather="user"></i></a>
+                </div>
+            </div>
+            <div class="text-center collapse" id="usersidebarprofile">
+                <figure class="avatar avatar-100 rounded-circle coverimg my-3">
+                    {% if request.user.avatar %}
+                        <img src="{{ request.user.get_avatar_tmb_url }}" alt="">
+                    {% else %}
+                        <img src="{% static 'panels/v1/admin/assets/img/modern-ai-image/user-6.jpg' %}"
+                             alt="">
+                    {% endif %}
+                </figure>
+                <h5 class="mb-1 fw-medium">{{ request.user.username }}</h5>
+                <p class="small opacity-50">({{ request.user.get_role_display }})</p></div>
+        </div>
+        <ul class="nav flex-column menu-active-line">
+            <li class="nav-item mt-1"><a href="{% url 'auth-v1:dashboard' %}" class="nav-link"><i
+                    class="menu-icon bi bi-columns-gap d-flex"></i><span class="menu-name pt-1">{{ dic_language.dashboard }}</span></a></li>
+            <li class="nav-item mt-1 dropdown">
+                <a href="javascrit:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="menu-icon bi bi-person-circle d-flex"></i>
+                    <span class="menu-name pt-1">{{ dic_language.users }}</span></a>
+                <div class="dropdown-menu">
+                    <div class="nav-item"><a href="{% url 'admin-v1-customer-list' %}" class="nav-link">
+                        <i class="menu-icon bi bi-bank d-flex ms-3"></i>
+                        <span class="menu-name pt-1">{{ dic_language.customer }}</span></a>
+                    </div>
+                    <div class="nav-item"><a href="{% url 'admin-v1-admin-list' %}" class="nav-link mt-1">
+                        <i class="menu-icon bi bi-cash-coin d-flex ms-3"></i>
+                        <span class="menu-name pt-1">{{ dic_language.admin }}</span></a>
+                    </div>
+                    <div class="nav-item"><a href="{% url 'admin-v1-register-list' %}" class="nav-link mt-1">
+                        <i class="menu-icon bi bi-percent d-flex ms-3"></i>
+                        <span class="menu-name pt-1">{{ dic_language.register }}</span>
+                        <span class="badge text-bg-primary mx-2 pt-2">{{ register_users_count }}+</span></a>
+                    </div>
+                    <div class="nav-item"><a href="{% url 'admin-v1-user-social-media-list' %}" class="nav-link mt-1">
+                        <i class="menu-icon bi bi-slack d-flex ms-3"></i>
+                        <span class="menu-name pt-1">{{ dic_language.social_media }}</span></a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item mt-1"><a href="{% url 'admin-v1-social-network:list' %}" class="nav-link"><i
+                    class="menu-icon bi bi-slack d-flex"></i><span class="menu-name pt-1">{{ dic_language.social_network }}</span></a></li>
+            <li class="nav-item mt-1"><a href="{% url 'admin-v1-category:list' %}" class="nav-link">
+                <i class="menu-icon bi bi-collection-fill d-flex"></i><span class="menu-name pt-1">{{ dic_language.category }}</span></a></li>
+        </ul>
+        <div class="mt-auto"></div>
+        <ul class="nav flex-column menu-active-line">
+            <h6 class="mb-3 fw-medium ff-pydda" role="button" onclick="click_link(this)">{{ dic_language.setting }}
+                <a href="{% url 'admin-v1-setting-template' %}"></a></h6>
+            <li class="nav-item">
+                <a href="{% url 'admin-v1-setting-site:list' %}" class="nav-link">
+                    <i class="menu-icon d-flex" data-feather="settings"></i>
+                    <span class="menu-name pt-1">{{ dic_language.site }}</span>
+                </a>
+            </li>
+            <li class="nav-item mt-1 dropdown">
+                <a href="javascrit:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="menu-icon bi bi-menu-up d-flex"></i> <span class="menu-name pt-1">{{ dic_language.header }}</span></a>
+                <div class="dropdown-menu">
+                    <div class="nav-item"><a href="{% url 'admin-v1-setting-header-group-list' %}" class="nav-link"><i
+                            class="menu-icon bi bi-collection d-flex ms-3"></i> <span class="menu-name pt-1">{{ dic_language.group }}</span></a>
+                    </div>
+                    <div class="nav-item"><a href="{% url 'admin-v1-setting-header-link-list' %}" class="nav-link mt-1">
+                        <i class="menu-icon bi bi-link-45deg d-flex ms-3"></i> <span class="menu-name pt-1">{{ dic_language.link }}</span></a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item mt-1 dropdown">
+                <a href="javascrit:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="menu-icon bi bi-menu-down d-flex"></i> <span class="menu-name pt-1">{{ dic_language.footer }}</span></a>
+                <div class="dropdown-menu">
+                    <div class="nav-item"><a href="{% url 'admin-v1-setting-footer-group-list' %}" class="nav-link"><i
+                            class="menu-icon bi bi-collection d-flex ms-3"></i> <span class="menu-name pt-1">{{ dic_language.group }}</span></a>
+                    </div>
+                    <div class="nav-item"><a href="{% url 'admin-v1-setting-footer-link-list' %}" class="nav-link mt-1"><i
+                            class="menu-icon bi bi-link-45deg d-flex ms-3"></i> <span class="menu-name pt-1">{{ dic_language.link }}</span></a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

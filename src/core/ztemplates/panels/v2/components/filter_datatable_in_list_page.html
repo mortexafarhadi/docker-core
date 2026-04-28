@@ -1,0 +1,129 @@
+{% if dont_show_search != True or dont_show_page_size != True or dont_show_export != True or dont_show_filter != True %}
+    <div class="row m-3 mx-2 my-0 justify-content-between py-5">
+        {% if dont_show_search != True %}
+            <div class=" {{ style_search|default:'col-md-auto col-lg-4' }} mt-0">
+                <div class="my-auto w-100">
+                    <input type="search" class="form-control ms-0 w-100" value="{{ request.params.q }}"
+                           onchange="change_text_in_search(this)"
+                           placeholder={{ dic_language.search }}>
+                </div>
+            </div>
+        {% endif %}
+        <div class="d-md-flex justify-content-between align-items-center dt-layout-end col-md-auto ms-auto gap-md-2 gap-0 mt-0">
+            {% if dont_show_page_size != True %}
+                <div class="me-2">
+                    <select onchange="set_page_size(this)" class="form-select form-select-sm">
+                        <option value="10" {% if request.params.page_size == '10' %}selected{% endif %}>10</option>
+                        <option value="20" {% if request.params.page_size == '20' %}selected{% endif %}>20</option>
+                        <option value="30" {% if request.params.page_size == '30' %}selected{% endif %}>30</option>
+                        <option value="50" {% if request.params.page_size == '50' %}selected{% endif %}>50</option>
+                        <option value="100" {% if request.params.page_size == '100' %}selected{% endif %}>100</option>
+                    </select>
+                </div>
+            {% endif %}
+            <div class="dt-buttons btn-group flex-wrap mb-md-0 mb-5">
+                {% if dont_show_export != True %}
+                    <div class="btn-group">
+                        <button class="btn buttons-collection btn-outline-secondary dropdown-toggle me-4 waves-effect"
+                                type="button" tabindex="0" aria-haspopup="dialog"
+                                aria-expanded="false"><span><span
+                                class="d-flex align-items-center"><i
+                                class="icon-base ri ri-upload-2-line icon-16px me-sm-1"></i> <span
+                                class="d-none d-sm-inline-block">Export</span></span></span>
+                        </button>
+                    </div>
+                {% endif %}
+                {% if dont_show_filter != True %}
+                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#filter_aria" aria-expanded="false"
+                            aria-controls="collapseExample">
+                            <span>
+                                <i class="icon-base ri ri-filter-2-fill me-0 me-sm-1 icon-16px"></i>
+                                <span class="d-none d-sm-inline-block">Filter</span>
+                            </span>
+                    </button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {#    {% if dont_show_filter != True %}#}
+    <div class="collapse mt-3" id="filter_aria">
+        <div class="d-grid d-sm-flex py-4 px-2 border">
+            <form class="row w-100 mx-0">
+                <input type="hidden" id="id__q" name="q">
+                <input type="hidden" id="id__page_size" name="page_size">
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-floating form-floating-outline">
+                                <select id="id__{{ active_name|default:'status' }}"
+                                        name="{{ active_name|default:'status' }}"
+                                        class="selectpicker w-100" data-style="btn-default">
+                                    <option value="" selected>{{ dic_language.all_ }}</option>
+                                    <option value="on" class="text-success"
+                                            {% if request.params.status == "on" %}selected{% endif %}>{{ dic_language.on_ }}
+                                    </option>
+                                    <option value="off" class="text-danger"
+                                            {% if request.params.status == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+                                    </option>
+                                </select>
+                                <label for="id__{{ active_name|default:'status' }}">{{ active_name|default:dic_language.status|capfirst }}</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-floating form-floating-outline">
+                                <select id="id__deleted" name="deleted"
+                                        class="selectpicker w-100" data-style="btn-default">
+                                    <option value="" selected>{{ dic_language.all_ }}</option>
+                                    <option value="on" class="text-primary"
+                                            {% if request.params.deleted == "on" %}selected{% endif %}>{{ dic_language.on_ }}
+                                    </option>
+                                    <option value="off" class="text-danger"
+                                            {% if request.params.deleted == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+                                    </option>
+                                </select>
+                                <label for="id__deleted">{{ dic_language.deleted }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="form-floating form-floating-outline">
+                        <input type="text" class="form-control" name="date_range_create" value="{{ request.params.date_range_create }}"
+                               placeholder="YYYY-MM-DD to YYYY-MM-DD" id="flatpickr-range-create"/>
+                        <label for="flatpickr-range-create">{{ dic_language.date }} {{ dic_language.range_ }} {{ dic_language.create }}</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="form-floating form-floating-outline">
+                        <input type="text" class="form-control" name="date_range_update" value="{{ request.params.date_range_update }}"
+                               placeholder="YYYY-MM-DD to YYYY-MM-DD" id="flatpickr-range-update"/>
+                        <label for="flatpickr-range-create">{{ dic_language.date }} {{ dic_language.range_ }} {{ dic_language.update }}</label>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <div class="form-floating form-floating-outline">
+                        <input type="text" class="form-control" name="date_range_delete" value="{{ request.params.date_range_delete }}"
+                               placeholder="YYYY-MM-DD to YYYY-MM-DD" id="flatpickr-range-delete"/>
+                        <label for="flatpickr-range-create">{{ dic_language.date }} {{ dic_language.delete }} {{ dic_language.update }}</label>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end mt-5">
+                    <button class="btn btn-primary me-3" type="submit">
+                        <span>
+                            <i class="icon-base ri ri-search-line me-0 me-sm-1 icon-16px"></i>
+                            <span class="d-none d-sm-inline-block">{{ dic_language.search }}</span>
+                        </span>
+                    </button>
+                    <a class="btn btn-dark" href="{{ list_url }}">
+                        <span>
+                            <i class="icon-base ri ri-refresh-line me-0 me-sm-1 icon-16px"></i>
+                            <span class="d-none d-sm-inline-block">{{ dic_language.reset }}</span>
+                        </span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    {#    {% endif %}#}
+{% endif %}

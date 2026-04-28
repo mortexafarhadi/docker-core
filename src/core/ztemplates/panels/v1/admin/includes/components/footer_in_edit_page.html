@@ -1,0 +1,20 @@
+<div class="card-footer">
+    {% if form.errors %}
+        <div class="alert alert-warning"><p class="">{{ form.errors }}</p></div>
+    {% endif %}
+    <div class="row align-items-center">
+        <div class="col">
+            {% include 'panels/v1/admin/includes/components/btn_submit_form_with_option_icon.html' with btn_color="btn-lg px-5 btn-success pb-1" text=dic_language.save style_text="d-none d-md-inline-block px-2" %}
+            {% if not object and dont_show_another != True %}
+                <input type="submit" value="{{ dic_language.save_and_add_another }}" name="_addanother"
+                       class="btn btn-lg px-5 btn-primary pb-1 ms-3">
+            {% endif %}
+        </div>
+        <div class="col-auto">
+            {% with request.META.HTTP_REFERER|default:'#' as back_link %}
+                <a class="btn btn-link pb-1" href="{{ detail_url|default:back_link }}">
+                    {{ dic_language.cancel }}</a>
+            {% endwith %}
+        </div>
+    </div>
+</div>

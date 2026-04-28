@@ -1,0 +1,18 @@
+{% load poll_extras %}
+{% load static %}
+
+<header class="adminuiux-header">
+    <nav class="navbar">
+        <div class="container-fluid"><a class="navbar-brand" href="{% url 'main:index' %}"><img
+                data-bs-img="light" src="{% static 'panels/v1/admin/assets/img/logo-light.svg' %}" alt=""> <img
+                data-bs-img="dark"
+                src="{% static 'panels/v1/admin/assets/img/logo.svg' %}"
+                alt="">
+            <div class=""><span class="h4">Investment<b>UX</b></span>
+                <p class="company-tagline">AdminUIUX HTML template</p></div>
+        </a>
+            <div class="ms-auto"></div>
+            <div class="ms-auto"></div>
+        </div>
+    </nav>
+</header>

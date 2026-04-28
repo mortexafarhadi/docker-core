@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="en" my-dir="{% if request.user_setting.language == 'en' %}ltr{% else %}rtl{% endif %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="robots" content="noindex">
+    <title>{{ current_setting.site_name }}</title>
+    {% if current_setting.logo_favicon %}
+        <link rel="icon" type="image/png" href="{{ current_setting.get_logo_favicon_tmb_url }}">
+    {% else %}
+        <link rel="icon" type="image/png" href="{% static 'panels/v1/admin/assets/img/favicon.png' %}">
+    {% endif %}
+    {% include 'panels/v1/admin/includes/references/header_references.html' %}
+    {% block Header_References %}{% endblock %}
+    {% block CSS_CUSTOM %}{% endblock %}
+</head>
+<body class="main-bg main-bg-opac main-bg-blur adminuiux-sidebar-fill-white adminuiux-sidebar-boxed theme-blue roundedui"
+      data-theme="theme-blue" data-sidebarfill="adminuiux-sidebar-fill-white" data-bs-spy="scroll"
+      data-bs-target="#list-example" data-bs-smooth-scroll="true" tabindex="0">
+
+{% include 'panels/v1/admin/includes/components/pre_loader.html' %}
+{% block Layout %}{% endblock %}
+<div class="position-fixed bottom-2 {% if request.user_setting.direction == 'ltr' %}end-0{% else %}start-0{% endif %} m-3 z-index-5">
+    <button class="btn btn-square btn-theme shadow d-flex align-items-center justify-content-center"
+            type="button" data-bs-toggle="offcanvas" data-bs-target="#theming"
+            aria-controls="theming"><i class="bi bi-palette d-flex mt-0_1rem ms-0_1rem"></i></button>
+    <button class="btn btn-theme btn-square rounded-circle d-flex align-items-center justify-content-center shadow mt-2 d-none"
+            id="backtotop"><i class="bi bi-arrow-up d-flex mt-0_1rem ms-0_1rem"></i></button>
+</div>
+{% include 'panels/v1/admin/includes/components/theming.html' %}
+{% include 'panels/v1/admin/includes/references/footer_references.html' %}
+{% block Footer_References_Base %}{% endblock %}
+{% block Footer_References %}{% endblock %}
+{% block JS_CUSTOM %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<a href="{{ detail_url }}"
+   class="btn btn-square btn-link pb-0 pt-2" data-bs-toggle="tooltip" title="{{ dic_language.view }}">
+    <i class="bi bi-eye"></i></a>
+{% if dont_show_dropdown != True %}
+    <div class="dropdown d-inline-block">
+        <a class="btn btn-link no-caret" data-bs-toggle="dropdown"><i class="bi bi-three-dots d-flex py-1"></i></a>
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <a class="dropdown-item text-center pt-2 {% if is_deleted %}disabled{% endif %}"
+                   href="{{ update_url }}">{{ dic_language.edit_ }}</a>
+            </li>
+            <li>
+                <a class="dropdown-item theme-red text-center pt-2 {% if is_deleted %}disabled{% endif %}"
+                   href="javascript:void(0)" data-bs-toggle="modal"
+                   onclick="setDeletePk('{{ pk }}')"
+                   data-bs-target="#DeleteModal">{{ dic_language.delete }}</a>
+            </li>
+        </ul>
+    </div>
+{% endif %}

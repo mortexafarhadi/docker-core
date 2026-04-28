@@ -1,0 +1,34 @@
+# delete all data
+python manage.py flush
+
+# export data
+python manage.py dumpdata --natural-primary --natural-foreign --indent 2 --exclude contenttypes --exclude auth.Permission --exclude sessions > __data/data.json
+
+# import data
+python manage.py loaddata __data/data.json
+
+
+# for save emoji and use UTF-8 in MYSQL Database  # ########   (JUST MYSQL ENGINE)   ######### #
+set bellow option in database setting
+
+'OPTIONS': {
+    'charset': 'utf8mb4',
+    'init_command': "SET sql_mode='STRICT_TRANS_TABLES', NAMES utf8mb4 COLLATE utf8mb4_general_ci",
+},
+
+example =>
+
+    DATABASES = {
+        'default': {
+            'ENGINE': config("DATABASES_ENGINE", default=''),
+            'NAME': config("DATABASES_NAME", default=''),
+            'USER': config("DATABASES_USERNAME", default=''),
+            'PASSWORD': config("DATABASES_PASSWORD", default=''),
+            'HOST': config("DATABASES_HOST", default=''),
+            'PORT': config("DATABASES_PORT", default=''),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES', NAMES utf8mb4 COLLATE utf8mb4_general_ci",
+            },
+        }
+    }

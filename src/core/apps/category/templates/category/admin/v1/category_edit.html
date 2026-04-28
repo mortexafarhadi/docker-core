@@ -1,0 +1,94 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block CSS_CUSTOM %}
+    {{ form.media }}
+{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-category:list' as the_list_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a
+                                        href="{{ the_list_url }}">{{ dic_language.category }}</a></li>
+                                <li class="breadcrumb-item active bi" aria-current="page">
+                                    {% if object %}{{ object.pk }}{% else %}{{ dic_language.add_ }}{% endif %}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with is_back=True btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="card-body pb-0">
+                                    <h3 class="mt-3 mb-4">{% if object %}{{ dic_language.edit_ }}{% else %}
+                                        {{ dic_language.add_ }}{% endif %} <span
+                                            class="text-orange">{{ dic_language.category }}</span></h3>
+                                    <div class="row">
+                                        <div class="col-12 col-md-6 col-lg-12">
+                                            <div class="form-floating mb-3">
+                                                {{ form.title_en }}
+                                                <label>{{ dic_language.title }} EN</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-floating mb-3">
+                                                {{ form.title_fa }}
+                                                <label>{{ dic_language.title }} FA</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-control mb-3">
+                                                <label>{{ dic_language.description }} En</label>
+                                                {{ form.description_en }}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-12">
+                                            <div class="form-control mb-3">
+                                                <label>{{ dic_language.description }} Fa</label>
+                                                {{ form.description_fa }}
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-6 col-lg-3">
+                                            <div class="form-floating mb-3">
+                                                {{ form.sort_order }}
+                                                <label>{{ dic_language.sort_order }}</label>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-12 col-md-12 col-lg-3 align-content-center py-3">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h4 class="my-auto">{{ dic_language.status }}</h4>
+                                                <div class="my-auto form-check-md form-switch fs-5 text-center">
+                                                    {{ form.is_active }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% include 'panels/v1/admin/includes/components/footer_in_edit_page.html' with detail_url=object.get_admin_detail_v1_url %}
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

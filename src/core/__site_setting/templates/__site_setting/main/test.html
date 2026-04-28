@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style nonce="{{ csp_nonce }}">
+        h1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<h1>Done Test Cache</h1>
+<h1>csp is : {{ csp_nonce }}</h1>
+<script nonce="{{ csp_nonce }}">
+    console.log("hello")
+</script>
+</body>
+</html>

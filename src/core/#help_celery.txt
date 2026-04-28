@@ -1,0 +1,15 @@
+#install bellow package
+django-celery-beat
+
+#add in INSTALLED_APPS
+"django_celery_beat"
+
+# then most migrate in database
+uv run manage.py migrate
+
+# 4. run beat in command
+# ### IMPORTANT ###
+celery -A ___config beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
+# 5. for manage go to django admin and add periodic task
+http://127.0.0.1:8000/en/admin/django_celery_beat/periodictask/

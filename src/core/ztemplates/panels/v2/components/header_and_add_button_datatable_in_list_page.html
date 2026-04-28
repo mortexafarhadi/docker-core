@@ -1,0 +1,11 @@
+<div class="card-header border-bottom">
+    <div class="d-flex justify-content-between">
+        <h3 class="card-title my-auto">{{ title|default:"List" }} {{ dic_language.list_ }}</h3>
+        {% if dont_show_add != True %}
+            <a class="btn add-new btn-primary" href="{{ url_add }}">
+                <i class="icon-base ri ri-add-line me-0 me-sm-1 icon-16px"></i>
+                <span class="d-none d-sm-inline-block">{{ dic_language.add_ }} {{ title|default:"List" }}</span>
+            </a>
+        {% endif %}
+    </div>
+</div>

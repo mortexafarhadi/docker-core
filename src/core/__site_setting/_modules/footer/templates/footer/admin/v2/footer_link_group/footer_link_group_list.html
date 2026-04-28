@@ -1,0 +1,135 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Footer_References %}
+    <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_list_page.js' %}"></script>{% endblock %}
+{% block Context %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-footer-group-list' as the_list_url %}
+    {% url 'admin-v1-setting-footer-group-add' as the_create_url %}
+    {% url 'admin-v1-setting-footer-group-delete' as the_delete_url %}
+    <main class="adminuiux-content has-sidebar">
+        <div class="container-fluid mt-4">
+            <div class="row gx-3 align-items-center">
+                <div class="col-12 col-sm">
+                    <nav aria-label="breadcrumb" class="mb-2">
+                        <ol class="breadcrumb mb-0">
+                            <li class="breadcrumb-item bi">
+                                <a href="{{ the_template_url }}">{{ dic_language.setting }}</a></li>
+                            <li class="breadcrumb-item active bi"
+                                aria-current="page">{{ dic_language.footer }} {{ dic_language.group }}</li>
+                        </ol>
+                    </nav>
+                    <h4>{{ dic_language.footer }} {{ dic_language.group }}</h4>
+                </div>
+                <div class="col-auto py-1"><a href="{{ the_create_url }}" class="btn btn-theme"><i
+                        data-feather="plus" class="me-0 me-md-1"></i>
+                    <span class="d-none d-md-inline-block pt-1 pe-2">{{ dic_language.add_ }} {{ dic_language.footer }} {{ dic_language.group }}</span></a>
+                </div>
+                <div class="col-auto py-1 ms-auto ms-sm-0" onclick="clear_datetimes()">
+                    <button class="btn btn-link btn-square btn-icon" data-bs-toggle="collapse" data-bs-target="#filter"
+                            aria-expanded="false" aria-controls="filter"><i data-feather="filter"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="collapse" id="filter">
+                <div class="card adminuiux-card mt-4">
+                    <div class="card-body pb-0">
+                        <form method="GET">
+                            <div class="row">
+                                {% include 'panels/v1/admin/includes/components/search_filter_in_list_page.html' %}
+                                <div class="col-6 col-md-3 col-lg-2 mb-3 align-content-end">
+                                    <div class="form-floating"><select name="has_child" class="form-select">
+                                        <option value="" selected>{{ dic_language.all_ }}</option>
+                                        <option value="on" class="text-primary"
+                                                {% if request.params.has_child == "on" %}selected{% endif %}>{{ dic_language.active }}
+                                        </option>
+                                        <option value="off" class="text-danger"
+                                                {% if request.params.has_child == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+                                        </option>
+                                    </select> <label>{{ dic_language.has_child }}</label></div>
+                                </div>
+                                <div class="col-6 col-md-3 col-lg-2 mb-3 align-content-end">
+                                    <div class="form-floating"><select name="move_mode" class="form-select">
+                                        <option value="" selected>{{ dic_language.all_ }}</option>
+                                        <option value="on" class="text-primary"
+                                                {% if request.params.move_mode == "on" %}selected{% endif %}>{{ dic_language.active }}
+                                        </option>
+                                        <option value="off" class="text-danger"
+                                                {% if request.params.move_mode == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+                                        </option>
+                                    </select> <label>{{ dic_language.move }} {{ dic_language.mode }}</label></div>
+                                </div>
+                                <div class="col-6 col-md-3 col-lg-2 mb-3 align-content-end">
+                                    <div class="form-floating"><select name="open_newtab" class="form-select">
+                                        <option value="" selected>{{ dic_language.all_ }}</option>
+                                        <option value="on" class="text-primary"
+                                                {% if request.params.open_newtab == "on" %}selected{% endif %}>{{ dic_language.active }}
+                                        </option>
+                                        <option value="off" class="text-danger"
+                                                {% if request.params.open_newtab == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+                                        </option>
+                                    </select> <label>{{ dic_language.open_in_newtab }}</label></div>
+                                </div>
+                                {% include 'panels/v1/admin/includes/components/status_delete_datetime_filter_and_submit_in_list_page.html' with list_url=the_list_url %}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card adminuiux-card mt-4 mb-0">
+                <div class="card-body">
+                    <table id="dataTable" class="table w-100 nowrap">
+                        <thead>
+                        <tr>
+                            <th class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} align-content-center">{{ dic_language.order }}</th>
+                            <th class="align-content-center">{{ dic_language.title }}</th>
+                            <th class="align-content-center" data-breakpoints="xs sm md">{{ dic_language.link }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.site_type }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.status }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.move }} {{ dic_language.mode }}</th>
+                            <th class="text-center align-content-center"
+                                data-breakpoints="xs sm">{{ dic_language.has_child }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.date_and_time }}</th>
+                            <th class="text-center align-content-center all">{{ dic_language.action }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for footer_group in object_list %}
+                            <tr>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %}">{{ footer_group.sort_order }}</td>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} text-wrap">
+                                    <h6>{{ footer_group.title }}</h6></td>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} text-wrap">
+                                    <p>{{ footer_group.link }}</p></td>
+                                <td class="{% if request.user_setting.direction == 'ltr' %}text-start{% else %}text-end{% endif %} text-wrap">
+                                    <p>{{ footer_group.site_type }}</p></td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if footer_group.is_active %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ footer_group.get_is_active_display }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if footer_group.is_move_mode %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ footer_group.get_is_move_mode }}</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge badge-light rounded-pill pt-2 {% if footer_group.has_child %}text-bg-success{% else %}text-bg-primary{% endif %}">{{ footer_group.get_has_child }}</span>
+                                </td>
+                                <td class="text-center"><p class="mb-0">{{ footer_group.datetime_update|date:"Y/m/d" }}</p>
+                                    <p class="text-secondary small">{{ footer_group.datetime_update|timesince }}</p>
+                                </td>
+                                <td class="text-center">
+                                    {% include 'panels/v1/admin/includes/components/option_record_in_list_page.html' with detail_url=footer_group.get_admin_detail_v1_url update_url=footer_group.get_admin_update_v1_url pk=footer_group.pk is_deleted=footer_group.is_deleted %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include 'panels/v1/admin/includes/components/paginator.html' %}
+                </div>
+            </div>
+        </div>
+        {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url=the_delete_url %}
+    </main>
+{% endblock %}

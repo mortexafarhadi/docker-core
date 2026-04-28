@@ -1,0 +1,655 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Context %}
+    {% url 'auth-v1:dashboard' as the_dashboard_url %}
+    {% url 'admin-v1-setting-template' as the_template_url %}
+    {% url 'admin-v1-setting-site:list' as the_list_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a href="{{ the_template_url }}">{{ dic_language.setting }}</a>
+                                </li>
+                                <li class="breadcrumb-item bi"><a href="{{ the_list_url }}">{{ dic_language.site }}</a>
+                                </li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.pk }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with link=the_dashboard_url btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.pk }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <div class="card-body">
+                                <h4 class="mt-3 mb-4">{{ dic_language.detail }} <span class="text-orange">{{ dic_language.site }} Index Info</span></h4>
+                                <div class="row mb-2">
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">register_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.register_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">register_btn_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.register_btn_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">register_btn_url</h5>
+                                            <h6 class="col-8 my-auto text-end text-primary link">{{ object.register_btn_url }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.about_award_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_poster</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.about_award_poster %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_about_award_poster_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-5 my-auto">about_award_btn_text</h5>
+                                            <h5 class="col-7 my-auto text-end text-primary link">{{ object.about_award_btn_text }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 col-lg-12 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-3 my-auto">about_award_description</h5>
+                                            <h4 class="col-9 my-auto text-end text-primary">{{ object.get_about_award_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_btn_url</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.about_award_btn_url }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_1_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.about_award_item_1_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_1_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.about_award_item_1_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">about_award_item_1_icon_name</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.about_award_item_1_icon_name }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-7 my-auto">about_award_item_1_value</h5>
+                                            <h4 class="col-5 my-auto text-end text-primary">{{ object.about_award_item_1_value }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_2_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.about_award_item_2_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_2_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.about_award_item_2_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">about_award_item_2_icon_name</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.about_award_item_2_icon_name }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-7 my-auto">about_award_item_2_value</h5>
+                                            <h4 class="col-5 my-auto text-end text-primary">{{ object.about_award_item_2_value }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_3_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.about_award_item_3_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_3_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.about_award_item_3_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">about_award_item_3_icon_name</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.about_award_item_3_icon_name }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-7 my-auto">about_award_item_3_value</h5>
+                                            <h4 class="col-5 my-auto text-end text-primary">{{ object.about_award_item_3_value }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_4_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.about_award_item_4_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">about_award_item_4_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.about_award_item_4_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">about_award_item_4_icon_name</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.about_award_item_4_icon_name }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-7 my-auto">about_award_item_4_value</h5>
+                                            <h4 class="col-5 my-auto text-end text-primary">{{ object.about_award_item_4_value }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">collection_asset_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.collection_asset_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">collection_asset_title_small</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.collection_asset_title_small }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">collection_asset_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.collection_asset_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">options_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.options_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">options_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.options_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_1_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_1_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_1_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_1_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_1_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_1_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_1_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_1_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_1_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_2_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_2_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_2_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_2_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_2_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_2_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_2_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_2_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_2_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_3_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_3_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_3_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_3_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_3_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_3_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_3_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_3_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_3_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_4_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_4_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_4_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_4_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_4_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_4_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_4_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_4_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_4_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_5_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_5_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_5_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_5_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_5_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_5_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_5_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_5_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_5_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_6_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.option_6_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_6_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.option_6_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">option_6_image</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.option_6_image %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_option_6_image_tmb_url }}"
+                                                             alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">option_6_description</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.get_option_6_description }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">subscribe_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.subscribe_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">subscribe_title_1</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.subscribe_title_1 }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">subscribe_title_2</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.subscribe_title_2 }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">subscribe_btn_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary">{{ object.subscribe_btn_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">news_active</h5>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.news_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">news_title_1</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.news_title_1 }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">news_title_2</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.news_title_2 }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">news_btn_title</h5>
+                                            <h4 class="col-6 my-auto text-end text-primary">{{ object.news_btn_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">follow_us_title_small</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.follow_us_title_small }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-4 my-auto">follow_us_title</h5>
+                                            <h4 class="col-8 my-auto text-end text-primary link">{{ object.follow_us_title }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_facebook_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_facebook_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_facebook_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_facebook_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_twitter_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_twitter_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_twitter_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_twitter_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_twitter_x_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_twitter_x_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_twitter_x_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_twitter_x_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_google_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_google_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_google_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_google_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_rss_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_rss_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_rss_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_rss_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_linkedin_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_linkedin_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_linkedin_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_linkedin_link }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_youtube_active</h5>
+                                            <div class="col-6 form-check-md form-switch d-flex justify-content-end">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.follow_us_youtube_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h5 class="col-6 my-auto">follow_us_youtube_link</h5>
+                                            <h6 class="col-6 my-auto text-end text-primary link">{{ object.follow_us_youtube_link }}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-top border-2">
+                                <div class="row align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h6 class="col-5 my-auto">Create Datetime</h6>
+                                            <h5 class="col-7 my-auto text-end text-primary">{{ object.datetime_create|date:"Y/m/d" }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="form-floating align-items-center row">
+                                            <h6 class="col-5 my-auto">Update Datetime</h6>
+                                            <h5 class="col-7 my-auto text-end text-primary">{{ object.datetime_update|date:"Y/m/d" }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row align-items-center mt-3">
+                                    <div class="col">
+                                        <a href="{% url 'admin-v1-setting-index-info-edit' object.pk %}"
+                                           class="btn btn-lg px-5 btn-theme">{{ dic_language.edit_ }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% block Context %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <h5>Users</h5></div>
+                    <div class="col-auto"></div>
+                </div>
+            </div>
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card adminuiux-card mb-4">
+                            <a href="{% url 'admin-v1-customer-list' %}" class="text-decoration-none">
+                                <div class="card-body">
+                                    <i class="bi bi-bullseye h3 avatar avatar-60 bg-theme-1-subtle text-theme-1 rounded-circle mb-3"></i>
+                                    <h4 class="mb-2 mb-md-3">Customer</h4>
+                                    <p class="text-secondary">Our mission is to provide great UI UX design with
+                                        flexibility of
+                                        development at the reliable cost. This will give you best by saving time and
+                                        money. So,
+                                        for our customer its all about the Win Win situation.</p></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card adminuiux-card mb-4">
+                            <a href="{% url 'admin-v1-admin-list' %}" class="text-decoration-none">
+                            <div class="card-body"><i
+                                    class="bi bi-window-stack h3 avatar avatar-60 bg-theme-1-subtle text-theme-1 rounded-circle mb-3"></i>
+                                <h4 class="mb-2 mb-md-3">Admins</h4>
+                                <p class="text-secondary">We do best creative and usable digital products for web and
+                                    mobile
+                                    devices, website and universal app development. We create unique, user centric,
+                                    experience design and creative HTML templates.</p></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="card adminuiux-card mb-4">
+                            <a href="{% url 'admin-v1-register-list' %}" class="text-decoration-none">
+                            <div class="card-body"><i
+                                    class="bi bi-cash-stack h3 avatar avatar-60 bg-theme-1-subtle text-theme-1 rounded-circle mb-3"></i>
+                                <h4 class="mb-2 mb-md-3">Register Users</h4>
+                                <p class="text-secondary">Using ready-to-use HTML templates can be a great way to save
+                                    time
+                                    & money when building a website. Templates created by professionals, ensuring a
+                                    high-quality and visually appealing layout.</p></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}

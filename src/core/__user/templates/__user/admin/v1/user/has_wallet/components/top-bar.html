@@ -1,0 +1,42 @@
+<div class="card adminuiux-card m-3">
+    <div class="card-body">
+        <ul class="nav nav-pills adminuiux-nav-pills flex-row">
+            <li class="nav-item col ms-3">
+                <a class="nav-link border border-2 {% if request.resolver_match.url_name == 'admin-v1-user-detail' %}active{% endif %}"
+                   aria-current="page" href="{% url 'admin-v1-user-detail' user_code %}">
+                    <div class="avatar avatar-28 icon">
+                        <i class="bi bi-info-lg fs-3"></i>
+                    </div>
+                    <div class="col">
+                        <p class="h6 mb-0">{{ dic_language.detail }}</p>
+                        <p class="small opacity-75">Basic Details</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item col ms-3">
+                <a class="nav-link border border-2 {% if request.resolver_match.url_name == 'admin-v1-user-wallet-card:list' %}active{% endif %}"
+                   aria-current="page" href="{% url 'admin-v1-user-wallet-card:list' user_code %}">
+                    <div class="avatar avatar-28 icon">
+                        <i class="bi bi-wallet fs-3"></i>
+                    </div>
+                    <div class="col">
+                        <p class="h6 mb-0">{{ dic_language.wallet }} {{ dic_language.cards }}</p>
+                        <p class="small opacity-75">Basic Details</p>
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item col ms-3">
+                <a class="nav-link border border-2 {% if request.resolver_match.url_name == 'admin-v1-user-wallet-deposit:list' %}active{% endif %}"
+                   aria-current="page" href="{% url 'admin-v1-user-wallet-deposit:list' user_code %}">
+                    <div class="avatar avatar-28 icon">
+                        <i class="bi bi-cash-coin fs-3"></i>
+                    </div>
+                    <div class="col">
+                        <p class="h6 mb-0">{{ dic_language.transactions }}</p>
+                        <p class="small opacity-75">Basic Details</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center">
+    <a href="{{ detail_url }}"
+       class="btn px-0" data-bs-toggle="tooltip" title="{{ dic_language.view }}">
+        <i class="mx-2 menu-icon icon-base ri ri-information-2-fill"></i>
+    </a>
+    {% if dont_show_dropdown != True %}
+        <div class="dropdown">
+            <a class="btn px-0" data-bs-toggle="dropdown">
+                <i class="mx-2 menu-icon icon-base ri ri-menu-line"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                    <a class="dropdown-item text-center pt-2 {% if is_deleted %}disabled{% endif %}"
+                       href="{{ update_url }}">{{ dic_language.edit_ }}</a>
+                </li>
+                <li>
+                    <a class="dropdown-item bg-danger-subtle text-danger text-center pt-2 {% if is_deleted %}disabled{% endif %}"
+                       href="javascript:void(0)" data-bs-toggle="modal"
+                       onclick="setDeletePk('{{ pk }}')"
+                       data-bs-target="#DeleteModal">{{ dic_language.delete }}</a>
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+</div>

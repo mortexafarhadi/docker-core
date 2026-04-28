@@ -1,0 +1,61 @@
+<div class="col-6 col-md-3 col-lg-2 mb-3">
+    <div class="form-floating">
+        <select name="{{ active_name|default:'status' }}" class="form-select">
+            <option value="" selected>{{ dic_language.all_ }}</option>
+            <option value="on" class="text-primary"
+                    {% if request.params.status == "on" %}selected{% endif %}>{{ dic_language.active }}
+            </option>
+            <option value="off" class="text-danger"
+                    {% if request.params.status == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+            </option>
+        </select> <label>{{ dic_language.status }}</label></div>
+</div>
+<div class="col-6 col-md-3 col-lg-2 mb-3">
+    <div class="form-floating">
+        <select name="deleted" class="form-select">
+            <option value="" selected>{{ dic_language.all_ }}</option>
+            <option value="on" class="text-primary"
+                    {% if request.params.deleted == "on" %}selected{% endif %}>{{ dic_language.active }}
+            </option>
+            <option value="off" class="text-danger"
+                    {% if request.params.deleted == "off" %}selected{% endif %}>{{ dic_language.off_ }}
+            </option>
+        </select> <label>{{ dic_language.deleted }}</label></div>
+</div>
+<div class="col-6 col-md-3 col-lg-3 mb-3 align-content-end">
+    <div class="">
+        <div class="input-group">
+            <span class="input-group-text text-dark">
+                {{ dic_language.date }} {{ dic_language.range_ }}<br>{{ dic_language.create }}
+                <i class="ms-2" data-feather="calendar"></i>
+            </span>
+            <input name="date_range_create" type="text" class="form-control" id="daterangepickerranges_create"/>
+        </div>
+    </div>
+</div>
+<div class="col-6 col-md-3 col-lg-3 mb-3 align-content-end">
+    <div class="">
+        <div class="input-group">
+            <span class="input-group-text text-dark">
+                {{ dic_language.date }} {{ dic_language.range_ }}<br>{{ dic_language.update }}
+                <i class="ms-2" data-feather="calendar"></i>
+            </span>
+            <input name="date_range_update" type="text" class="form-control" id="daterangepickerranges_update"/>
+        </div>
+    </div>
+</div>
+<div class="col-6 col-md-3 col-lg-3 mb-3 align-content-end">
+    <div class="">
+        <div class="input-group">
+            <span class="input-group-text text-dark">
+                {{ dic_language.date }} {{ dic_language.range_ }}<br>{{ dic_language.delete }}
+                <i class="ms-2" data-feather="calendar"></i>
+            </span>
+            <input name="date_range_delete" type="text" class="form-control" id="daterangepickerranges_delete"/>
+        </div>
+    </div>
+</div>
+<div class="col-6 col-md-3 col-lg-3 align-content-end ps-3 mb-3 ">
+    {% include 'panels/v1/admin/includes/components/btn_submit_form_with_option_icon.html' with btn_color="btn-theme pt-2 pe-3" icon_name="search" text=dic_language.search style_text="d-none d-md-inline-block px-2" %}
+    {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with link=list_url btn_color="btn-dark pt-2 pe-3" icon_name="refresh-cw" text=dic_language.reset style_text="d-none d-md-inline-block px-2" %}
+</div>

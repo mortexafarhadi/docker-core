@@ -1,0 +1,59 @@
+{% extends 'panels/v1/admin/auth-layout.html' %}
+{% load static %}
+{% block Form_Layout %}
+    <div class="col-12 col-md-6 col-xl-4 minvheight-100 d-flex flex-column px-0">
+        {% include 'panels/v1/admin/includes/components/header_auth.html' %}
+        <div class="h-100 py-4 px-3">
+            <div class="row h-100 align-items-center justify-content-center mt-md-4">
+                <div class="col-11 col-sm-8 col-md-11 col-xl-11 col-xxl-10 login-box">
+                    <div class="text-center mb-4"><h1 class="mb-0">Sorry!  &#9940;</h1><h4 class="mb-3">You Are Ban</h4>
+                        <p class="text-secondary">Suspicious activity was detected on your side.
+                            Your activity is limited for one hour
+                            Please do it later.</p></div>
+                    <a href="{% url 'main:index' %}" class="btn btn-lg btn-theme w-100 mb-4">Explore</a>
+                    <br><br></div>
+            </div>
+        </div>
+        {% include 'panels/v1/admin/includes/components/footer_auth.html' %}
+    </div>
+{% endblock Form_Layout %}
+{% block Img_Layout %}
+    <div class="col-12 col-md-6 col-xl-8 p-4 d-none d-md-block">
+        <div class="card adminuiux-card bg-theme-1-space position-relative overflow-hidden h-100">
+            <div class="position-absolute start-0 top-0 h-100 w-100 coverimg opacity-75 z-index-0"><img
+                    src="{% static 'panels/v1/admin/assets/img/backgorund-image/backgorund-image-8.jpg' %}" alt=""></div>
+            <div class="card-body position-relative z-index-1">
+                <div class="row h-100 d-flex flex-column justify-content-center align-items-center gx-0 text-center">
+                    <div class="col-10 col-md-11 col-xl-8 mb-4 mx-auto">
+                        <div class="swiper swipernavpagination pb-5">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide"><img
+                                        src="{% static 'panels/v1/admin/assets/img/investment/slider.png' %}" alt=""
+                                        class="mw-100 mb-3">
+                                    <h2 class="text-white mb-3">Create and Manage your Investment
+                                        appointments easily at your own very personalized space.</h2>
+                                    <p class="lead opacity-75">You are at the best Adminuiux Investment
+                                        UX<br>HTML template demo preview</p></div>
+                                <div class="swiper-slide"><img
+                                        src="{% static 'panels/v1/admin/assets/img/investment/slider.png' %}" alt=""
+                                        class="mw-100 mb-3">
+                                    <h2 class="text-white mb-3">Create and Manage your Investment
+                                        appointments easily at your own very personalized space.</h2>
+                                    <p class="lead opacity-75">You are at the best Adminuiux Investment
+                                        UX<br>HTML template demo preview</p></div>
+                                <div class="swiper-slide"><img
+                                        src="{% static 'panels/v1/admin/assets/img/investment/slider.png' %}" alt=""
+                                        class="mw-100 mb-3">
+                                    <h2 class="text-white mb-3">Create and Manage your Investment
+                                        appointments easily at your own very personalized space.</h2>
+                                    <p class="lead opacity-75">You are at the best Adminuiux Investment
+                                        UX<br>HTML template demo preview</p></div>
+                            </div>
+                            <div class="swiper-pagination white bottom-0"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock Img_Layout %}

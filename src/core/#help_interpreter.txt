@@ -1,0 +1,20 @@
+## list package
+uv pip list
+
+## sync interpreter
+uv sync
+
+## sync interpreter with extra option
+uv sync --extra production
+
+## add package from file
+uv add -r zzrequirements/development.txt
+
+## add package normal
+uv add --package_name--
+
+## add package to production mode
+uv add --package_name-- --optional production
+
+# update package
+uv add --package_name-- --upgrade

@@ -1,0 +1,28 @@
+https://faker.readthedocs.io/en/master/index.html
+
+fake.name()                                                    ==> for name
+fake.first_name()                                              ==> for first name
+fake.last_name()                                               ==> for last name
+fake.prefix()                                                  ==> for prefix  (Mx - Mr - Mrs)
+fake.suffix()                                                  ==> for suffix  (PhD - DDS - MD - III - MD)
+fake.email()                                                   ==> for email
+fake.phone_number()                                            ==> for phone number
+fake.address()                                                 ==> for address
+fake.ean(length=13)                                            ==> for barcode (int) just length 8 or 13
+fake.color(color_format:'hex')                                 ==> for color (optional)
+fake.hex_color()                                               ==> for hex color
+fake.rgb_color()                                               ==> for rgb color
+fake.company()                                                 ==> for company
+fake.company_suffix()                                          ==> for company suffix (Group - Inc - LLC)
+fake.credit_card_number()                                      ==> for credit_card_number
+fake.cryptocurrency()                                          ==> for cryptocurrency ('XRP', 'Ripple')
+fake.image_url()                                               ==> for image
+fake.text(max_nb_chars=20)                                     ==> for text
+fake.pybool()                                                  ==> for boolean
+fake.pyint(min_value:int=0,max_value:int=9999,step:int=1)      ==> for integer
+fake.pystr()                                                   ==> for string
+fake.random_number(digits=3)                                   ==> for random number length 3
+fake.date()                                                    ==> for date
+fake.date_time()                                               ==> for datetime
+fake.url()                                                     ==> for url
+fake.random_choices(elements=('a', 'b', 'c', 'd'))

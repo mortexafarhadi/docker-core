@@ -1,0 +1,15 @@
+/* لود فونت از Google Fonts (برای Vazir) */
+@import url('https://fonts.googleapis.com/css2?family=Vazir:wght@400;700&display=swap');
+
+/* لود فونت محلی (فرض کنید فایل‌های فونت در static/fonts هستند) */
+@font-face {
+    font-family: 'Lalezar';
+    src: url('../fonts/Lalezar-Regular.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* اعمال فونت‌ها به ویرایشگر (اختیاری، برای پیش‌نمایش بهتر) */
+.ck-content {
+    font-family: 'Lalezar', sans-serif;  /* فونت پیش‌فرض محتوا را تغییر دهید اگر بخواهید */
+}
