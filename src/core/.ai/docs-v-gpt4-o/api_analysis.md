@@ -150,7 +150,7 @@
 
 #### 3. Email Service
 - **Service Name & Purpose**: Email Service for sending transactional emails.
-- **Base URL/Configuration**: SMTP server details defined in `___config/configs/EMAIL_CONFIG.py`.
+- **Base URL/Configuration**: SMTP server details defined in `_0_config/configs/EMAIL_CONFIG.py`.
 - **Endpoints Used**: Email sending.
 - **Authentication Method**: SMTP credentials.
 - **Error Handling**: Retry logic for failed email sends.

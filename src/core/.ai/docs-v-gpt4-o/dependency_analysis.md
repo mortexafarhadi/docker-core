@@ -2,7 +2,7 @@
 
 ## Internal Dependencies Map
 The project follows a modular monolithic architecture with distinct layers and components:
-1. **Configuration Layer (`___config`)**:
+1. **Configuration Layer (`_0_config`)**:
    - Centralized settings split into multiple files (e.g., `DATABASE_CONFIG.py`, `AUTH_AND_SESSION_CONFIG.py`).
    - Entry points for WSGI/ASGI and URL routing (`asgi.py`, `wsgi.py`, `urls.py`).
 
@@ -14,14 +14,14 @@ The project follows a modular monolithic architecture with distinct layers and c
      - `service/`: External integrations (e.g., `crypto_service.py`, `email_service.py`, `payment/zarinpal_service.py`).
      - `middlewares/`: Request processing hooks (e.g., `access_middleware.py`, `ip_address_middleware.py`).
 
-3. **Core Domain Layer (`__user`, `__site_setting`)**:
+3. **Core Domain Layer (`_1_user`, `_1_site_setting`)**:
    - Handles user management and site configuration.
    - Modularized into sub-components (`_modules/register_user`, `_modules/user_setting`).
 
 4. **Business Domain Layer (`apps`)**:
    - Contains business logic modules such as `category` and `social_network`.
 
-5. **Presentation Layer (`_panel_admin`, `_panel_user`, `ztemplates`)**:
+5. **Presentation Layer (`_2_panel_admin`, `_2_panel_user`, `ztemplates`)**:
    - Admin and user dashboards with decoupled UI logic.
 
 ## External Libraries Analysis
@@ -98,47 +98,47 @@ The project follows a modular monolithic architecture with distinct layers and c
   - `basic_model.py` and `base_view.py` act as layer supertypes, providing shared functionality.
 
 - **Configuration Injection**:
-  - Settings are imported from `___config/configs` into `settings.py`.
+  - Settings are imported from `_0_config/configs` into `settings.py`.
 
 ## Module Coupling Assessment
 - **High Coupling**:
-  - `___config` is tightly coupled with all components due to its role in managing settings.
-  - `___utils` is heavily relied upon by `apps` and `__user`.
+  - `_0_config` is tightly coupled with all components due to its role in managing settings.
+  - `___utils` is heavily relied upon by `apps` and `_1_user`.
 
 - **Moderate Coupling**:
-  - `apps` and `__user` interact with `___utils` for shared services and models.
+  - `apps` and `_1_user` interact with `___utils` for shared services and models.
 
 - **Low Coupling**:
-  - `ztemplates` and `_panel_admin` are decoupled from the data models, focusing solely on presentation.
+  - `ztemplates` and `_2_panel_admin` are decoupled from the data models, focusing solely on presentation.
 
 ## Dependency Graph
 ```
-___config
+_0_config
   ├── ___utils
   │     ├── functions
   │     ├── models
   │     ├── service
   │     ├── middlewares
   │     └── views
-  ├── __user
+  ├── _1_user
   │     ├── _modules/register_user
   │     ├── _modules/user_setting
   │     └── _modules/user_social_media
-  ├── __site_setting
+  ├── _1_site_setting
   │     ├── _modules/footer
   │     ├── _modules/header
   │     └── _modules/site_social_media
   ├── apps
   │     ├── category
   │     └── social_network
-  ├── _panel_admin
-  ├── _panel_user
+  ├── _2_panel_admin
+  ├── _2_panel_user
   └── ztemplates
 ```
 
 ## Potential Dependency Issues
 1. **Tight Coupling**:
-   - `___config` is a single point of failure. Any changes here could impact all components.
+   - `_0_config` is a single point of failure. Any changes here could impact all components.
    - `___utils` is heavily relied upon, which may lead to challenges in testing and modularization.
 
 2. **Circular Dependencies**:
@@ -158,7 +158,7 @@ ___config
 
 ## Recommendations
 1. **Decouple Configuration**:
-   - Consider modularizing `___config` further to reduce coupling.
+   - Consider modularizing `_0_config` further to reduce coupling.
 
 2. **Refactor Utility Layer**:
    - Evaluate `___utils` for redundant or overly complex components.

@@ -32,6 +32,8 @@ RUN for i in 1 2 3; do apt-get update && break || sleep 5; done && \
 
 COPY pyproject.toml uv.lock ./
 
+# RUN uv lock --upgrade
+
 RUN uv sync --frozen --no-install-project --extra production
 
 COPY . .
@@ -42,6 +44,6 @@ RUN uv sync --frozen --extra production
 # RUN apt-get remove -y build-essential gcc python3-dev default-libmysqlclient-dev \
 #     pkg-config libssl-dev libffi-dev
 
-RUN chmod +x ./___deploy/*.sh
+RUN chmod +x ./_0_deploy/*.sh
 
-ENTRYPOINT [ "sh", "-c", "./___deploy/script.sh" ]
+ENTRYPOINT [ "sh", "-c", "./_0_deploy/script.sh" ]

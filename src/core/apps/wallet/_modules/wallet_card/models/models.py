@@ -1,7 +1,7 @@
 from django.db import models
 
-from ___utils.models import basic_models as mb
-from ___utils.templatetags.poll_extras import separate_with_dash
+from _0_utils.models import basic_models as mb
+from _0_utils.templatetags.poll_extras import separate_with_dash
 from apps.wallet.models.models import Wallet
 
 

@@ -12,6 +12,8 @@ WORKDIR /app
 
 COPY ./src/core/pyproject.toml ./src/core/uv.lock ./
 
+# RUN uv lock --upgrade
+
 RUN uv sync --frozen --no-install-project --extra testing
 
 COPY ./src/core .

@@ -6,19 +6,19 @@
 The codebase represents a highly modularized **Django Monolithic** application with a distinct custom directory structure. It deviates from the standard flat Django app layout by enforcing a hierarchical organization based on component types (System vs. Business vs. Utilities).
 
 The architecture implements a **Layered Architecture** within a Monolith:
-1. **Configuration Layer (`___config`)**: Centralized and split settings.
-2. **Shared Kernel / Infrastructure Layer (`___utils`)**: Contains base classes, global services, and helper functions used across the system.
-3. **Core Domain Layer (`__user`, `__site_setting`)**: Essential system modules prefixed with underscores to denote their foundational nature.
+1. **Configuration Layer (`_0_config`)**: Centralized and split settings.
+2. **Shared Kernel / Infrastructure Layer (`_0_utils`)**: Contains base classes, global services, and helper functions used across the system.
+3. **Core Domain Layer (`_1_user`, `_1_site_setting`)**: Essential system modules prefixed with underscores to denote their foundational nature.
 4. **Business Domain Layer (`apps`)**: Pluggable business logic modules (e.g., `category`, `social_network`).
-5. **Presentation/Interface Layer (`_panel_admin`, `_panel_user`, `ztemplates`)**: Separate dashboards for admins and users, decoupling UI logic from data models.
+5. **Presentation/Interface Layer (`_2_panel_admin`, `_2_panel_user`, `ztemplates`)**: Separate dashboards for admins and users, decoupling UI logic from data models.
 
 ## Core Components
 
-### 1. Configuration Hub (`___config`)
+### 1. Configuration Hub (`_0_config`)
 * **Purpose**: Manages application settings, WSGI/ASGI entry points, and root URLs.
 * **Structure**: Uses a "Split Settings" pattern where `settings.py` imports from `configs/` (e.g., `DATABASE_CONFIG.py`, `AUTH_AND_SESSION_CONFIG.py`). This improves maintainability and separation of concerns.
 
-### 2. Shared Utilities (`___utils`)
+### 2. Shared Utilities (`_0_utils`)
 * **Purpose**: Acts as the "Shared Kernel" of the application. It provides reusable code to avoid duplication across apps.
 * **Key Sub-components**:
   * `functions/`: Granular utility functions (date, json, string manipulation).
@@ -26,13 +26,13 @@ The architecture implements a **Layered Architecture** within a Monolith:
   * `service/`: External system integrations (Crypto, Email, Payment).
   * `views/` & `middlewares/`: Base view classes and request processing hooks.
 
-### 3. User & Identity Management (`__user`)
+### 3. User & Identity Management (`_1_user`)
 * **Purpose**: Handles the custom user model, authentication signals, and user-specific settings.
 * **Structure**: It is further modularized into sub-modules (`_modules/register_user`, `_modules/user_setting`), indicating a "Modular Monolith" approach where complex domains are encapsulated.
 
-### 4. Site Configuration (`__site_setting`)
+### 4. Site Configuration (`_1_site_setting`)
 * **Purpose**: Manages global website content such as Headers, Footers, and Social Media links.
-* **Structure**: Similar to `__user`, it uses sub-modules to organize distinct parts of the site layout.
+* **Structure**: Similar to `_1_user`, it uses sub-modules to organize distinct parts of the site layout.
 
 ### 5. Business Applications (`apps`)
 * **Purpose**: Contains the specific business logic of the project.
@@ -42,12 +42,12 @@ The architecture implements a **Layered Architecture** within a Monolith:
 
 ## Service Definitions
 
-The application explicitly defines a Service Layer within `___utils/service` to handle complex business logic and external integrations.
+The application explicitly defines a Service Layer within `_0_utils/service` to handle complex business logic and external integrations.
 
-* **Crypto Service (`___utils/service/crypto`)**:
+* **Crypto Service (`_0_utils/service/crypto`)**:
   * **Responsibility**: Handles blockchain interactions.
   * **Capabilities**: Includes sub-services for specific chains (`SOL.py`, `TRX.py`), smart contract interactions (`SMART_CONTRACT.py`), and address validation. It abstracts the complexity of RPC calls and transaction signing.
-* **Payment Service (`___utils/service/payment`)**:
+* **Payment Service (`_0_utils/service/payment`)**:
   * **Responsibility**: Manages payment gateway integrations.
   * **Implementation**: Currently features `zarinpal_service.py`, encapsulating the logic for the Zarinpal payment provider.
 * **Communication Services**:
@@ -61,34 +61,34 @@ The application explicitly defines a Service Layer within `___utils/service` to 
 
 The codebase relies on inheritance and base classes to enforce contracts across the system.
 
-* **Base Models (`___utils/models/basic_model.py`)**:
+* **Base Models (`_0_utils/models/basic_model.py`)**:
   * Likely defines an abstract `BaseModel` that all other models inherit from.
   * **Contract**: Enforces presence of `created_at`, `updated_at`, `is_active`, and potentially `is_deleted` (soft delete) fields.
-* **Base Views (`___utils/views/base_view.py`)**:
+* **Base Views (`_0_utils/views/base_view.py`)**:
   * Provides a standard structure for Class-Based Views (CBVs).
   * **Contract**: Standardizes context data injection, error handling, and permission checks.
-* **Validator Contracts (`___utils/validator`)**:
+* **Validator Contracts (`_0_utils/validator`)**:
   * `file_validator.py`: Enforces rules for file uploads (size, extension), ensuring data integrity before it reaches the model layer.
-* **Middleware Contracts (`___utils/middlewares`)**:
+* **Middleware Contracts (`_0_utils/middlewares`)**:
   * `access_middleware.py` & `ip_address_middleware.py`: Define the contract for request interception, enforcing security policies (IP blocking, access control) globally.
 
 ## Design Patterns Identified
 
 1. **Model-View-Template (MVT)**: The standard Django pattern is the backbone.
 2. **Service Layer Pattern**: Logic for Crypto, Payments, and Notifications is extracted out of Views/Models into `___utils/service`, promoting testability and reusability.
-3. **Split Settings Pattern**: Configuration is broken down by domain (Database, Auth, Static) in `___config/configs`.
+3. **Split Settings Pattern**: Configuration is broken down by domain (Database, Auth, Static) in `_0_config/configs`.
 4. **Layer Supertype Pattern**: Use of `basic_model.py` and `base_view.py` to share common behavior across all models and views.
-5. **Modular Monolith**: The `_modules` directory inside apps (e.g., `__user/_modules`) suggests a pattern where large domains are broken down into sub-domains but kept within the same deployable unit.
+5. **Modular Monolith**: The `_modules` directory inside apps (e.g., `_1_user/_modules`) suggests a pattern where large domains are broken down into sub-domains but kept within the same deployable unit.
 6. **Separation of Concerns (Admin vs. User)**:
-  * Views and URLs are explicitly split into `admin/` and `base/` (or `user/`) directories within apps (e.g., `__user/views/admin`, `__user/views/base`).
-  * Panel logic is separated into `_panel_admin` and `_panel_user`.
+  * Views and URLs are explicitly split into `admin/` and `base/` (or `user/`) directories within apps (e.g., `_1_user/views/admin`, `_1_user/views/base`).
+  * Panel logic is separated into `_2_panel_admin` and `_2_panel_user`.
 
 ## Component Relationships
 
-* **`___config` -> All Components**: All components depend on settings defined here.
-* **`apps` & `__user` -> `___utils`**: Business logic heavily relies on the base models, services, and functions provided by the utility layer.
-* **`_panel_admin` -> `apps` & `__user`**: The admin panel aggregates views and data from the underlying business and user apps to present a management interface.
-* **`_auth` -> `__user`**: The authentication UI (`_auth`) interacts with the user data model (`__user`) to perform login/registration.
+* **`_0_config` -> All Components**: All components depend on settings defined here.
+* **`apps` & `_1_user` -> `___utils`**: Business logic heavily relies on the base models, services, and functions provided by the utility layer.
+* **`_2_panel_admin` -> `apps` & `_1_user`**: The admin panel aggregates views and data from the underlying business and user apps to present a management interface.
+* **`_2_auth` -> `_1_user`**: The authentication UI (`_2_auth`) interacts with the user data model (`_1_user`) to perform login/registration.
 * **`___utils/service/crypto` -> `___utils/service/crypto/utils`**: The main crypto service orchestrates lower-level utility scripts (RPC finders, ABI definitions).
 
 ## Key Methods & Functions

@@ -1,15 +1,16 @@
 from django.db import models
 from django.urls import reverse
 
-from ___utils.functions.generator.url_image_base import get_image_thumbnail
-from ___utils.models import basic_models as mb
+from _0_utils.functions.generator.file_path_generator import UploadPathFactory
+from _0_utils.functions.generator.url_image_base import get_image_thumbnail
+from _0_utils.models import basic_models as mb
 
 
 class SocialNetwork(mb.BaseCKEditorModelActiveSortOrderHistorical):
     title = models.CharField(max_length=200)
     link = models.URLField()
     icon_name = models.CharField(max_length=250, blank=True, null=True)
-    image = models.ImageField(upload_to="images/social_network/", null=True, blank=True)
+    image = models.ImageField(upload_to=UploadPathFactory(base_path="media/SocialNetwork"), null=True, blank=True)
 
     def get_image_tmb_url(self):
         return get_image_thumbnail(self.image)

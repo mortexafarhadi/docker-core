@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.views.generic import View
 
-from ___utils.views.base_view import (
+from _0_utils.views.base_view import (
     ListView,
     DetailView,
     UpdateView,

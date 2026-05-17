@@ -2,11 +2,11 @@ from django.db import models
 from django.urls import reverse
 from translated_fields import TranslatedField
 
-from ___utils.functions.generator import uniq_slugify as tc
-from ___utils.functions.generator.url_image_base import get_image_thumbnail
-from ___utils.functions.string_function import to_kebab_case
-from ___utils.models import basic_models as mb
-from ___utils.models import mixin_models as mx
+from _0_utils.functions.generator import uniq_slugify as tc
+from _0_utils.functions.generator.url_image_base import get_image_thumbnail
+from _0_utils.functions.string_function import to_kebab_case
+from _0_utils.models import basic_models as mb
+from _0_utils.models import mixin_models as mx
 
 
 class Category(mb.BaseCKEditorMultiLangModelActiveSortOrderHistorical, mx.SlugMixin):

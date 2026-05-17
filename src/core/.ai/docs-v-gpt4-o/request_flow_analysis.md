@@ -1,15 +1,15 @@
 # Request Flow Analysis
 
 ## Entry Points Overview
-The primary entry point for the application is the `manage.py` file located in the root directory. This file initializes the Django application and routes requests to the appropriate handlers. The `___config` directory contains the `asgi.py` and `wsgi.py` files, which serve as the entry points for ASGI and WSGI servers, respectively. These files are responsible for setting up the application environment and routing requests to the Django application.
+The primary entry point for the application is the `manage.py` file located in the root directory. This file initializes the Django application and routes requests to the appropriate handlers. The `_0_config` directory contains the `asgi.py` and `wsgi.py` files, which serve as the entry points for ASGI and WSGI servers, respectively. These files are responsible for setting up the application environment and routing requests to the Django application.
 
 ## Request Routing Map
-The routing mechanism is defined in the `___config/urls/urls.py` file. This file acts as the central hub for URL routing, delegating requests to specific apps and modules. Each app, such as `__user`, `__site_setting`, and `apps`, has its own `urls.py` file to define its specific routes. The routing structure is modular, with separate URL configurations for admin and user interfaces. For example:
-- `__user/urls/admin/urls_user.py` handles user-related admin routes.
-- `__site_setting/urls/admin/urls_site.py` manages site configuration routes.
+The routing mechanism is defined in the `_0_config/urls/urls.py` file. This file acts as the central hub for URL routing, delegating requests to specific apps and modules. Each app, such as `_1_user`, `_1_site_setting`, and `apps`, has its own `urls.py` file to define its specific routes. The routing structure is modular, with separate URL configurations for admin and user interfaces. For example:
+- `_1_user/urls/admin/urls_user.py` handles user-related admin routes.
+- `_1_site_setting/urls/admin/urls_site.py` manages site configuration routes.
 
 ## Middleware Pipeline
-The middleware pipeline is defined in the `___config/configs/MIDDLEWARE_CONFIG.py` file. Custom middleware components are located in the `___utils/middlewares` directory. Key middleware includes:
+The middleware pipeline is defined in the `_0_config/configs/MIDDLEWARE_CONFIG.py` file. Custom middleware components are located in the `___utils/middlewares` directory. Key middleware includes:
 - `access_middleware.py`: Enforces access control policies based on roles or IP addresses.
 - `ip_address_middleware.py`: Tracks and validates client IP addresses.
 - `request_params_middleware.py`: Processes and validates request parameters.
@@ -19,27 +19,27 @@ These middleware components are executed sequentially, preprocessing requests be
 
 ## Controller/Handler Analysis
 Controllers and handlers are implemented as Class-Based Views (CBVs) in the `___utils/views` directory. The `base_view.py` file provides a standardized structure for CBVs, including context data injection, error handling, and permission checks. Specific views are organized by domain:
-- `__user/views/admin/views_user.py`: Handles user-related admin operations.
-- `__site_setting/views/admin/views_site.py`: Manages site configuration operations.
+- `_1_user/views/admin/views_user.py`: Handles user-related admin operations.
+- `_1_site_setting/views/admin/views_site.py`: Manages site configuration operations.
 - `apps/category/views/admin/views.py`: Implements category-related business logic.
 
 The modular organization ensures separation of concerns and reusability of view logic.
 
 ## Authentication & Authorization Flow
-Authentication and authorization are managed by the `__user` module. The custom user model is defined in `__user/models/models.py`, and authentication signals are implemented in `__user/signals.py`. The `_auth` module provides the user interface for login, registration, and password management. Key files include:
-- `_auth/urls/urls.py`: Defines authentication-related routes.
-- `_auth/views/views.py`: Implements authentication logic, including login, registration, and password reset.
+Authentication and authorization are managed by the `_1_user` module. The custom user model is defined in `_1_user/models/models.py`, and authentication signals are implemented in `_1_user/signals.py`. The `_2_auth` module provides the user interface for login, registration, and password management. Key files include:
+- `_2_auth/urls/urls.py`: Defines authentication-related routes.
+- `_2_auth/views/views.py`: Implements authentication logic, including login, registration, and password reset.
 
 Authorization checks are performed using middleware components like `access_middleware.py` and permission classes in `___utils/permissions/auth_permission.py`.
 
 ## Error Handling Pathways
-Error handling is centralized in the `___utils/views/base_view.py` file, which provides methods for handling exceptions and returning appropriate HTTP status codes. Middleware components also contribute to error handling by intercepting and processing invalid requests. Custom error pages are defined in the `_auth/templates/_auth` directory, such as `error-bans.html` and `error-congratulations.html`.
+Error handling is centralized in the `___utils/views/base_view.py` file, which provides methods for handling exceptions and returning appropriate HTTP status codes. Middleware components also contribute to error handling by intercepting and processing invalid requests. Custom error pages are defined in the `_2_auth/templates/_2_auth` directory, such as `error-bans.html` and `error-congratulations.html`.
 
 ## Request Lifecycle Diagram
 ```markdown
 1. **Request Entry**:
    - HTTP request received by `manage.py` (development) or `asgi.py`/`wsgi.py` (production).
-   - Request routed to `___config/urls/urls.py`.
+   - Request routed to `_0_config/urls/urls.py`.
 
 2. **Middleware Processing**:
    - Sequential execution of middleware components:
@@ -49,7 +49,7 @@ Error handling is centralized in the `___utils/views/base_view.py` file, which p
      - `user_setting_middleware.py`
 
 3. **Routing**:
-   - URL patterns matched in `___config/urls/urls.py`.
+   - URL patterns matched in `_0_config/urls/urls.py`.
    - Request delegated to app-specific `urls.py` files.
 
 4. **Controller Execution**:
@@ -57,7 +57,7 @@ Error handling is centralized in the `___utils/views/base_view.py` file, which p
    - View processes the request, interacts with models and services, and prepares the response.
 
 5. **Authentication & Authorization**:
-   - Authentication checks performed using `__user` module.
+   - Authentication checks performed using `_1_user` module.
    - Authorization enforced by middleware and permission classes.
 
 6. **Response Formation**:

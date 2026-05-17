@@ -367,7 +367,7 @@
     height: 48px;
     display: flex;
     display: -webkit-box;
-    display: -ms-flexbox;
+    /*display: -ms-flexbox;*/
     display: -webkit-flex;
     justify-content: center;
     align-items: center;
@@ -1291,33 +1291,34 @@
 
   .flat-tabs.items .menu-tab li {
     padding: 20px 15px 29px 15px;
-}
-
-.top-search {
-  position: absolute;
-  right: -70px;
-}
-
-
-@media only screen and (max-width: 400px) {
-
-  .sc-card-activity.style-2 .content .media,
-  .sc-card-activity.style-2 .content .media img,
-  .sc-card-activity .content .media{
-    height: auto;
   }
 
-  .sc-card-activity .content .media img,
-  .tf-box .box-item{
-    width: 100% !important;
-  }
-
-  .sc-card-activity .button-active.icon{
-    margin: 10px auto 0;
-  }
-  .tab-authors .menu-tab .tablinks {
-    font-size: 12px;
-    padding-left: 10px;
-    padding-right: 10px;
+  .top-search {
+    position: absolute;
+    right: -70px;
   }
 }
+
+  @media only screen and (max-width: 400px) {
+
+    .sc-card-activity.style-2 .content .media,
+    .sc-card-activity.style-2 .content .media img,
+    .sc-card-activity .content .media {
+      height: auto;
+    }
+
+    .sc-card-activity .content .media img,
+    .tf-box .box-item {
+      width: 100% !important;
+    }
+
+    .sc-card-activity .button-active.icon {
+      margin: 10px auto 0;
+    }
+
+    .tab-authors .menu-tab .tablinks {
+      font-size: 12px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }

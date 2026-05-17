@@ -23,9 +23,11 @@ services:
   redis_worker:
     build: .
     container_name: core_redis_worker
-    command: celery -A ___config worker --loglevel=info -l INFO
+    command: uv run celery -A _0_config worker --loglevel=info -l INFO
     volumes:
       - "./src/core:/app"
+    environment:
+      - PYTHONUNBUFFERED=1
     depends_on:
       - redis
       - backend
@@ -41,6 +43,8 @@ services:
       - "8000:8000"
     env_file:
       - "./src/core/.env"
+    environment:
+      - PYTHONUNBUFFERED=1
     depends_on:
       - redis
 
@@ -50,12 +54,14 @@ services:
      ports:
        - "8089:8089"
      volumes:
-       - './src/core/___utils/locust:/mnt/locust'
+       - './src/core/_0_utils/locust:/mnt/locust'
      command: -f /mnt/locust/locustfile.py --master -H http://backend:8000
 
   locust_worker:
      image: locustio/locust
      container_name: core_locust_worker
      volumes:
-       - './src/core/___utils/locust:/mnt/locust'
+       - './src/core/_0_utils/locust:/mnt/locust'
      command: -f /mnt/locust/locustfile.py --worker --master-host locust_master
+     depends_on:
+       - locust_master

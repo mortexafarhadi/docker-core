@@ -1,7 +1,7 @@
 from django.db import models, transaction
 from django.urls import reverse
 
-from ___utils.models import mixin_models as mx
+from _0_utils.models import mixin_models as mx
 from apps.wallet.models.models import Wallet
 
 

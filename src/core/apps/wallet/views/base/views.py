@@ -1,4 +1,4 @@
-from ___utils.functions.list_and_dict_function import check_and_get_list
+from _0_utils.functions.list_and_dict_function import check_and_get_list
 from ...models import models as mm
 
 

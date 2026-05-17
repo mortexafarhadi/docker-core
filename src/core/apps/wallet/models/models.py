@@ -1,7 +1,7 @@
 from django.db import models
 
-from __user.views.base.views_user import get_user_model
-from ___utils.models import mixin_models as mx
+from _1_user.views.base.views_user import get_user_model
+from _0_utils.models import mixin_models as mx
 
 User = get_user_model()
 

@@ -2,8 +2,8 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import View
 
-from ___utils.views.base_view import ListView, DetailView, CreateView
-from __user.views.base.views_user import get_user_with_code
+from _0_utils.views.base_view import ListView, DetailView, CreateView
+from _1_user.views.base.views_user import get_user_with_code
 from ..base.views import get_wallet_withdrawal_with_pk
 from ...forms import forms as ff
 from ...models import models as mm

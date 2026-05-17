@@ -14,7 +14,7 @@ db.sqlite3-journal
 scripts/
 pyvenv.cfg
 
-__data/*
+_1_data/*
 
 # ### Django.Python Stack ###
 # # Byte-compiled / optimized / DLL files

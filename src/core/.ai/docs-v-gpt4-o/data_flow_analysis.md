@@ -2,9 +2,9 @@
 
 ## Data Models Overview
 The application employs a layered architecture with distinct data models across its core and business domains. Key models include:
-- **Base Models (`___utils/models/basic_model.py`)**: Abstract models providing common fields like `created_at`, `updated_at`, `is_active`, and `is_deleted` for soft deletion.
-- **User Models (`__user/models.py`)**: Custom user models with modular extensions for user settings, social media, and registration.
-- **Site Configuration Models (`__site_setting/models.py`)**: Models for managing headers, footers, and social media links.
+- **Base Models (`_0_utils/models/basic_model.py`)**: Abstract models providing common fields like `created_at`, `updated_at`, `is_active`, and `is_deleted` for soft deletion.
+- **User Models (`_1_user/models.py`)**: Custom user models with modular extensions for user settings, social media, and registration.
+- **Site Configuration Models (`_1_site_setting/models.py`)**: Models for managing headers, footers, and social media links.
 - **Business Logic Models (`apps/category/models.py`, `apps/social_network/models.py`)**: Domain-specific models for taxonomy and social network management.
 
 ## Data Transformation Map
@@ -20,13 +20,13 @@ Data transformations occur at multiple layers:
 
 ## Storage Interactions
 The application uses Django's ORM for database interactions:
-- **Database Configuration**: Managed via `DATABASE_CONFIG.py` in the `___config/configs` directory.
+- **Database Configuration**: Managed via `DATABASE_CONFIG.py` in the `_0_config/configs` directory.
 - **Soft Deletion**: Implemented in `basic_model.py` using `is_deleted` fields.
 - **Caching**: Likely integrated via Django's caching framework, though specific configurations are not detailed.
 
 ## Validation Mechanisms
 Validation is enforced at multiple levels:
-- **File Validation (`___utils/validator/file_validator.py`)**: Ensures file uploads meet size and extension requirements.
+- **File Validation (`_0_utils/validator/file_validator.py`)**: Ensures file uploads meet size and extension requirements.
 - **Middleware**: Validates request parameters and user access rights.
 - **Model Constraints**: Enforced via Django's model field validations.
 
@@ -59,31 +59,31 @@ Files grouped by directory (relative to .):
 
 /.ai/docs: ['structure_analysis.md']
 
-/___config: ['__init__.py', 'asgi.py', 'settings.py', 'wsgi.py']
+/_0_config: ['__init__.py', 'asgi.py', 'settings.py', 'wsgi.py']
 
-/___config/configs: ['AUTH_AND_SESSION_CONFIG.py', 'BASE_CONFIG.py', 'CKEDITOR_CONFIG.py', 'DATABASE_CONFIG.py', 'EMAIL_CONFIG.py', 'INSTALLED_APPS_CONFIG.py', 'JALALI_DATE_CONFIG.py', 'LANGUAGES_CONFIG.py', 'MEDIA_CONFIG.py', 'MIDDLEWARE_CONFIG.py', 'RECAPTCHA_CONFIG.py', 'STATIC_CONFIG.py', 'TEMPLATES_CONFIG.py']
+/_0_config/configs: ['AUTH_AND_SESSION_CONFIG.py', 'BASE_CONFIG.py', 'CKEDITOR_CONFIG.py', 'DATABASE_CONFIG.py', 'EMAIL_CONFIG.py', 'INSTALLED_APPS_CONFIG.py', 'JALALI_DATE_CONFIG.py', 'LANGUAGES_CONFIG.py', 'MEDIA_CONFIG.py', 'MIDDLEWARE_CONFIG.py', 'RECAPTCHA_CONFIG.py', 'STATIC_CONFIG.py', 'TEMPLATES_CONFIG.py']
 
-/___config/urls: ['urls.py']
+/_0_config/urls: ['urls.py']
 
-/___deploy: ['script.sh']
+/_0_deploy: ['script.sh']
 
-/___utils: ['__init__.py', 'admin.py', 'apps.py', 'base_variables.py']
+/_0_utils: ['__init__.py', 'admin.py', 'apps.py', 'base_variables.py']
 
-/___utils/functions: ['bool_function.py', 'date_and_time_function.py', 'gis_function.py', 'json_function.py', 'list_and_dict_function.py', 'log_function.py', 'number_function.py', 'packaging_function.py', 'password_function.py', 'string_function.py']
+/_0_utils/functions: ['bool_function.py', 'date_and_time_function.py', 'gis_function.py', 'json_function.py', 'list_and_dict_function.py', 'log_function.py', 'number_function.py', 'packaging_function.py', 'password_function.py', 'string_function.py']
 
-/___utils/functions/generator: ['uniq_slugify.py', 'url_Image_setting.py', 'url_base.py', 'url_image_base.py']
+/_0_utils/functions/generator: ['uniq_slugify.py', 'url_Image_setting.py', 'url_base.py', 'url_image_base.py']
 
-/___utils/middlewares: ['__docs.py', 'access_middleware.py', 'ip_address_middleware.py', 'request_params_middleware.py', 'user_setting_middleware.py']
+/_0_utils/middlewares: ['__docs.py', 'access_middleware.py', 'ip_address_middleware.py', 'request_params_middleware.py', 'user_setting_middleware.py']
 
-/___utils/migrations: ['0001_initial.py', '__init__.py']
+/_0_utils/migrations: ['0001_initial.py', '__init__.py']
 
-/___utils/models: ['basic_model.py', 'ip_address_model.py']
+/_0_utils/models: ['basic_model.py', 'ip_address_model.py']
 
-/___utils/permissions: ['auth_permission.py']
+/_0_utils/permissions: ['auth_permission.py']
 
-/___utils/service: ['email_service.py', 'qrcode_service.py', 'session_and_cookie_service.py', 'sms_service.py']
+/_0_utils/service: ['email_service.py', 'qrcode_service.py', 'session_and_cookie_service.py', 'sms_service.py']
 
-/___utils/service/crypto: ['_help_en.txt', '_help_fa.txt', 'crypto_service.py']
+/_0_utils/service/crypto: ['_help_en.txt', '_help_fa.txt', 'crypto_service.py']
 
 /___utils/service/crypto/utils: ['BLOCK_CYPHER_SERVICE.py', 'CHECK_ADDRESS.py', 'FIND_ACCOUNT_SOL.py', 'SMART_CONTRACT.py', 'SOL.py', 'TRX.py', 'USDT_TO_CRYPTO.py', 'public_rpc_finder.py']
 
@@ -97,167 +97,163 @@ Files grouped by directory (relative to .):
 
 /___utils/views: ['auth_view.py', 'base_view.py', 'paginator_view.py']
 
-/__site_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_site_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__site_setting/_modules: ['__init__.py']
+/_1_site_setting/_modules: ['__init__.py']
 
-/__site_setting/_modules/footer: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_site_setting/_modules/footer: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__site_setting/_modules/footer/forms: ['forms.py']
+/_1_site_setting/_modules/footer/forms: ['forms.py']
 
-/__site_setting/_modules/footer/migrations: ['0001_initial.py', '__init__.py']
+/_1_site_setting/_modules/footer/migrations: ['0001_initial.py', '__init__.py']
 
-/__site_setting/_modules/footer/models: ['models.py']
+/_1_site_setting/_modules/footer/models: ['models.py']
 
-/__site_setting/_modules/footer/templates/footer/admin/footer_link: ['footer_link_detail.html', 'footer_link_edit.html', 'footer_link_list.html']
+/_1_site_setting/_modules/footer/templates/footer/admin/footer_link: ['footer_link_detail.html', 'footer_link_edit.html', 'footer_link_list.html']
 
-/__site_setting/_modules/footer/templates/footer/admin/footer_link_group: ['footer_link_group_detail.html', 'footer_link_group_edit.html', 'footer_link_group_list.html']
+/_1_site_setting/_modules/footer/templates/footer/admin/footer_link_group: ['footer_link_group_detail.html', 'footer_link_group_edit.html', 'footer_link_group_list.html']
 
-/__site_setting/_modules/footer/urls/admin: ['urls_footer_link_group_i18n.py', 'urls_footer_link_i18n.py']
+/_1_site_setting/_modules/footer/urls/admin: ['urls_footer_link_group_i18n.py', 'urls_footer_link_i18n.py']
 
-/__site_setting/_modules/footer/views/admin: ['views_footer_link.py', 'views_footer_link_group.py']
+/_1_site_setting/_modules/footer/views/admin: ['views_footer_link.py', 'views_footer_link_group.py']
 
-/__site_setting/_modules/footer/views/base: ['views_footer_link.py', 'views_footer_link_group.py']
+/_1_site_setting/_modules/footer/views/base: ['views_footer_link.py', 'views_footer_link_group.py']
 
-/__site_setting/_modules/header: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_site_setting/_modules/header: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__site_setting/_modules/header/forms: ['forms.py']
+/_1_site_setting/_modules/header/forms: ['forms.py']
 
-/__site_setting/_modules/header/migrations: ['0001_initial.py', '__init__.py']
+/_1_site_setting/_modules/header/migrations: ['0001_initial.py', '__init__.py']
 
-/__site_setting/_modules/header/models: ['models.py']
+/_1_site_setting/_modules/header/models: ['models.py']
 
-/__site_setting/_modules/header/templates/header/admin/header_link: ['header_link_detail.html', 'header_link_edit.html', 'header_link_list.html']
+/_1_site_setting/_modules/header/templates/header/admin/header_link: ['header_link_detail.html', 'header_link_edit.html', 'header_link_list.html']
 
-/__site_setting/_modules/header/templates/header/admin/header_link_group: ['header_link_group_detail.html', 'header_link_group_edit.html', 'header_link_group_list.html']
+/_1_site_setting/_modules/header/templates/header/admin/header_link_group: ['header_link_group_detail.html', 'header_link_group_edit.html', 'header_link_group_list.html']
 
-/__site_setting/_modules/header/urls/admin: ['urls_header_link_group_i18n.py', 'urls_header_link_i18n.py']
+/_1_site_setting/_modules/header/urls/admin: ['urls_header_link_group_i18n.py', 'urls_header_link_i18n.py']
 
-/__site_setting/_modules/header/views/admin: ['views_header_link.py', 'views_header_link_group.py']
+/_1_site_setting/_modules/header/views/admin: ['views_header_link.py', 'views_header_link_group.py']
 
-/__site_setting/_modules/header/views/base: ['views_header_link.py', 'views_header_link_group.py']
+/_1_site_setting/_modules/header/views/base: ['views_header_link.py', 'views_header_link_group.py']
 
-/__site_setting/_modules/site_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_site_setting/_modules/site_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__site_setting/_modules/site_social_media/migrations: ['0001_initial.py', '__init__.py']
+/_1_site_setting/_modules/site_social_media/migrations: ['0001_initial.py', '__init__.py']
 
-/__site_setting/_modules/site_social_media/models: ['models.py']
+/_1_site_setting/_modules/site_social_media/models: ['models.py']
 
-/__site_setting/forms: ['forms.py']
+/_1_site_setting/forms: ['forms.py']
 
-/__site_setting/migrations: ['0001_initial.py', '__init__.py']
+/_1_site_setting/migrations: ['0001_initial.py', '__init__.py']
 
-/__site_setting/models: ['models.py']
+/_1_site_setting/models: ['models.py']
 
-/__site_setting/templates/__site_setting/admin: ['base.html']
+/_1_site_setting/templates/_1_site_setting/admin: ['base.html']
 
-/__site_setting/templates/__site_setting/admin/site_index_info: ['site_index_info_detail.html', 'site_index_info_edit.html']
+/_1_site_setting/templates/_1_site_setting/admin/site_index_info: ['site_index_info_detail.html', 'site_index_info_edit.html']
 
-/__site_setting/templates/__site_setting/main: ['index.html']
+/_1_site_setting/templates/_1_site_setting/main: ['index.html']
 
-/__site_setting/urls/admin: ['urls_i18n.py', 'urls_site.py']
+/_1_site_setting/urls/admin: ['urls_i18n.py', 'urls_site.py']
 
-/__site_setting/urls/base: ['urls_i18n.py']
+/_1_site_setting/urls/base: ['urls_i18n.py']
 
-/__site_setting/views/admin: ['views_base.py', 'views_site.py']
+/_1_site_setting/views/admin: ['views_base.py', 'views_site.py']
 
-/__site_setting/views/base: ['views_base.py', 'views_site.py']
+/_1_site_setting/views/base: ['views_base.py', 'views_site.py']
 
-/__site_setting/views/main: ['views.py']
+/_1_site_setting/views/main: ['views.py']
 
-/__user: ['__init__.py', 'admin.py', 'apps.py', 'signals.py', 'tests.py']
+/_1_user: ['__init__.py', 'admin.py', 'apps.py', 'signals.py', 'tests.py']
 
-/__user/_modules: ['__init__.py']
+/_1_user/_modules: ['__init__.py']
 
-/__user/_modules/register_user: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_user/_modules/register_user: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__user/_modules/register_user/migrations: ['0001_initial.py', '__init__.py']
+/_1_user/_modules/register_user/migrations: ['0001_initial.py', '__init__.py']
 
-/__user/_modules/register_user/models: ['models.py']
+/_1_user/_modules/register_user/models: ['models.py']
 
-/__user/_modules/register_user/templates/register_user/admin: ['register_list.html']
+/_1_user/_modules/register_user/templates/register_user/admin: ['register_list.html']
 
-/__user/_modules/register_user/views/base: ['views.py']
+/_1_user/_modules/register_user/views/base: ['views.py']
 
-/__user/_modules/user_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_user/_modules/user_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__user/_modules/user_setting/migrations: ['0001_initial.py', '0002_remove_usersetting_direction.py', '__init__.py']
+/_1_user/_modules/user_setting/migrations: ['0001_initial.py', '0002_remove_usersetting_direction.py', '__init__.py']
 
-/__user/_modules/user_setting/models: ['models.py']
+/_1_user/_modules/user_setting/models: ['models.py']
 
-/__user/_modules/user_setting/urls: ['urls.py']
+/_1_user/_modules/user_setting/urls: ['urls.py']
 
-/__user/_modules/user_setting/views: ['views.py']
+/_1_user/_modules/user_setting/views: ['views.py']
 
-/__user/_modules/user_setting/views/base: ['views.py']
+/_1_user/_modules/user_setting/views/base: ['views.py']
 
-/__user/_modules/user_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_1_user/_modules/user_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/__user/_modules/user_social_media/forms: ['forms.py']
+/_1_user/_modules/user_social_media/forms: ['forms.py']
 
-/__user/_modules/user_social_media/migrations: ['0001_initial.py', '__init__.py']
+/_1_user/_modules/user_social_media/migrations: ['0001_initial.py', '__init__.py']
 
-/__user/_modules/user_social_media/models: ['models.py']
+/_1_user/_modules/user_social_media/models: ['models.py']
 
-/__user/_modules/user_social_media/templates/user_social_media/admin: ['social_media_detail.html', 'social_media_edit.html', 'social_media_list.html']
+/_1_user/_modules/user_social_media/templates/user_social_media/admin: ['social_media_detail.html', 'social_media_edit.html', 'social_media_list.html']
 
-/__user/_modules/user_social_media/urls/admin: ['urls_i18n.py']
+/_1_user/_modules/user_social_media/urls/admin: ['urls_i18n.py']
 
-/__user/_modules/user_social_media/views/admin: ['views.py']
+/_1_user/_modules/user_social_media/views/admin: ['views.py']
 
-/__user/_modules/user_social_media/views/base: ['views.py']
+/_1_user/_modules/user_social_media/views/base: ['views.py']
 
-/__user/forms: ['forms_user.py']
+/_1_user/forms: ['forms_user.py']
 
-/__user/manager: ['user_phone_manager.py']
+/_1_user/manager: ['user_phone_manager.py']
 
-/__user/migrations: ['0001_initial.py', '__init__.py']
+/_1_user/migrations: ['0001_initial.py', '__init__.py']
 
-/__user/models: ['__init__.py', 'models.py']
+/_1_user/models: ['__init__.py', 'models.py']
 
-/__user/templates/__user/admin: ['base.html']
+/_1_user/templates/_1_user/admin: ['base.html']
 
-/__user/templates/__user/admin/user: ['user_detail.html', 'user_edit.html', 'user_list.html']
+/_1_user/templates/_1_user/admin/user: ['user_detail.html', 'user_edit.html', 'user_list.html']
 
-/__user/urls/admin: ['urls_customer.py', 'urls_i18n.py', 'urls_user.py']
+/_1_user/urls/admin: ['urls_customer.py', 'urls_i18n.py', 'urls_user.py']
 
-/__user/views/admin: ['views_base.py', 'views_user.py']
+/_1_user/views/admin: ['views_base.py', 'views_user.py']
 
-/__user/views/base: ['views_user.py']
+/_1_user/views/base: ['views_user.py']
 
-/_auth: ['__init__.py']
+/_2_auth: ['__init__.py']
 
-/_auth/forms: ['forms.py']
+/_2_auth/forms: ['forms.py']
 
-/_auth/templates/_auth: ['account-activation.html', 'error-bans.html', 'error-congratulations.html', 'error-send-mail-reset-password.html', 'forget-password.html', 'login.html', 'login_with_allauth.html', 'register.html', 'register_with_allauth.html', 'reset-password.html', 'user-detail.html', 'user-list.html']
+/_2_auth/templates/_2_auth: ['account-activation.html', 'error-bans.html', 'error-congratulations.html', 'error-send-mail-reset-password.html', 'forget-password.html', 'login.html', 'login_with_allauth.html', 'register.html', 'register_with_allauth.html', 'reset-password.html', 'user-detail.html', 'user-list.html']
 
-/_auth/templates/emails: ['active_account.html', 'forget_password.html', 'new_payment.html']
+/_2_auth/templates/emails: ['active_account.html', 'forget_password.html', 'new_payment.html']
 
-/_auth/urls: ['urls.py']
+/_2_auth/urls: ['urls.py']
 
-/_auth/views: ['views.py']
+/_2_auth/views: ['views.py']
 
-/_fake_data: ['__init__.py', 'apps.py', 'help.txt', 'urls.py', 'views.py']
+/_2_locales: ['errors_en.py', 'errors_fa.py', 'language_en.py', 'language_fa.py', 'placeholder_en.py', 'placeholder_fa.py']
 
-/_fake_data/templates/_fake_data: ['fake-data.html']
+/_2_panel_admin: ['__init__.py', 'apps.py']
 
-/_locales: ['errors_en.py', 'errors_fa.py', 'language_en.py', 'language_fa.py', 'placeholder_en.py', 'placeholder_fa.py']
+/_2_panel_admin/templates/_2_panel_admin: ['dashboard.html']
 
-/_panel_admin: ['__init__.py', 'apps.py']
+/_2_panel_admin/urls/admin: ['urls_i18n.py']
 
-/_panel_admin/templates/_panel_admin: ['dashboard.html']
+/_2_panel_admin/views/admin: ['views.py']
 
-/_panel_admin/urls/admin: ['urls_i18n.py']
+/_2_panel_user: ['__init__.py', 'apps.py']
 
-/_panel_admin/views/admin: ['views.py']
+/_2_panel_user/templates/_2_panel_user: ['dashboard.html']
 
-/_panel_user: ['__init__.py', 'apps.py']
+/_2_panel_user/urls/user: ['urls_i18n.py']
 
-/_panel_user/templates/_panel_user: ['dashboard.html']
-
-/_panel_user/urls/user: ['urls_i18n.py']
-
-/_panel_user/views/user: ['views.py']
+/_2_panel_user/views/user: ['views.py']
 
 /apps: ['__init__.py']
 
@@ -327,7 +323,7 @@ Files grouped by directory (relative to .):
 
 /ztemplates/panels/v1/admin: ['auth-layout.html', 'layout.html']
 
-/ztemplates/panels/v1/admin/includes/components: ['btn_link.html', 'btn_link_with_icon.html', 'btn_modal.html', 'btn_submit_form_with_option_icon.html', 'modal_delete.html', 'footer_auth.html', 'footer_in_detail_page.html', 'footer_in_edit_page.html', 'footer_panel.html', 'header.html', 'header_auth.html', 'left_sidebar.html', 'log_history_in_detail_page.html', 'option_record_in_list_page.html', 'paginator.html', 'pre_loader.html', 'search_filter_in_list_page.html', 'status_delete_datetime_filter_and_submit_in_list_page.html', 'theming.html']
+/ztemplates/panels/v1/admin/includes/components: ['btn_link.html', 'btn_link_with_icon.html', 'btn_modal.html', 'btn_submit_form_with_option_icon.html', 'modal_delete.html', 'footer_2_auth.html', 'footer_in_detail_page.html', 'footer_in_edit_page.html', 'footer_panel.html', 'header.html', 'header_2_auth.html', 'left_sidebar.html', 'log_history_in_detail_page.html', 'option_record_in_list_page.html', 'paginator.html', 'pre_loader.html', 'search_filter_in_list_page.html', 'status_delete_datetime_filter_and_submit_in_list_page.html', 'theming.html']
 
 /ztemplates/panels/v1/admin/includes/references: ['footer_references.html', 'header_references.html']
 

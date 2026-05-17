@@ -2,10 +2,10 @@
 python manage.py flush
 
 # export data
-python manage.py dumpdata --natural-primary --natural-foreign --indent 2 --exclude contenttypes --exclude auth.Permission --exclude sessions > __data/data.json
+python manage.py dumpdata --natural-primary --natural-foreign --indent 2 --exclude contenttypes --exclude auth.Permission --exclude sessions > _1_data/data.json
 
 # import data
-python manage.py loaddata __data/data.json
+python manage.py loaddata _1_data/data.json
 
 
 # for save emoji and use UTF-8 in MYSQL Database  # ########   (JUST MYSQL ENGINE)   ######### #

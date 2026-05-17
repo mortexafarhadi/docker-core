@@ -4,6 +4,9 @@ uv pip list
 ## sync interpreter
 uv sync
 
+## reset or set mirror
+uv lock --upgrade
+
 ## sync interpreter with extra option
 uv sync --extra production
 

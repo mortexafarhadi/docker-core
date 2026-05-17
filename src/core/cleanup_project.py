@@ -1,6 +1,8 @@
 import os
 import shutil
 
+from _0_utils.functions.string_function import red_text, green_text, PrintColored
+
 
 def clean_project(project_path="."):
     # لیست پوشه‌هایی که نباید وارد آن‌ها شویم
@@ -9,9 +11,9 @@ def clean_project(project_path="."):
         "zstatic",
         "ztemplates",
         "zzrequirements",
-        "_locales",
-        "___deploy",
-        "__data",
+        "_2_locales",
+        "_0_deploy",
+        "_1_data",
         ".venv",
         ".zzvenv",
         "venv",
@@ -53,16 +55,32 @@ def clean_project(project_path="."):
                     except Exception as e:
                         print(f"  - Error deleting {file}: {e}")
 
-    print(f"\n\nRemoved {deleted_cache} Cached Folder")
-    print(f"Removed {deleted_migration} Migrations File")
+    pc = PrintColored()
+    pc.add_red("\n\nRemoved ")
+    pc.add_green(deleted_cache)
+    pc.add_red(" Cached Folder")
+    pc.print()
+    pc = PrintColored()
+    pc.add_red("Removed ")
+    pc.add_green(deleted_migration)
+    pc.add_red(" Migrations File")
+    pc.print()
 
 
 if __name__ == "__main__":
-    confirm = input(
-        "Are you sure you want to delete Migrations and Caches in the entire project (except venv)? (y/n): "
-    )
+    pc = PrintColored()
+    pc.add_blue("Are you sure you want to delete Migrations and Caches in the entire project ")
+    pc.add_magenta("(except venv)")
+    pc.add_blue("? (")
+    pc.add_red("y")
+    pc.add_blue("/")
+    pc.add_yellow("n")
+    pc.add_blue("):")
+    pc.print()
+
+    confirm = input()
     if confirm.lower() == "y":
         clean_project()
-        print("\nThe Operation Completed Successfully.")
+        print(green_text("\nThe Operation Completed Successfully."))
     else:
-        print("\nOperation Canceled.")
+        print(red_text("\nOperation Canceled."))

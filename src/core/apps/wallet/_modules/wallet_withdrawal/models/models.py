@@ -1,8 +1,8 @@
 from django.db import models, transaction
 from django.urls import reverse
 
-from ___utils.functions.date_and_time_function import now
-from ___utils.models import mixin_models as mx
+from _0_utils.functions.date_and_time_function import now
+from _0_utils.models import mixin_models as mx
 from apps.wallet._modules.wallet_card.models.models import WalletCard
 from apps.wallet.models.models import Wallet
 

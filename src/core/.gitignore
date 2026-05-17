@@ -14,7 +14,7 @@ db.sqlite3-journal
 scripts/
 pyvenv.cfg
 
-__data/*
+_1_data/*
 
 # ### Django.Python Stack ###
 # # Byte-compiled / optimized / DLL files
@@ -226,4 +226,4 @@ status.json
 !zmedias/photo.jpg
 !zstatic/
 !zstatic/**
-!__data/.gitkeep
+!_1_data/.gitkeep
