@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
-from _1_user.views.base.views_user import get_user_model
+from _2_account.views.base.views_user import get_user_model
 
 
 class Command(BaseCommand):

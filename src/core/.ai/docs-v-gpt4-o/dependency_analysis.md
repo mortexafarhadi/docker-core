@@ -14,7 +14,7 @@ The project follows a modular monolithic architecture with distinct layers and c
      - `service/`: External integrations (e.g., `crypto_service.py`, `email_service.py`, `payment/zarinpal_service.py`).
      - `middlewares/`: Request processing hooks (e.g., `access_middleware.py`, `ip_address_middleware.py`).
 
-3. **Core Domain Layer (`_1_user`, `_1_site_setting`)**:
+3. **Core Domain Layer (`_2_account`, `_1_site_setting`)**:
    - Handles user management and site configuration.
    - Modularized into sub-components (`_modules/register_user`, `_modules/user_setting`).
 
@@ -103,10 +103,10 @@ The project follows a modular monolithic architecture with distinct layers and c
 ## Module Coupling Assessment
 - **High Coupling**:
   - `_0_config` is tightly coupled with all components due to its role in managing settings.
-  - `___utils` is heavily relied upon by `apps` and `_1_user`.
+  - `___utils` is heavily relied upon by `apps` and `_2_account`.
 
 - **Moderate Coupling**:
-  - `apps` and `_1_user` interact with `___utils` for shared services and models.
+  - `apps` and `_2_account` interact with `___utils` for shared services and models.
 
 - **Low Coupling**:
   - `ztemplates` and `_2_panel_admin` are decoupled from the data models, focusing solely on presentation.
@@ -120,7 +120,7 @@ _0_config
   │     ├── service
   │     ├── middlewares
   │     └── views
-  ├── _1_user
+  ├── _2_account
   │     ├── _modules/register_user
   │     ├── _modules/user_setting
   │     └── _modules/user_social_media

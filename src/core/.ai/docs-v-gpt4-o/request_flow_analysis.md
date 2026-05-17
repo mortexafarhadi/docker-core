@@ -4,8 +4,8 @@
 The primary entry point for the application is the `manage.py` file located in the root directory. This file initializes the Django application and routes requests to the appropriate handlers. The `_0_config` directory contains the `asgi.py` and `wsgi.py` files, which serve as the entry points for ASGI and WSGI servers, respectively. These files are responsible for setting up the application environment and routing requests to the Django application.
 
 ## Request Routing Map
-The routing mechanism is defined in the `_0_config/urls/urls.py` file. This file acts as the central hub for URL routing, delegating requests to specific apps and modules. Each app, such as `_1_user`, `_1_site_setting`, and `apps`, has its own `urls.py` file to define its specific routes. The routing structure is modular, with separate URL configurations for admin and user interfaces. For example:
-- `_1_user/urls/admin/urls_user.py` handles user-related admin routes.
+The routing mechanism is defined in the `_0_config/urls/urls.py` file. This file acts as the central hub for URL routing, delegating requests to specific apps and modules. Each app, such as `_2_account`, `_1_site_setting`, and `apps`, has its own `urls.py` file to define its specific routes. The routing structure is modular, with separate URL configurations for admin and user interfaces. For example:
+- `_2_account/urls/admin/urls_user.py` handles user-related admin routes.
 - `_1_site_setting/urls/admin/urls_site.py` manages site configuration routes.
 
 ## Middleware Pipeline
@@ -19,14 +19,14 @@ These middleware components are executed sequentially, preprocessing requests be
 
 ## Controller/Handler Analysis
 Controllers and handlers are implemented as Class-Based Views (CBVs) in the `___utils/views` directory. The `base_view.py` file provides a standardized structure for CBVs, including context data injection, error handling, and permission checks. Specific views are organized by domain:
-- `_1_user/views/admin/views_user.py`: Handles user-related admin operations.
+- `_2_account/views/admin/views_user.py`: Handles user-related admin operations.
 - `_1_site_setting/views/admin/views_site.py`: Manages site configuration operations.
 - `apps/category/views/admin/views.py`: Implements category-related business logic.
 
 The modular organization ensures separation of concerns and reusability of view logic.
 
 ## Authentication & Authorization Flow
-Authentication and authorization are managed by the `_1_user` module. The custom user model is defined in `_1_user/models/models.py`, and authentication signals are implemented in `_1_user/signals.py`. The `_2_auth` module provides the user interface for login, registration, and password management. Key files include:
+Authentication and authorization are managed by the `_2_account` module. The custom user model is defined in `_2_account/models/models.py`, and authentication signals are implemented in `_2_account/signals.py`. The `_2_auth` module provides the user interface for login, registration, and password management. Key files include:
 - `_2_auth/urls/urls.py`: Defines authentication-related routes.
 - `_2_auth/views/views.py`: Implements authentication logic, including login, registration, and password reset.
 
@@ -57,7 +57,7 @@ Error handling is centralized in the `___utils/views/base_view.py` file, which p
    - View processes the request, interacts with models and services, and prepares the response.
 
 5. **Authentication & Authorization**:
-   - Authentication checks performed using `_1_user` module.
+   - Authentication checks performed using `_2_account` module.
    - Authorization enforced by middleware and permission classes.
 
 6. **Response Formation**:

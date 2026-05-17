@@ -61,6 +61,10 @@ class RegisterForm(forms.Form):
 
     # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(),required=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password"].widget.attrs["id"] = "checkstrength"
+
     def clean_confirm_password(self):
         password = self.cleaned_data.get("password")
         confirm_password = self.cleaned_data.get("confirm_password")
@@ -135,6 +139,9 @@ class ResetPasswordForm(forms.Form):
     )
 
     # captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(), required=True)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["password"].widget.attrs["id"] = "checkstrength"
 
     def clean_password(self):
         password = self.cleaned_data.get("password")

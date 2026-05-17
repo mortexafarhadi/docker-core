@@ -1,5 +1,5 @@
 from _0_utils.views.base_view import TemplateView
-from _1_user.views.base.views_user import get_user_with_code
+from _2_account.views.base.views_user import get_user_with_code
 
 
 class WalletBalanceComponent(TemplateView):

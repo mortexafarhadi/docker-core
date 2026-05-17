@@ -65,7 +65,7 @@ if SERVE_MEDIA_STATIC:
     ]
 
 urlpatterns += [
-    path("set-user-setting/", include("_1_user._modules.user_setting.urls.urls")),
+    path("set-user-setting/", include("_2_account._modules.user_setting.urls.urls")),
 ]
 i18n_paths += [
     path("", include("_1_site_setting.urls.base.urls_i18n")),

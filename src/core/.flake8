@@ -17,7 +17,7 @@ exclude =
     zzrequirements/,
     help*.txt,
     z_changes.txt,
-    _1_user/apps.py,
+    _2_account/apps.py,
 
 
 ignore =

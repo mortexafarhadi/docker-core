@@ -8,7 +8,7 @@ The codebase represents a highly modularized **Django Monolithic** application w
 The architecture implements a **Layered Architecture** within a Monolith:
 1. **Configuration Layer (`_0_config`)**: Centralized and split settings.
 2. **Shared Kernel / Infrastructure Layer (`_0_utils`)**: Contains base classes, global services, and helper functions used across the system.
-3. **Core Domain Layer (`_1_user`, `_1_site_setting`)**: Essential system modules prefixed with underscores to denote their foundational nature.
+3. **Core Domain Layer (`_2_account`, `_1_site_setting`)**: Essential system modules prefixed with underscores to denote their foundational nature.
 4. **Business Domain Layer (`apps`)**: Pluggable business logic modules (e.g., `category`, `social_network`).
 5. **Presentation/Interface Layer (`_2_panel_admin`, `_2_panel_user`, `ztemplates`)**: Separate dashboards for admins and users, decoupling UI logic from data models.
 
@@ -26,13 +26,13 @@ The architecture implements a **Layered Architecture** within a Monolith:
   * `service/`: External system integrations (Crypto, Email, Payment).
   * `views/` & `middlewares/`: Base view classes and request processing hooks.
 
-### 3. User & Identity Management (`_1_user`)
+### 3. User & Identity Management (`_2_account`)
 * **Purpose**: Handles the custom user model, authentication signals, and user-specific settings.
 * **Structure**: It is further modularized into sub-modules (`_modules/register_user`, `_modules/user_setting`), indicating a "Modular Monolith" approach where complex domains are encapsulated.
 
 ### 4. Site Configuration (`_1_site_setting`)
 * **Purpose**: Manages global website content such as Headers, Footers, and Social Media links.
-* **Structure**: Similar to `_1_user`, it uses sub-modules to organize distinct parts of the site layout.
+* **Structure**: Similar to `_2_account`, it uses sub-modules to organize distinct parts of the site layout.
 
 ### 5. Business Applications (`apps`)
 * **Purpose**: Contains the specific business logic of the project.
@@ -78,17 +78,17 @@ The codebase relies on inheritance and base classes to enforce contracts across 
 2. **Service Layer Pattern**: Logic for Crypto, Payments, and Notifications is extracted out of Views/Models into `___utils/service`, promoting testability and reusability.
 3. **Split Settings Pattern**: Configuration is broken down by domain (Database, Auth, Static) in `_0_config/configs`.
 4. **Layer Supertype Pattern**: Use of `basic_model.py` and `base_view.py` to share common behavior across all models and views.
-5. **Modular Monolith**: The `_modules` directory inside apps (e.g., `_1_user/_modules`) suggests a pattern where large domains are broken down into sub-domains but kept within the same deployable unit.
+5. **Modular Monolith**: The `_modules` directory inside apps (e.g., `_2_account/_modules`) suggests a pattern where large domains are broken down into sub-domains but kept within the same deployable unit.
 6. **Separation of Concerns (Admin vs. User)**:
-  * Views and URLs are explicitly split into `admin/` and `base/` (or `user/`) directories within apps (e.g., `_1_user/views/admin`, `_1_user/views/base`).
+  * Views and URLs are explicitly split into `admin/` and `base/` (or `user/`) directories within apps (e.g., `_2_account/views/admin`, `_2_account/views/base`).
   * Panel logic is separated into `_2_panel_admin` and `_2_panel_user`.
 
 ## Component Relationships
 
 * **`_0_config` -> All Components**: All components depend on settings defined here.
-* **`apps` & `_1_user` -> `___utils`**: Business logic heavily relies on the base models, services, and functions provided by the utility layer.
-* **`_2_panel_admin` -> `apps` & `_1_user`**: The admin panel aggregates views and data from the underlying business and user apps to present a management interface.
-* **`_2_auth` -> `_1_user`**: The authentication UI (`_2_auth`) interacts with the user data model (`_1_user`) to perform login/registration.
+* **`apps` & `_2_account` -> `___utils`**: Business logic heavily relies on the base models, services, and functions provided by the utility layer.
+* **`_2_panel_admin` -> `apps` & `_2_account`**: The admin panel aggregates views and data from the underlying business and user apps to present a management interface.
+* **`_2_auth` -> `_2_account`**: The authentication UI (`_2_auth`) interacts with the user data model (`_2_account`) to perform login/registration.
 * **`___utils/service/crypto` -> `___utils/service/crypto/utils`**: The main crypto service orchestrates lower-level utility scripts (RPC finders, ABI definitions).
 
 ## Key Methods & Functions

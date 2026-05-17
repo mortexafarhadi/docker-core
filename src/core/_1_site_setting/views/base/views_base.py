@@ -1,5 +1,5 @@
 from _1_site_setting.views.base.views_site import get_site_setting_main
-from _1_user._modules.register_user.views.base.views import (
+from _2_account._modules.register_user.views.base.views import (
     get_register_users_all,
 )
 

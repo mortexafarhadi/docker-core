@@ -14,12 +14,12 @@ from _0_utils.service.email_service import send_mail
 from _0_utils.views.auth_view import check_user_authenticated
 from _0_utils.views.base_view import render
 from _1_site_setting.views.base.views_base import site_setting_context
-from _1_user._modules.register_user.views.base.views import (
+from _2_account._modules.register_user.views.base.views import (
     get_register_user_with_email,
     get_register_user_model,
     get_register_user_with_activation_code,
 )
-from _1_user.views.base.views_user import (
+from _2_account.views.base.views_user import (
     get_user_with_email,
     get_user_objects,
     get_user_with_reset_password_link,

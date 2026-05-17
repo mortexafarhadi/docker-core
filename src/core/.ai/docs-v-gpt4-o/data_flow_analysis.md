@@ -3,7 +3,7 @@
 ## Data Models Overview
 The application employs a layered architecture with distinct data models across its core and business domains. Key models include:
 - **Base Models (`_0_utils/models/basic_model.py`)**: Abstract models providing common fields like `created_at`, `updated_at`, `is_active`, and `is_deleted` for soft deletion.
-- **User Models (`_1_user/models.py`)**: Custom user models with modular extensions for user settings, social media, and registration.
+- **User Models (`_2_account/models.py`)**: Custom user models with modular extensions for user settings, social media, and registration.
 - **Site Configuration Models (`_1_site_setting/models.py`)**: Models for managing headers, footers, and social media links.
 - **Business Logic Models (`apps/category/models.py`, `apps/social_network/models.py`)**: Domain-specific models for taxonomy and social network management.
 
@@ -165,65 +165,65 @@ Files grouped by directory (relative to .):
 
 /_1_site_setting/views/main: ['views.py']
 
-/_1_user: ['__init__.py', 'admin.py', 'apps.py', 'signals.py', 'tests.py']
+/_2_account: ['__init__.py', 'admin.py', 'apps.py', 'signals.py', 'tests.py']
 
-/_1_user/_modules: ['__init__.py']
+/_2_account/_modules: ['__init__.py']
 
-/_1_user/_modules/register_user: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_2_account/_modules/register_user: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/_1_user/_modules/register_user/migrations: ['0001_initial.py', '__init__.py']
+/_2_account/_modules/register_user/migrations: ['0001_initial.py', '__init__.py']
 
-/_1_user/_modules/register_user/models: ['models.py']
+/_2_account/_modules/register_user/models: ['models.py']
 
-/_1_user/_modules/register_user/templates/register_user/admin: ['register_list.html']
+/_2_account/_modules/register_user/templates/register_user/admin: ['register_list.html']
 
-/_1_user/_modules/register_user/views/base: ['views.py']
+/_2_account/_modules/register_user/views/base: ['views.py']
 
-/_1_user/_modules/user_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_2_account/_modules/user_setting: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/_1_user/_modules/user_setting/migrations: ['0001_initial.py', '0002_remove_usersetting_direction.py', '__init__.py']
+/_2_account/_modules/user_setting/migrations: ['0001_initial.py', '0002_remove_usersetting_direction.py', '__init__.py']
 
-/_1_user/_modules/user_setting/models: ['models.py']
+/_2_account/_modules/user_setting/models: ['models.py']
 
-/_1_user/_modules/user_setting/urls: ['urls.py']
+/_2_account/_modules/user_setting/urls: ['urls.py']
 
-/_1_user/_modules/user_setting/views: ['views.py']
+/_2_account/_modules/user_setting/views: ['views.py']
 
-/_1_user/_modules/user_setting/views/base: ['views.py']
+/_2_account/_modules/user_setting/views/base: ['views.py']
 
-/_1_user/_modules/user_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
+/_2_account/_modules/user_social_media: ['__init__.py', 'admin.py', 'apps.py', 'tests.py']
 
-/_1_user/_modules/user_social_media/forms: ['forms.py']
+/_2_account/_modules/user_social_media/forms: ['forms.py']
 
-/_1_user/_modules/user_social_media/migrations: ['0001_initial.py', '__init__.py']
+/_2_account/_modules/user_social_media/migrations: ['0001_initial.py', '__init__.py']
 
-/_1_user/_modules/user_social_media/models: ['models.py']
+/_2_account/_modules/user_social_media/models: ['models.py']
 
-/_1_user/_modules/user_social_media/templates/user_social_media/admin: ['social_media_detail.html', 'social_media_edit.html', 'social_media_list.html']
+/_2_account/_modules/user_social_media/templates/user_social_media/admin: ['social_media_detail.html', 'social_media_edit.html', 'social_media_list.html']
 
-/_1_user/_modules/user_social_media/urls/admin: ['urls_i18n.py']
+/_2_account/_modules/user_social_media/urls/admin: ['urls_i18n.py']
 
-/_1_user/_modules/user_social_media/views/admin: ['views.py']
+/_2_account/_modules/user_social_media/views/admin: ['views.py']
 
-/_1_user/_modules/user_social_media/views/base: ['views.py']
+/_2_account/_modules/user_social_media/views/base: ['views.py']
 
-/_1_user/forms: ['forms_user.py']
+/_2_account/forms: ['forms_user.py']
 
-/_1_user/manager: ['user_phone_manager.py']
+/_2_account/manager: ['user_phone_manager.py']
 
-/_1_user/migrations: ['0001_initial.py', '__init__.py']
+/_2_account/migrations: ['0001_initial.py', '__init__.py']
 
-/_1_user/models: ['__init__.py', 'models.py']
+/_2_account/models: ['__init__.py', 'models.py']
 
-/_1_user/templates/_1_user/admin: ['base.html']
+/_2_account/templates/_2_account/admin: ['base.html']
 
-/_1_user/templates/_1_user/admin/user: ['user_detail.html', 'user_edit.html', 'user_list.html']
+/_2_account/templates/_2_account/admin/user: ['user_detail.html', 'user_edit.html', 'user_list.html']
 
-/_1_user/urls/admin: ['urls_customer.py', 'urls_i18n.py', 'urls_user.py']
+/_2_account/urls/admin: ['urls_customer.py', 'urls_i18n.py', 'urls_user.py']
 
-/_1_user/views/admin: ['views_base.py', 'views_user.py']
+/_2_account/views/admin: ['views_base.py', 'views_user.py']
 
-/_1_user/views/base: ['views_user.py']
+/_2_account/views/base: ['views_user.py']
 
 /_2_auth: ['__init__.py']
 

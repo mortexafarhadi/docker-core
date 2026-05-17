@@ -1,6 +1,10 @@
 {% extends 'panels/v1/base-layout.html' %}
 {% load poll_extras %}
 {% load static %}
+{% block Header_References %}
+    <script defer src="{% static 'panels/v1/admin/assets/js/app.js'%}"></script>
+    <link href="{% static 'panels/v1/admin/assets/css/app.css'%}" rel="stylesheet">
+{% endblock %}
 {% block Layout %}
     <main class="flex-shrink-0 pt-0 h-100">
         <div class="container-fluid">
@@ -63,6 +67,7 @@
         </div>
     </main>
 {% endblock Layout %}
-{% block Footer_References %}<script src="{% static 'panels/v1/admin/assets/js/investment/panels_investment-auth.js' %}"></script>
+{% block Footer_References %}
+    <script src="{% static 'panels/v1/admin/assets/js/investment/panels_investment-auth.js' %}"></script>
     <script src="{% static 'panels/v1/admin/assets/js/my_js/panels_auth.js' %}"></script>
 {% endblock %}

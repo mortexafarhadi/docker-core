@@ -12,7 +12,7 @@ from _0_utils.service.session_and_cookie_service import (
     get_cookie_key,
     set_cookie_key,
 )
-from _1_user._modules.user_setting.views.base.views import (
+from _2_account._modules.user_setting.views.base.views import (
     get_user_setting_with_user_object,
     get_user_setting_objects,
 )

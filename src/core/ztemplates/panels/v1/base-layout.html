@@ -20,7 +20,7 @@
       data-theme="theme-blue" data-sidebarfill="adminuiux-sidebar-fill-white" data-bs-spy="scroll"
       data-bs-target="#list-example" data-bs-smooth-scroll="true" tabindex="0">
 
-{% include 'panels/v1/admin/includes/components/pre_loader.html' %}
+{#{% include 'panels/v1/admin/includes/components/pre_loader.html' %}#}
 {% block Layout %}{% endblock %}
 <div class="position-fixed bottom-2 {% if request.user_setting.direction == 'ltr' %}end-0{% else %}start-0{% endif %} m-3 z-index-5">
     <button class="btn btn-square btn-theme shadow d-flex align-items-center justify-content-center"

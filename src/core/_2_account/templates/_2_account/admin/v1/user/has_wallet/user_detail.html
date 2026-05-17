@@ -1,0 +1,240 @@
+{% extends 'panels/v1/admin/layout.html' %}
+{% load static %}
+{% load poll_extras %}
+{% load render_partial %}
+{% block Context %}
+    {% url 'admin-v1-user-template' as the_user_template_url %}
+    {% url 'admin-v1-admin-list' as the_admin_list_url %}
+    {% url 'admin-v1-user-delete' as the_delete_url %}
+    <div class="adminuiux-wrap">
+        <main class="adminuiux-content has-sidebar">
+            <div class="container-fluid mt-4">
+                <div class="row gx-3 align-items-center">
+                    <div class="col-12 col-sm">
+                        <nav aria-label="breadcrumb" class="mb-2">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item bi"><a href="{{ the_user_template_url }}">Users</a>
+                                </li>
+                                <li class="breadcrumb-item bi"><a href="{{ the_admin_list_url }}">Admin</a>
+                                </li>
+                                <li class="breadcrumb-item active bi" aria-current="page">{{ object.code }}</li>
+                            </ol>
+                        </nav>
+                        <div class="row align-items-center">
+                            <h5 class="col my-auto">
+                                {% include 'panels/v1/admin/includes/components/btn_link_with_icon.html' with link=the_admin_list_url btn_color="btn-accent pt-2 pe-3" icon_name="arrow-left" text=dic_language.back style_text="d-none d-md-inline-block px-2" %}
+                            </h5>
+                            <h2 class="col text-end text-primary">{{ object.code }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include '_2_account/admin/user/has_wallet/components/top-bar.html' with user_code=object.code %}
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col">
+                        {# ------- TITLE PAGE START ------- #}
+                        <div class="card adminuiux-card bg-blue-subtle mb-4 px-3">
+                            <div class="card-body pb-0">
+                                <h1 class="mt-3 mb-4 text-center">Detail <span
+                                        class="text-orange">{{ dic_language.user }}</span>
+                                </h1>
+                            </div>
+                        </div>
+                        {# ------- TITLE PAGE END ------- #}
+                        {# ------- WALLET COMPONENT START ------- #}
+                        {% render_partial 'apps.wallet.views.admin.views.WalletBalanceComponent' user_code=object.code %}
+                        {# ------- WALLET COMPONENT END ------- #}
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col">
+                        <div class="card adminuiux-card overflow-hidden mb-4 px-3">
+                            <div class="card-body">
+                                <h3 class="mt-3 mb-4"><span class="text-orange">{{ dic_language.user }}</span> {{ dic_language.information }}
+                                </h3>
+                                <div class="row mb-2">
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">First Name</h4>
+                                            <h3 class="my-auto text-end text-primary">{{ object.first_name }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">Last Name</h4>
+                                            <h3 class="my-auto text-end text-primary link">{{ object.last_name }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-3 my-auto">Username</h4>
+                                            <h3 class="col-9 my-auto text-end text-primary link">{{ object.username }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-3 my-auto">Email</h4>
+                                            <h3 class="col-9 my-auto text-end text-primary link">{{ object.email }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">Admin</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_staff %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">Ban</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_ban %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-6 my-auto">Gender</h4>
+                                            <h3 class="col-6 my-auto text-end text-primary">{{ object.get_gender_display }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-5 my-auto">Last Login</h4>
+                                            <h3 class="col-7 my-auto text-end text-primary">
+                                                {% if object.last_login %}{{ object.last_login|date:"Y/m/d" }}{% else %}
+                                                    ------{% endif %}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-6 my-auto">{{ dic_language.description }}</h4>
+                                            <h3 class="col-6 my-auto text-end text-primary">{{ object.get_description_display }}</h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">Avatar</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                {% if object.avatar %}
+                                                    <figure class="avatar">
+                                                        <img src="{{ object.get_avatar_tmb_url }}" alt="favicon">
+                                                    </figure>
+                                                {% else %}
+                                                    <h6 class="col-10 my-auto text-end text-primary link">Not Set</h6>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">{{ dic_language.active }}</h4>
+                                            <div class="my-auto form-check-md form-switch d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_active %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="my-auto">{{ dic_language.deleted }}</h4>
+                                            <div class="col-8 form-check-md form-switch theme-red d-flex justify-content-end fs-5">
+                                                <input class="form-check-input" type="checkbox" disabled
+                                                       {% if object.is_deleted %}checked{% endif %}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-3 my-auto">Role</h4>
+                                            <h3 class="col-9 my-auto text-end text-primary link">{{ object.get_role_display }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer border-top border-2">
+                                <div class="row justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-5 my-auto">Join At</h4>
+                                            <h4 class="col-7 my-auto text-end text-primary">{{ object.date_joined|date:"Y/m/d" }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                        <div class="d-flex justify-content-between align-content-center">
+                                            <h4 class="col-5 my-auto">Update Datetime</h4>
+                                            <h4 class="col-7 my-auto text-end text-primary">{{ object.datetime_update|date:"Y/m/d" }}</h4>
+                                        </div>
+                                    </div>
+                                    {% if object.is_deleted %}
+                                        <div class="col-12 col-md-6 col-lg-4 align-content-center py-3">
+                                            <div class="d-flex justify-content-between align-content-center">
+                                                <h5 class="col-5 my-auto">Delete Datetime</h5>
+                                                <h4 class="col-7 my-auto text-end text-primary">{{ object.datetime_delete|date:"Y/m/d" }}</h4>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if not object.is_deleted %}
+                                    <div class="row align-items-center justify-content-between mt-3">
+                                        <div class="col-auto row justify-content-start">
+                                            <div class="col-auto align-content-center">
+                                                <a href="{{ object.get_admin_update_v1_url }}"
+                                                   class="btn btn-lg px-5 btn-theme pb-1">{{ dic_language.edit_ }}</a>
+                                            </div>
+                                            <div class="col-auto align-content-center">
+                                                <form method="POST" action="{% url 'admin-v1-user-active' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="code" value="{{ object.code }}">
+                                                    <button type="submit"
+                                                            class="btn px-3 pb-1 {% if object.is_active %}btn-danger{% else %}btn-success{% endif %}">
+                                                        {% if object.is_active %}De{% endif %} Active
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-auto align-content-center">
+                                                <form method="POST" action="{% url 'admin-v1-user-staff' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="code" value="{{ object.code }}">
+                                                    <button type="submit"
+                                                            class="btn px-3 pb-1 {% if object.is_staff %}btn-warning{% else %}btn-success{% endif %}">
+                                                        {% if object.is_staff %}Disable{% else %}Set{% endif %} Admin
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div class="col-auto align-content-center">
+                                                <form method="POST" action="{% url 'admin-v1-user-ban' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="code" value="{{ object.code }}">
+                                                    <button type="submit"
+                                                            class="btn px-3 pb-1 {% if object.is_ban %}btn-secondary{% else %}btn-danger{% endif %}">
+                                                        {% if object.is_ban %}UnBan{% else %}Ban{% endif %}
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-danger pb-1"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#DeleteModal">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% include 'panels/v1/admin/includes/components/log_history_in_detail_page.html' with model="User" %}
+                    </div>
+                </div>
+            </div>
+            {% include 'panels/v1/admin/includes/components/modal_delete.html' with target_url=the_delete_url pk_field='code' pk_value=object.code %}
+        </main>
+    </div>
+{% endblock %}
