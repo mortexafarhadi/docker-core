@@ -32,8 +32,11 @@ class SiteSetting(mb.BasicCKEditorModelHistorical):
     section_head_keywords = models.TextField(null=True, blank=True, default="")
     section_head_author = models.TextField(null=True, blank=True, default="")
     section_head_favicon = models.ImageField(
-        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="section_head_favicon"), null=True,
-        blank=True
+        upload_to=UploadPathFactory(
+            base_path="media/Setting", subfolder="section_head_favicon"
+        ),
+        null=True,
+        blank=True,
     )
     section_head_html_language = models.CharField(
         max_length=10, default="zxx", null=True, blank=True
@@ -60,13 +63,21 @@ class SiteSetting(mb.BasicCKEditorModelHistorical):
     # ########## Base End ########## #
 
     logo_header = models.ImageField(
-        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="logo_header"), null=True, blank=True
+        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="logo_header"),
+        null=True,
+        blank=True,
     )
     logo_footer = models.ImageField(
-        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="logo_footer"), null=True, blank=True
+        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="logo_footer"),
+        null=True,
+        blank=True,
     )
     logo_preload = models.ImageField(
-        upload_to=UploadPathFactory(base_path="media/Setting", subfolder="logo_preload"), null=True, blank=True
+        upload_to=UploadPathFactory(
+            base_path="media/Setting", subfolder="logo_preload"
+        ),
+        null=True,
+        blank=True,
     )
     footer_description = models.TextField(
         default="""The point of using Lorem Ipsum is that it has a more-or-less normal distribution of

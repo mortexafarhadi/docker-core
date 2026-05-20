@@ -72,6 +72,6 @@ def _send_mail_without_queue(subject, to, context, template_name):
         return True, "Mail Sent Successfully", None
     except Exception as e:
         print("*" * 50)
-        print(e)
+        print_debug(e)
         print("*" * 50)
         return False, "Mail Don't Send", e

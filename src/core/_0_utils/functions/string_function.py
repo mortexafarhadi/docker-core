@@ -2,7 +2,7 @@ import re
 
 from django.utils.crypto import get_random_string
 
-from _0_utils.base_variables import SHOW_LOG_DEBUG
+from ..base_variables import SHOW_LOG_DEBUG
 
 
 class TextColors:
@@ -45,7 +45,7 @@ def base36_value(num):
     value = 0
     chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     for i, c in enumerate(num[::-1]):
-        value += chars.index(c) * 36 ** i
+        value += chars.index(c) * 36**i
     return value
 
 
@@ -140,23 +140,32 @@ class PrintColored:
         self.parts.append(color_func(text))
         return self
 
-    def add_black(self, text): self.parts.append(black_text(text))
+    def add_black(self, text):
+        self.parts.append(black_text(text))
 
-    def add_red(self, text): self.parts.append(red_text(text))
+    def add_red(self, text):
+        self.parts.append(red_text(text))
 
-    def add_green(self, text): self.parts.append(green_text(text))
+    def add_green(self, text):
+        self.parts.append(green_text(text))
 
-    def add_yellow(self, text): self.parts.append(yellow_text(text))
+    def add_yellow(self, text):
+        self.parts.append(yellow_text(text))
 
-    def add_blue(self, text): self.parts.append(blue_text(text))
+    def add_blue(self, text):
+        self.parts.append(blue_text(text))
 
-    def add_magenta(self, text): self.parts.append(magenta_text(text))
+    def add_magenta(self, text):
+        self.parts.append(magenta_text(text))
 
-    def add_cyan(self, text): self.parts.append(cyan_text(text))
+    def add_cyan(self, text):
+        self.parts.append(cyan_text(text))
 
-    def add_white(self, text): self.parts.append(white_text(text))
+    def add_white(self, text):
+        self.parts.append(white_text(text))
 
-    def build(self): return "".join(self.parts)
+    def build(self):
+        return "".join(self.parts)
 
     def print(self):
         print(self.build())

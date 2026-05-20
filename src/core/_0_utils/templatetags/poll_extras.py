@@ -6,6 +6,7 @@ from django.template.defaultfilters import stringfilter
 from jalali_date import date2jalali
 
 from _0_utils.functions.number_function import round_up, decimal_places
+from _0_utils.functions.string_function import print_debug
 
 register = template.Library()
 
@@ -48,7 +49,7 @@ def to_jalali(value):
     try:
         return date2jalali(value).strftime("%Y/%m/%d")
     except Exception as e:
-        print(e)
+        print_debug(e)
         return value
 
 

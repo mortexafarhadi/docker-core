@@ -129,7 +129,7 @@ def calculate_datetime_breakdown(datetime_str):
         "days": days,
         "hours": hours,
         "minutes": minutes,
-        "seconds": seconds
+        "seconds": seconds,
     }
     return result
 

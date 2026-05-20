@@ -69,7 +69,9 @@ def clean_project(project_path="."):
 
 if __name__ == "__main__":
     pc = PrintColored()
-    pc.add_blue("Are you sure you want to delete Migrations and Caches in the entire project ")
+    pc.add_blue(
+        "Are you sure you want to delete Migrations and Caches in the entire project "
+    )
     pc.add_magenta("(except venv)")
     pc.add_blue("? (")
     pc.add_red("y")

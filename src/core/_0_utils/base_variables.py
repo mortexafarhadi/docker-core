@@ -2,7 +2,7 @@ from pathlib import Path
 
 from decouple import config
 
-APPLICATION_VERSION = "4.4.1"
+APPLICATION_VERSION = "5.1.2"
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SHOW_LOG_DEBUG = config("SHOW_LOG_DEBUG", cast=bool, default=False)

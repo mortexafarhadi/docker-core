@@ -7,6 +7,7 @@ from _0_config.configs.LANGUAGES_CONFIG import (
     DEFAULT_LANGUAGE_NAME,
     DEFAULT_LANGUAGE_FLAG,
 )
+from _0_utils.functions.string_function import print_debug
 from _0_utils.service.session_and_cookie_service import (
     get_session_key,
     get_cookie_key,
@@ -34,8 +35,8 @@ class UserSettingMiddleware:
     def __call__(self, request):
         _path_info = str(getattr(request, "path_info", ""))
         if any(
-                _path_info.startswith(f"/{prefix}/")
-                for prefix in DONT_HAVE_MIDDLEWARE_ADDRESSES
+            _path_info.startswith(f"/{prefix}/")
+            for prefix in DONT_HAVE_MIDDLEWARE_ADDRESSES
         ):
             return self.get_response(request)
 
@@ -119,22 +120,24 @@ def get_language_name(language_code):
                 return name
         return DEFAULT_LANGUAGE_NAME
     except Exception as e:
+        print_debug(e)
         return DEFAULT_LANGUAGE_NAME
-
 
 
 def get_language_flag(language_code):
     try:
         from _0_config.configs.LANGUAGES_CONFIG import LANGUAGES_FLAG
+
         return LANGUAGES_FLAG.get(language_code, DEFAULT_LANGUAGE_FLAG)
     except Exception as e:
+        print_debug(e)
         return DEFAULT_LANGUAGE_FLAG
 
 
 def activate_language_from_path(
-        path_info,
-        current_language: str = None,
-        fallback: str = DEFAULT_LANGUAGE_CODE,
+    path_info,
+    current_language: str = None,
+    fallback: str = DEFAULT_LANGUAGE_CODE,
 ):
     path = (path_info or "").lstrip("/")
     first_segment = path.split("/", 1)[0]
@@ -157,5 +160,5 @@ def find_direction_from_language(language=None):
             return "ltr"
         return language_direction[language]
     except Exception as e:
-        print(e)
+        print_debug(e)
         return "ltr"

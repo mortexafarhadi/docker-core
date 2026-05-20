@@ -1,11 +1,13 @@
 import os
 from django.utils.deconstruct import deconstructible
 
+
 @deconstructible
 class UploadPathFactory:
     """
     کلاس قابل فراخوانی برای تولید مسیر پویا در FileField و ImageField.
     """
+
     def __init__(
         self,
         base_path,
