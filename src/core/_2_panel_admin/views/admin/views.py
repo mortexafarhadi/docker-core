@@ -1,3 +1,4 @@
+from _0_utils.functions.string_function import print_debug
 from _0_utils.views.base_view import TemplateView
 
 
@@ -9,7 +10,7 @@ class DashboardView(TemplateView):
             if v_index != -1:
                 return req_path[v_index + 1 : v_index + 3]
         except Exception as e:
-            print(e)
+            print_debug(e)
         return "v1"
 
     def get_template_names(self):

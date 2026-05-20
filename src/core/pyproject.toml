@@ -1,6 +1,6 @@
 [project]
 name = "core"
-version = "5.0.1"
+version = "5.1.2"
 description = "The Core of the project and the initial settings"
 readme = "README.md"
 requires-python = "==3.13.*"

@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import View
 
-from _0_utils.functions.string_function import random_string
+from _0_utils.functions.string_function import random_string, print_debug
 from _0_utils.service.email_service import send_mail
 from _0_utils.views.auth_view import check_user_authenticated
 from _0_utils.views.base_view import render
@@ -204,7 +204,7 @@ class DashboardView(View):
             if v_index != -1:
                 return req_path[v_index + 1 : v_index + 3]
         except Exception as e:
-            print(e)
+            print_debug(e)
         return "v1"
 
     def get(self, request):
