@@ -10,7 +10,7 @@
 # from _0_utils.functions.json import read_json
 #
 # NETWORKS_FILE = "_0_utils/service/crypto/utils/metadata/networks.json"
-# ABI_FILE = "___utils/service/crypto/utils/metadata/abi.json"
+# ABI_FILE = "_0_utils/service/crypto/utils/metadata/abi.json"
 #
 # NETWORK_CONFIGS = read_json(NETWORKS_FILE, {})
 # CONTRACT_ABI = read_json(ABI_FILE, [])

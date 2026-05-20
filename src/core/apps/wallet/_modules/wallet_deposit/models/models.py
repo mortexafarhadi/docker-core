@@ -14,7 +14,10 @@ class WalletDeposit(mx.UUIDMixin, mx.DatetimeCreateMixin, mx.DescriptionMixin):
     wallet = models.ForeignKey(
         Wallet, on_delete=models.CASCADE, related_name="deposits"
     )
-    amount = models.DecimalField(max_digits=27, decimal_places=2, default=0)
+    # amount = models.DecimalField(max_digits=27, decimal_places=2, default=0)  # Euro - Dollar
+    amount = models.DecimalField(
+        max_digits=15, decimal_places=0, default=0
+    )  # Toman - Rial
     transaction_reference = models.CharField(
         max_length=100, unique=True, blank=True, null=True
     )

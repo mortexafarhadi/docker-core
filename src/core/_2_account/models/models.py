@@ -7,6 +7,7 @@ from _0_utils.functions.generator import uniq_slugify as tc
 from _0_utils.functions.generator.url_image_base import get_image_thumbnail
 from _0_utils.functions.password_function import set_salt_password
 from _0_utils.models import basic_models as mb
+from _0_utils.validator.phone_validator import validate_iranian_phone_number
 
 
 class User(AbstractUser, mb.BasicCKEditorModelHistorical):
@@ -24,7 +25,13 @@ class User(AbstractUser, mb.BasicCKEditorModelHistorical):
     datetime_create = None
     code = models.SlugField(max_length=250, unique=True, editable=False)
     is_ban = models.BooleanField(default=False)
-    phone = models.CharField(max_length=10, unique=True, null=True, blank=True)
+    phone_number = models.CharField(
+        max_length=10,
+        unique=True,
+        null=True,
+        blank=True,
+        validators=[validate_iranian_phone_number],
+    )
     gender = models.CharField(
         max_length=30,
         choices=GENDER_CHOICES.choices,
@@ -37,7 +44,7 @@ class User(AbstractUser, mb.BasicCKEditorModelHistorical):
     )
     referral_code = models.CharField(max_length=15, null=True, blank=True)
 
-    PHONE_FIELD = "phone"
+    PHONE_FIELD = "phone_number"
 
     def get_code_token(self):
         return self.reset_password_link
@@ -67,16 +74,16 @@ class User(AbstractUser, mb.BasicCKEditorModelHistorical):
         return "On" if self.is_ban else "Off"
 
     def get_language(self):
-        return self.usersetting.language
+        return self.setting.language
 
     def get_language_str(self):
-        return "EN - English" if self.usersetting.language == "en" else "FA - Persian"
+        return "EN - English" if self.setting.language == "en" else "FA - Persian"
 
     def get_light_dark_mode(self):
-        return self.usersetting.is_dark_mode
+        return self.setting.is_dark_mode
 
     def get_background_theme(self):
-        return self.usersetting.background_theme
+        return self.setting.background_theme
 
     def set_code(self):
         self.code = tc.uniq_number_code(self)

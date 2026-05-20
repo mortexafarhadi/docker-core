@@ -5,7 +5,9 @@ from _2_account.models import models as mu
 
 
 class UserSetting(mb.UUIDMixin):
-    user = models.OneToOneField(mu.User, on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        mu.User, on_delete=models.CASCADE, related_name="setting"
+    )
     language = models.CharField(max_length=100, default="en", null=True, blank=True)
     is_dark_mode = models.BooleanField(default=False)
     background_theme = models.CharField(

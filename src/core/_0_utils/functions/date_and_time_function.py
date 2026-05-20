@@ -25,8 +25,8 @@ def now():
     return tz.now().astimezone(pytz.timezone(settings.TIME_ZONE))
 
 
-def generate_timedelta_days(value):
-    return datetime.timedelta(days=value)
+def generate_timedelta_days(days):
+    return datetime.timedelta(days=days)
 
 
 def generate_timedelta_minutes(value):

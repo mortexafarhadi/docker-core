@@ -1,3 +1,5 @@
+from django.db.models import Q
+
 from _0_utils.functions.list_and_dict_function import check_and_get_list
 from ...models import models as mm
 
@@ -58,12 +60,25 @@ def get_user_with_email__in(email_list):
     return get_user_objects().filter(email__in=check_and_get_list(email_list))
 
 
-def get_user_with_phone(phone):
-    return get_user_objects().filter(phone__iexact=str(phone)).first()
+def get_user_with_phone_number(phone_number):
+    return get_user_objects().filter(phone_number__iexact=str(phone_number)).first()
 
 
-def get_user_with_phone__in(phone_list):
-    return get_user_objects().filter(phone__in=check_and_get_list(phone_list))
+def get_user_with_phone_number__in(phone_number_list):
+    return get_user_objects().filter(
+        phone_number__in=check_and_get_list(phone_number_list)
+    )
+
+
+def get_user_with_email_or_phone_number(email_or_phone_number):
+    return (
+        get_user_objects()
+        .filter(
+            Q(email__iexact=str(email_or_phone_number))
+            | Q(phone_number__iexact=str(email_or_phone_number))
+        )
+        .first()
+    )
 
 
 def get_user_with_username(username):

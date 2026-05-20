@@ -22,7 +22,7 @@ from _0_utils.views.paginator_view import get_page_range, paginate_queryset
 from _1_site_setting.views.base.views_base import site_setting_context
 from _2_account.views.base.views_user import (
     get_user_with_email,
-    get_user_with_phone,
+    get_user_with_phone_number,
 )
 from _2_locales import language_en, language_fa
 
@@ -64,28 +64,28 @@ def check_user_email_method_post(request):
     return _is_method_post, _email_exists, message, usr
 
 
-def check_user_phone_method_post(request):
-    _phone_exists = False
+def check_user_phone_number_method_post(request):
+    _phone_number_exists = False
     usr = None
     _is_method_post, message = check_method_post(request)
     if not _is_method_post:
         message = message
     else:
         _is_method_post = True
-        phone = request.POST.get("phone")
+        phone_number = request.POST.get("phone_number")
 
         # validation part
-        if len(phone) < 10:
+        if len(phone_number) < 10:
             _is_method_post = False
             message = "send_a_post_request_with_valid_parameter_only"
         else:
-            user = get_user_with_phone(phone)
+            user = get_user_with_phone_number(phone_number)
             if not user or user is None:
-                message = "the_phone_or_password_is_incorrect"
+                message = "the_phone_number_or_password_is_incorrect"
             else:
-                message = "phone_already_exists"
+                message = "phone_number_already_exists"
                 usr = user
-    return _is_method_post, _phone_exists, message, usr
+    return _is_method_post, _phone_number_exists, message, usr
 
 
 def render(request, template_name, context=None):

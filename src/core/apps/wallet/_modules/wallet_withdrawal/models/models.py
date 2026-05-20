@@ -39,7 +39,10 @@ class WalletWithdrawal(
         null=True,
         blank=True,
     )
-    amount = models.DecimalField(max_digits=27, decimal_places=2, default=0)
+    # amount = models.DecimalField(max_digits=27, decimal_places=2, default=0)  # Euro - Dollar
+    amount = models.DecimalField(
+        max_digits=15, decimal_places=0, default=0
+    )  # Toman - Rial
     status = models.CharField(
         max_length=20,
         choices=StatusChoices.choices,

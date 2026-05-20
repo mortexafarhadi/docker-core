@@ -18,7 +18,7 @@ class ChangeLanguageView(View):
             next_url = f"/{language}/{next_url[4:]}"
         user = request.user
         if user.is_authenticated:
-            user_setting = user.usersetting
+            user_setting = user.setting
             user_setting.language = language
             user_setting.save()
         else:
@@ -32,7 +32,7 @@ class ToggleDarkModeStatusView(View):
     def post(self, request):
         user = request.user
         if user.is_authenticated:
-            setting = user.usersetting
+            setting = user.setting
             setting.is_dark_mode = (
                 True
                 if get_cookie_key(request, "adminuiuxlayoutmode") == "dark"
@@ -46,7 +46,7 @@ class ChangeBackgroundModeView(View):
     def post(self, request):
         user = request.user
         if user.is_authenticated:
-            setting = user.usersetting
+            setting = user.setting
             setting.background_theme = get_cookie_key(request, "adminuiuxbggradient")
             setting.save()
         return JsonResponse({"result": "ok"})
@@ -56,7 +56,7 @@ class ChangeColorModeView(View):
     def post(self, request):
         user = request.user
         if user.is_authenticated:
-            setting = user.usersetting
+            setting = user.setting
             setting.color_theme = get_cookie_key(request, "adminuiuxtheme")
             setting.save()
         return JsonResponse({"result": "ok"})
@@ -66,7 +66,7 @@ class ChangeSidebarModeView(View):
     def post(self, request):
         user = request.user
         if user.is_authenticated:
-            setting = user.usersetting
+            setting = user.setting
             setting.sidebar_mode = get_cookie_key(request, "adminuiuxsidebarlayout")
             setting.save()
         return JsonResponse({"result": "ok"})

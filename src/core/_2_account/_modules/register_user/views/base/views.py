@@ -17,8 +17,12 @@ def get_register_user_with_email(email):
     return get_register_user_objects().filter(email__iexact=str(email)).first()
 
 
-def get_register_user_with_phone(phone):
-    return get_register_user_objects().filter(phone__iexact=str(phone)).first()
+def get_register_user_with_phone_number(phone_number):
+    return (
+        get_register_user_objects()
+        .filter(phone_number__iexact=str(phone_number))
+        .first()
+    )
 
 
 def get_register_user_with_activation_code(activation_code):

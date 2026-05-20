@@ -17,11 +17,11 @@
 # USE_SMS_SERVICE = config("USE_SMS_SERVICE", default=False, cast=bool)
 #
 #
-# def send_sms_code_signup_login(phone, code):
+# def send_sms_code_signup_login(phone_number, code):
 #     """send to user"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_code_signup_login : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_code_signup_login : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set. code is : {code}"
@@ -36,7 +36,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_code_signup_login",
@@ -44,11 +44,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_advertising_SMS(phone, template_id_, parameters_):
+# def send_advertising_SMS(phone_number, template_id_, parameters_):
 #     """send to user"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_advertising_SMS : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_advertising_SMS : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set"
@@ -56,7 +56,7 @@
 #         return True, msg, "SMS Service is not available"
 #     else:
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=template_id_,
 #             params=parameters_,
 #             function_name="send_advertising_SMS",
@@ -64,11 +64,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_notif_to_pay(phone, _date, _time):
+# def send_sms_notif_to_pay(phone_number, _date, _time):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_notif_to_pay : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_notif_to_pay : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = (
@@ -91,7 +91,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_notif_to_pay",
@@ -99,11 +99,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_new_request(phone, _date, _time):
+# def send_sms_new_request(phone_number, _date, _time):
 #     """send to barber"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_new_request : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_new_request : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = (
@@ -126,7 +126,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_new_request",
@@ -134,11 +134,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_final_accept_order(phone, _date, _time):
+# def send_sms_final_accept_order(phone_number, _date, _time):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_final_accept_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_final_accept_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = (
@@ -161,7 +161,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_final_accept_order",
@@ -173,7 +173,7 @@
 #     _count = 0
 #     for order in order_list:
 #         _status, msg, error = send_sms_reject_order(
-#             order.customer.phone, order.date, order.time
+#             order.customer.phone_number, order.date, order.time
 #         )
 #         if _status:
 #             _count += 1
@@ -183,11 +183,11 @@
 #     return order_list.count(), _count
 #
 #
-# def send_sms_reject_order(phone, _date, _time):
+# def send_sms_reject_order(phone_number, _date, _time):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_reject_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_reject_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = (
@@ -210,7 +210,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_reject_order",
@@ -218,11 +218,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_cancel_order(phone, _date, _time):
+# def send_sms_cancel_order(phone_number, _date, _time):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_cancel_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_cancel_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = (
@@ -245,7 +245,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_cancel_order",
@@ -253,11 +253,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_change_final_amount_order(phone, _date, _time, _amount):
+# def send_sms_change_final_amount_order(phone_number, _date, _time, _amount):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_change_final_amount_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_change_final_amount_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set. date: {_date}, time: {_time}, amount: {_amount}"
@@ -283,7 +283,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_change_final_amount_order",
@@ -291,11 +291,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_reminder_customer_order(phone, _time):
+# def send_sms_reminder_customer_order(phone_number, _time):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_reminder_customer_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_reminder_customer_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set. time: {_time}"
@@ -311,7 +311,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_reminder_customer_order",
@@ -319,11 +319,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_reminder_barber_order(phone, _time):
+# def send_sms_reminder_barber_order(phone_number, _time):
 #     """send to barber"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_reminder_barber_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_reminder_barber_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set. time: {_time}"
@@ -339,7 +339,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_reminder_barber_order",
@@ -347,11 +347,11 @@
 #         return True, "Sent SMS Successfully", None
 #
 #
-# def send_sms_complete_order(phone, _order_code):
+# def send_sms_complete_order(phone_number, _order_code):
 #     """send to customer"""
-#     if not phone or phone is None:
-#         print(f"Error in -> send_sms_complete_order : Phone is None")
-#         return False, "Phone is None", "Phone is None"
+#     if not phone_number or phone_number is None:
+#         print(f"Error in -> send_sms_complete_order : phone_number is None")
+#         return False, "phone_number is None", "phone_number is None"
 #
 #     if not USE_SMS_SERVICE:
 #         msg = f"USE_SMS_SERVICE Key in .env Config Not Set. order_code: {_order_code}"
@@ -366,7 +366,7 @@
 #             },
 #         ]
 #         _send_sms.delay(
-#             phone=phone,
+#             phone_number=phone_number,
 #             template_id=TEMPLATE_ID,
 #             params=parameters,
 #             function_name="send_sms_complete_order",
@@ -375,16 +375,16 @@
 #
 #
 # @shared_task()
-# def _send_sms(phone, template_id, params, function_name=None):
+# def _send_sms(phone_number, template_id, params, function_name=None):
 #     try:
 #         sms_ir = SmsIr(settings.SMS_SERVICE_KEY)
 #         response = sms_ir.send_verify_code(
-#             number=f"+98{phone}",
+#             number=f"+98{phone_number}",
 #             template_id=template_id,
 #             parameters=params,
 #         )
 #         if response.status_code == 200:
-#             print(f"Sent SMS Successfully to: {phone}")
+#             print(f"Sent SMS Successfully to: {phone_number}")
 #         else:
 #             print(blue_text("*" * 50))
 #             print(red_text(response.__dict__))

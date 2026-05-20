@@ -10,7 +10,7 @@ class Command(BaseCommand):
         User = get_user_model()
         if not User.objects.filter(is_superuser=True).exists():
             user = User.objects.create_superuser(
-                username="admin", phone="9123456789", email="admin@admin.com"
+                username="admin", phone_number="9123456789", email="admin@admin.com"
             )
             user.set_password("123")
             user.save()

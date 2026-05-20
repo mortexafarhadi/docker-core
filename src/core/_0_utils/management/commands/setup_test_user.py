@@ -13,7 +13,7 @@ class Command(BaseCommand):
             Q(username__iexact="test") | Q(email__iexact="test@test.com")
         ).exists():
             user = User.objects.create_superuser(
-                username="test", phone="9987654321", email="test@test.com"
+                username="test", phone_number="9987654321", email="test@test.com"
             )
             user.set_password("123")
             user.save()

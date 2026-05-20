@@ -10,7 +10,7 @@ from _0_utils.functions.generator.url_image_base import get_image_thumbnail
 from _0_utils.functions.password_function import set_salt_password
 from _0_utils.models import mixin_models as mx
 from _0_utils.validator.phone_validator import validate_iranian_phone_number
-from _2_account.manager.user_manager import UserManager
+from _2_account.manager.user_manager import UserUsernameManager
 
 
 class User(
@@ -71,7 +71,7 @@ class User(
     PHONE_FIELD = "phone_number"
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
-    objects = UserManager()
+    objects = UserUsernameManager()
 
     REQUIRED_FIELDS = []
 
@@ -113,16 +113,16 @@ class User(
         return "On" if self.is_ban else "Off"
 
     def get_language(self):
-        return self.usersetting.language
+        return self.setting.language
 
     def get_language_str(self):
-        return "EN - English" if self.usersetting.language == "en" else "FA - Persian"
+        return "EN - English" if self.setting.language == "en" else "FA - Persian"
 
     def get_light_dark_mode(self):
-        return self.usersetting.is_dark_mode
+        return self.setting.is_dark_mode
 
     def get_background_theme(self):
-        return self.usersetting.background_theme
+        return self.setting.background_theme
 
     def set_code(self):
         self.code = tc.uniq_number_code(self)

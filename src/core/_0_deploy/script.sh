@@ -5,7 +5,7 @@ set -e
 GUNICORN_BIND_PORT=${DJANGO_PORT:-8000}
 
 echo "⏸️ Waiting for Database port to be open..."
-while ! nc -z ${DATABASES_HOST:-maria_db} ${DATABASES_PORT:-3306}; do
+while ! nc -z ${DATABASES_HOST:-maria_db} ${DATABASES_PORT:-5432}; do
     sleep 1
 done
 echo "✅ Database is reachable. Waiting an extra 5 seconds for full readiness..."

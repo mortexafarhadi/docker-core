@@ -145,10 +145,10 @@ class SiteSetting(mb.BasicCKEditorModelHistorical):
     sort_order = models.PositiveSmallIntegerField(default=1)
     is_main = models.BooleanField(default=True)
 
-    def get_admin_detail_url(self):
+    def get_admin_detail_v1_url(self):
         return reverse("admin-v1-setting-site:detail", kwargs={"pk": self.pk})
 
-    def get_admin_update_url(self):
+    def get_admin_update_v1_url(self):
         return reverse("admin-v1-setting-site:edit", kwargs={"pk": self.pk})
 
     def get_address(self):
