@@ -15,9 +15,16 @@ class Command(BaseCommand):
             help="Export data to JSON format for cross-database use",
         )
 
+    @staticmethod
+    def get_count(options, default=10):
+        count = options.get("count", default)
+        try:
+            return int(count)
+        except (ValueError, TypeError):
+            return default
+
     def handle(self, *args, **options):
-        count = options.get("count")
-        count = count if count else 10
+        count = self.get_count()
         fake_en = Faker()
         fake_fa = Faker(locale="fa_IR")
         for _ in range(count):
