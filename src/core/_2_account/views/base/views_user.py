@@ -1,6 +1,7 @@
 from django.db.models import Q
 
 from _0_utils.functions.list_and_dict_function import check_and_get_list
+from _0_utils.functions.queryset_function import random_choice_queryset
 from ...models import models as mm
 
 
@@ -99,6 +100,16 @@ def get_user_with_reset_password_link(reset_password_link):
 
 def get_users_active(status=True, queryset=get_user_objects()):
     return queryset.filter(is_active=status)
+
+
+def get_users_active__count(status=True, queryset=get_user_objects()):
+    return get_users_active(status=status, queryset=queryset).count()
+
+
+def get_user_active__random(status=True, queryset=None):
+    if queryset is None:
+        queryset = get_users_active(status=status)
+    return random_choice_queryset(queryset=queryset)
 
 
 def get_users_deleted(status=True, queryset=get_user_objects()):
