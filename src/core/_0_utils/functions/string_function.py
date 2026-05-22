@@ -136,10 +136,6 @@ class PrintColored:
     def __init__(self):
         self.parts = []
 
-    def add(self, text, color_func):
-        self.parts.append(color_func(text))
-        return self
-
     def add_black(self, text):
         self.parts.append(black_text(text))
 

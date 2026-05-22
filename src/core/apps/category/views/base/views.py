@@ -1,3 +1,4 @@
+from _0_utils.functions.queryset_function import random_choice_queryset
 from ...models import models as mm
 
 
@@ -27,6 +28,12 @@ def get_category_with_pk(pk):
 
 def get_categories_active(status=True, queryset=get_category_objects()):
     return queryset.filter(is_active=status)
+
+
+def get_category_active__random(status=True, queryset=None):
+    if queryset is None:
+        queryset = get_categories_active(status=status)
+    return random_choice_queryset(queryset=queryset)
 
 
 def get_categories_deleted(status=True, queryset=get_category_objects()):
