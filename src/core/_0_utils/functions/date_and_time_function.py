@@ -3,6 +3,7 @@ import datetime
 import pytz
 from django.conf import settings
 from django.utils import timezone as tz
+from faker import Faker
 from jalali_date import date2jalali
 
 JALALI_MONTHS_FA = {
@@ -23,6 +24,14 @@ JALALI_MONTHS_FA = {
 
 def now():
     return tz.now().astimezone(pytz.timezone(settings.TIME_ZONE))
+
+
+def generate_random_date():
+    return Faker().date()
+
+
+def generate_random_datetime():
+    return Faker().date_time()
 
 
 def generate_timedelta_days(days):
