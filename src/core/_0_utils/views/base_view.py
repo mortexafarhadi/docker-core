@@ -447,12 +447,12 @@ class CreateView(_CreateView):
 
         try:
             if "_addanother" in self.request.POST:
-                return reverse(_success_url + "-add")
+                return reverse(_success_url + ":add")
             elif "_save_draft" in self.request.POST:
                 obj_pk = self.get_form().instance.pk
-                return reverse(_success_url + "-detail", kwargs={"pk": obj_pk})
+                return reverse(_success_url + ":detail", kwargs={"pk": obj_pk})
             else:
-                return reverse(_success_url + "-list")
+                return reverse(_success_url + ":list")
         except Exception as e:
             print_debug(e)
             return reverse(_success_url)
