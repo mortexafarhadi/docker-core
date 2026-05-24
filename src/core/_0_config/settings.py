@@ -1,5 +1,4 @@
 from decouple import config
-from django.utils.translation import gettext_lazy as _
 
 from .configs import (
     DATABASE_CONFIG,
