@@ -16,6 +16,6 @@ COPY ./src/core/pyproject.toml ./src/core/uv.lock ./
 
 RUN uv sync --frozen --no-install-project --extra testing
 
-COPY ./src/core .
+COPY ./src/core/ .
 
 RUN uv sync --frozen --extra testing

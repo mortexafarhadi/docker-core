@@ -26,6 +26,7 @@ services:
     command: uv run celery -A _0_config worker --loglevel=info -l INFO
     volumes:
       - "./src/core:/app"
+      - /app/.venv
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
@@ -39,6 +40,7 @@ services:
     command: uv run manage.py runserver 0.0.0.0:8000
     volumes:
       - "./src/core:/app"
+      - /app/.venv
     ports:
       - "8000:8000"
     env_file:
