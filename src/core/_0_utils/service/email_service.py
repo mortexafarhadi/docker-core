@@ -1,4 +1,4 @@
-from _0_utils.functions.string_function import print_debug, red_text, blue_text
+from _0_utils.functions.string_function import print_debug, red_text, blue_text, green_text
 from _1_site_setting.views.base.views_base import site_setting_context
 from decouple import config
 from django.conf import settings
@@ -13,7 +13,7 @@ USE_EMAIL_SERVICE = config("USE_EMAIL_SERVICE", default=False, cast=bool)
 
 def send_mail(subject, email, context, template):
     if not USE_EMAIL_SERVICE:
-        msg = f"USE_EMAIL_SERVICE Key in .env Config Not Set. code is : {context.get('code', 'not set')}"
+        msg = green_text(f"USE_EMAIL_SERVICE Key in .env Config Not Set. code is : {context.get('code', 'not set')}")
         print(msg)
         return True, msg, "Email Service is not available"
 

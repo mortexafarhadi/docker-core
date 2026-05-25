@@ -261,7 +261,7 @@ class AccountActivationView(View):
                     )
             context = {"form": form}
             context = site_setting_context(context)
-            return render(request, "_auth/v1/account-activation.html", context)
+            return render(request, "_2_auth/v1/account-activation.html", context)
 
 
 class ForgetPasswordView(View):
@@ -273,7 +273,7 @@ class ForgetPasswordView(View):
             forget_pass_form = ForgetPassForm()
             context = {"form": forget_pass_form}
             context = site_setting_context(context)
-            return render(request, "_auth/v1/forget-password.html", context)
+            return render(request, "_2_auth/v1/forget-password.html", context)
 
     def post(self, request):
         _redirect = check_user_authenticated(request)
@@ -307,7 +307,7 @@ class ForgetPasswordView(View):
             context = site_setting_context(context)
             return render(
                 request,
-                "_auth/v1/error-send-mail-reset-password.html",
+                "_2_auth/v1/error-send-mail-reset-password.html",
                 context,
             )
 
@@ -325,7 +325,7 @@ class ResetPasswordView(View):
                 reset_pass_form = ResetPasswordForm()
                 context = {"form": reset_pass_form}
                 context = site_setting_context(context)
-                return render(request, "_auth/v1/reset-password.html", context)
+                return render(request, "_2_auth/v1/reset-password.html", context)
 
     def post(self, request, reset_pass_link):
         _redirect = check_user_authenticated(request)
@@ -349,10 +349,10 @@ class ResetPasswordView(View):
                         reset_pass_form.add_error("password", e)
 
             context = {"form": reset_pass_form}
-            return render(request, "_auth/v1/reset-password.html", context)
+            return render(request, "_2_auth/v1/reset-password.html", context)
 
 
-def __resend_code(request):
+def  __resend_code(request):
     if request.method == "POST":
         email = request.POST.get("email")
         form = AccountActivationForm()
@@ -361,7 +361,7 @@ def __resend_code(request):
             if user is not None:
                 if user.send_count > 5:
                     context = site_setting_context()
-                    return render(request, "_auth/v1/error-bans.html", context)
+                    return render(request, "_2_auth/v1/error-bans.html", context)
                 else:
                     context = {"user": user, "code": user.get_code_token()}
                     status, msg, error = send_mail(
@@ -376,7 +376,7 @@ def __resend_code(request):
                         context = {"email": email, "form": form}
                         return render(
                             request,
-                            "_auth/v1/account-activation.html",
+                            "_2_auth/v1/account-activation.html",
                             context,
                         )
 

@@ -223,6 +223,7 @@ currency_pair.json
 currency.json
 status.json
 volumes/
+uv.lock
 
 !zmedias/.gitkeep
 !zstatic/
