@@ -18,23 +18,35 @@ services:
     restart: always
     ports:
       - "6379:6379"
+    volumes:
+      - ./volumes/redis:/data
     command: redis-server --save 60 1 --loglevel warning
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
   redis_worker:
-    build: .
+#    build: .
+    image: backend_app
     container_name: core_redis_worker
     command: uv run celery -A _0_config worker --loglevel=info -l INFO
+    restart: always
     volumes:
       - "./src/core:/app"
       - /app/.venv
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
-      - redis
-      - backend
+      redis:
+        condition: service_healthy
+      backend:
+        condition: service_started
 
   backend:
     build: .
+    image: backend_app
     container_name: core_backend
     restart: always
     command: uv run manage.py runserver 0.0.0.0:8000
@@ -48,7 +60,10 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+      smtp4dev:
+        condition: service_started
 
   locust_master:
      image: locustio/locust
