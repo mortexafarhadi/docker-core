@@ -118,8 +118,8 @@ locust = [
 #name = "runflare"  # parspack - liara
 name = "parspack" #- liara
 #url = "https://mirror.abrha.net/repository/pypi/simple"
-url = "https://mirror-pypi.runflare.com/simple"
-#url = "https://package-mirror.liara.ir/repository/pypi/simple"
+#url = "https://mirror-pypi.runflare.com/simple"
+url = "https://package-mirror.liara.ir/repository/pypi/simple"
 default = true
 
 

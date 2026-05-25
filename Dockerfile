@@ -10,9 +10,11 @@ ENV UV_HTTP_TIMEOUT=1200
 
 WORKDIR /app
 
-COPY ./src/core/pyproject.toml ./src/core/uv.lock ./
+#COPY ./src/core/pyproject.toml ./src/core/uv.lock ./
+COPY ./src/core/pyproject.toml ./
 
 # RUN uv lock --upgrade
+RUN uv lock
 
 RUN uv sync --frozen --no-install-project --extra testing
 
