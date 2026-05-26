@@ -1,7 +1,7 @@
 {% extends 'panels/v1/admin/auth-layout.html' %}
 {% load static %}
 {% block CUSTOM_JS %}
-    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module" nonce="{{ csp_nonce }}"></script>
 {% endblock %}
 {% block Form_Layout %}
     <div class="col-12 col-md-12 col-xl-6 minvheight-100 d-flex flex-column px-0">

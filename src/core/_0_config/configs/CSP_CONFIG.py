@@ -8,15 +8,34 @@ SECURE_CSP = (
     if not USE_CSP
     else {
         "default-src": [CSP.SELF],
-        "style-src": [CSP.SELF, CSP.NONCE],
-        "script-src": [CSP.SELF, CSP.NONCE],
+        "style-src": [
+            CSP.SELF,
+            CSP.NONCE,
+            "https://fonts.googleapis.com",
+        ],
+        "script-src": [
+            CSP.SELF,
+            CSP.NONCE,
+            "https://cdn.jsdelivr.net",
+            "https://unpkg.com",
+            "'wasm-unsafe-eval'",
+        ],
         "img-src": [
             CSP.SELF,
+            "data:",
         ],
-        "font-src": [CSP.SELF],
+        "font-src": [
+            CSP.SELF,
+            "data:",
+            "https://fonts.gstatic.com",
+            "https://unpkg.com",
+            "https://cdn.jsdelivr.net",
+        ],
         # Ajax/WebSocket Connection
         "connect-src": [
             CSP.SELF,
+            "https://cdn.jsdelivr.net",
+            "https://unpkg.com",
         ],
         "frame-src": [
             CSP.SELF,

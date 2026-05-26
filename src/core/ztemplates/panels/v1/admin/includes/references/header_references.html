@@ -1,19 +1,19 @@
 {% load static %}
 <link rel="preconnect" href="{% static 'panels/v1/admin/fonts.googleapis.com/index.html' %}">
 <link rel="preconnect" href="{% static 'panels/v1/admin/fonts.gstatic.com/index.html' %}" crossorigin>
-<link href="{% static 'panels/v1/admin/fonts.googleapis.com/panels_fonts_google_css2dae2.css' %}" rel="stylesheet">
-<style>:root {
+<link href="{% static 'panels/v1/admin/fonts.googleapis.com/panels_fonts_google_css2dae2.css' %}" rel="stylesheet" nonce="{{ csp_nonce }}">
+<style nonce="{{ csp_nonce }}">:root {
     --adminuiux-content-font: "Open Sans", sans-serif;
     --adminuiux-content-font-weight: 400;
     --adminuiux-title-font: "Lexend", sans-serif;
     --adminuiux-title-font-weight: 600
 }</style>
-<script defer="defer" src="{% static 'panels/v1/admin/assets/js/panels_appac4e.js' %}"></script>
-<link href="{% static 'panels/v1/admin/assets/css/panels_appac4e.css' %}" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'panels/v1/admin/assets/font/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css' %}">
-<link rel="stylesheet" href="{% static 'panels/v1/admin/assets/css/panels_my.css' %}">
-<script src="{% static 'base/base-jquery-4.0.0.min.js' %}"></script>
-<script src="{% static 'base/base_htmx.min.js' %}" defer></script>
-<link rel="stylesheet" href="{% static 'base/base_font-payda.css' %}">
-<link rel="stylesheet" href="{% static 'base/searchable_dropdown/base_searchable_dropdown_select.css' %}">
-<link rel="stylesheet" href="{% static 'base/base_my.css' %}">
+<script defer="defer" src="{% static 'panels/v1/admin/assets/js/panels_appac4e.js' %}" nonce="{{ csp_nonce }}"></script>
+<link href="{% static 'panels/v1/admin/assets/css/panels_appac4e.css' %}" rel="stylesheet" nonce="{{ csp_nonce }}">
+<link rel="stylesheet" href="{% static 'panels/v1/admin/assets/font/bootstrap-icons-1.11.3/font/bootstrap-icons.min.css' %}" nonce="{{ csp_nonce }}">
+<link rel="stylesheet" href="{% static 'panels/v1/admin/assets/css/panels_my.css' %}" nonce="{{ csp_nonce }}">
+<script src="{% static 'base/base-jquery-4.0.0.min.js' %}" nonce="{{ csp_nonce }}"></script>
+<script src="{% static 'base/base_htmx.min.js' %}" defer nonce="{{ csp_nonce }}"></script>
+<link rel="stylesheet" href="{% static 'base/base_font-payda.css' %}" nonce="{{ csp_nonce }}">
+<link rel="stylesheet" href="{% static 'base/searchable_dropdown/base_searchable_dropdown_select.css' %}" nonce="{{ csp_nonce }}">
+<link rel="stylesheet" href="{% static 'base/base_my.css' %}" nonce="{{ csp_nonce }}">
