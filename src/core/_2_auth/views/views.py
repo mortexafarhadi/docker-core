@@ -92,7 +92,6 @@ class RegisterView(View):
                                 else:
                                     send_count = new_user.send_count + 1
                                     new_user.delete()
-
                         new_user = RegisterUser(
                             email=email,
                             first_name=first_name,
@@ -105,24 +104,21 @@ class RegisterView(View):
                             "user": new_user,
                             "code": new_user.get_code_token(),
                         }
-                        status, msg, error = send_mail(
+                        send_mail(
                             "Register",
                             email,
                             context,
                             "emails/active_account.html",
                         )
-                        if status:
-                            new_user.save()
-                            form = AccountActivationForm()
-                            context = {"email": email, "form": form}
-                            context = site_setting_context(context)
-                            return render(
-                                request,
-                                "_2_auth/v1/account-activation.html",
-                                context,
-                            )
-                        else:
-                            register_form.add_error("email", f"{msg}:{error}")
+                        new_user.save()
+                        form = AccountActivationForm()
+                        context = {"email": email, "form": form}
+                        context = site_setting_context(context)
+                        return render(
+                            request,
+                            "_2_auth/v1/account-activation.html",
+                            context,
+                        )
 
             context = {"form": register_form}
             context = site_setting_context(context)
@@ -291,17 +287,14 @@ class ForgetPasswordView(View):
                     errors.append(errors_en.mail_send_to_email)
                 else:
                     user.reset_password_link = random_string(250)
+                    user.save()
                     context = {"user": user, "code": user.reset_password_link}
-                    status, msg, error = send_mail(
+                    send_mail(
                         "Recovery Password",
                         user.email,
                         context,
                         "emails/forget_password.html",
                     )
-                    if status:
-                        user.save()
-                    else:
-                        errors.append(f"{msg}:{error}")
 
             context = {"errors": errors}
             context = site_setting_context(context)
@@ -352,7 +345,7 @@ class ResetPasswordView(View):
             return render(request, "_2_auth/v1/reset-password.html", context)
 
 
-def  __resend_code(request):
+def __resend_code(request):
     if request.method == "POST":
         email = request.POST.get("email")
         form = AccountActivationForm()
@@ -363,21 +356,24 @@ def  __resend_code(request):
                     context = site_setting_context()
                     return render(request, "_2_auth/v1/error-bans.html", context)
                 else:
-                    context = {"user": user, "code": user.get_code_token()}
-                    status, msg, error = send_mail(
+                    user.send_count += 1
+                    user.save()
+                    context_mail = {
+                        "user": user,
+                        "code": user.get_code_token(),
+                        "count": user.send_count,
+                    }
+                    send_mail(
                         "Activation Code",
                         user.email,
-                        context,
+                        context_mail,
                         "emails/active_account.html",
                     )
-                    if status:
-                        user.send_count += 1
-                        user.save()
-                        context = {"email": email, "form": form}
-                        return render(
-                            request,
-                            "_2_auth/v1/account-activation.html",
-                            context,
-                        )
+                    context = {"email": email, "form": form}
+                    return render(
+                        request,
+                        "_2_auth/v1/account-activation.html",
+                        context,
+                    )
 
     return redirect(reverse("auth-v1:login"))
