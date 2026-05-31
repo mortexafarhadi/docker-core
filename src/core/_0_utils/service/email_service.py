@@ -1,4 +1,9 @@
-from _0_utils.functions.string_function import print_debug, red_text, blue_text, green_text
+from _0_utils.functions.string_function import (
+    print_debug,
+    red_text,
+    blue_text,
+    green_text,
+)
 from _1_site_setting.views.base.views_base import site_setting_context
 from decouple import config
 from django.conf import settings
@@ -13,14 +18,20 @@ USE_EMAIL_SERVICE = config("USE_EMAIL_SERVICE", default=False, cast=bool)
 
 def send_mail(subject, email, context, template):
     if not USE_EMAIL_SERVICE:
-        msg = green_text(f"USE_EMAIL_SERVICE Key in .env Config Not Set. code is : {context.get('code', 'not set')}")
-        print(msg)
-        return True, msg, "Email Service is not available"
+        print(
+            green_text(
+                f"USE_EMAIL_SERVICE Key in .env Config Not Set."
+                f"\ncode is : {context.get('code', 'not set')}"
+                f"\ncount : {context.get('count', '0')}"
+            )
+        )
 
-    context = site_setting_context(context)
-    _send_mail.delay(subject=subject, to=email, context=context, template_name=template)
-    print_debug("Mail Sent Successfully")
-    return True, "Mail Sent Successfully", None
+    else:
+        context = site_setting_context(context)
+        _send_mail.delay(
+            subject=subject, to=email, context=context, template_name=template
+        )
+        print_debug("Mail Sent Successfully")
 
 
 @shared_task()
